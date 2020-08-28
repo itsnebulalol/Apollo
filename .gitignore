@@ -13,6 +13,7 @@ out
 *.iws
 *.iml
 .idea
+*.DS_Store
 
 # gradle
 build
@@ -21,3 +22,5 @@ build
 # other
 eclipse
 run
+.DS_Store
+.DS_Store
