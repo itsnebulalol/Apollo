@@ -1,3 +1,17 @@
+/*
+ * ****************************************************************
+ *  Copyright (C) 2020-2021 developed by Icovid
+ *  Class Authors : Nora [Nora#0001]
+ *
+ *  ApolloTweaker.java is part of Apollo Client. [8/28/20, 2:36 PM]
+ *
+ *  ApolloTweaker.java can not be copied and/or distributed without the express
+ *  permission of Icovid
+ *
+ *  Contact: Icovid#3888
+ * ****************************************************************
+ */
+
 package io.apollo.mixinminecraft;
 
 import net.minecraft.launchwrapper.ITweaker;
@@ -10,51 +24,43 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/* Tweaker Used to Start Mixin Bootstrap - called in Launch Arguments */
 public class ApolloTweaker implements ITweaker {
-    private List<String> args2 = new ArrayList<>();
 
-    @Override
-    public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
-        this.args2.addAll(args);
+    // List of Launch Arguments for getLaunchArguments[]
+    private final List<String> launchArguments = new ArrayList<>();
+
+    @Override public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
+        this.launchArguments.addAll(args);
 
         if(!args.contains("--version") && profile != null) {
-            args2.add("--version");
-            args2.add(profile);
+            launchArguments.add("--version");
+            launchArguments.add(profile);
         }
 
         if(!args.contains("--assetDir") && assetsDir != null) {
-            args2.add("--assetDir");
-            args2.add(assetsDir.getAbsolutePath());
+            launchArguments.add("--assetDir");
+            launchArguments.add(assetsDir.getAbsolutePath());
         }
 
         if(!args.contains("--gameDir") && gameDir != null) {
-            args2.add("--gameDir");
-            args2.add(gameDir.getAbsolutePath());
+            launchArguments.add("--gameDir");
+            launchArguments.add(gameDir.getAbsolutePath());
         }
     }
 
-    @Override
-    public void injectIntoClassLoader(LaunchClassLoader classLoader) {
-        System.out.println("Loading MixinBootstrap.");
+    @Override public void injectIntoClassLoader(LaunchClassLoader classLoader) {
         MixinBootstrap.init();
 
         MixinEnvironment env = MixinEnvironment.getDefaultEnvironment();
         Mixins.addConfiguration("mixins.apollo.json");
 
-        if (env.getObfuscationContext() == null) {
-            env.setObfuscationContext("notch");
-        }
+        if (env.getObfuscationContext() == null) { env.setObfuscationContext("notch"); }
 
         env.setSide(MixinEnvironment.Side.CLIENT);
     }
 
-    @Override
-    public String getLaunchTarget() {
-        return "net.minecraft.client.main.Main";
-    }
+    @Override public String getLaunchTarget() { return "net.minecraft.client.main.Main"; }
 
-    @Override
-    public String[] getLaunchArguments() {
-        return args2.toArray(new String[0]);
-    }
+    @Override public String[] getLaunchArguments() { return launchArguments.toArray(new String[0]); }
 }

@@ -1,30 +1,39 @@
+/*
+ * ****************************************************************
+ *  Copyright (C) 2020-2021 developed by Icovid
+ *
+ *  Apollo.java is part of Apollo Client. [8/28/20, 2:36 PM]
+ *
+ *  Apollo.java can not be copied and/or distributed without the express
+ *  permission of Icovid
+ *
+ *  Contact: Icovid#3888
+ * ****************************************************************
+ */
+
 package io.apollo;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.lwjgl.opengl.Display;
-
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/* Main class for Apollo; holds all instances used through out client */
 public class Apollo {
-    public static final String name = "Apollo", version = "b0.1";
-    public static final String[] developers = {"Icovid", "Nora", "isXander"};
-    public static final File apolloDirectory = new File(System.getProperty("user.dir") + "/" + name.toLowerCase());
-    public static final File settingsFile = new File(System.getProperty("user.dir") + "/" + name.toLowerCase() + "/settings.json");
 
+    // Apollo information used for display title and credits info.
+    public static final String NAME = "Apollo", VERSION = "b0.1", MCVERSION = "1.8.9";
+    public static final String[] DEVELOPERS = {"Icovid", "Nora", "isXander"};
+
+    // Public client instance used to retrieve any aspect of Apollo.
     public static final Apollo instance = new Apollo();
-//    public static final EventManager eventManager = new EventManager();
-//    public static final ModuleManager moduleManager = new ModuleManager();
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public Apollo() {
-        Display.setTitle(name + " " + version);
-        if (!apolloDirectory.exists()) { try { apolloDirectory.mkdirs();  } catch (Exception ignored) { } log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath()); }
-        if (!settingsFile.exists()) { try { settingsFile.createNewFile(); } catch (Exception ignored) { } log("Created Settings File: " + settingsFile.getAbsolutePath()); }
-    }
+    // Main constructor used to instanciate all aspects of Apollo.
+    public Apollo() { }
 
-    public void postInitialisation() { log("Apollo Startup Finnish with " + 0+ " Modules!"); }
-    public static void log (String... msg) { for (String log : msg)  System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [Apollo] " + log); }
+    /** Log Apollo instance stats after construction. **/
+    public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings!"); }
+
+    /** Used to log Apollo messages to console
+     * @param message any string to be displayed in console. **/
+    public static void log (String... message) { for (String out : message)  System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [Apollo] " + out); }
+
 }
