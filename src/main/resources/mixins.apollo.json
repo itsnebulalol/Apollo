@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "package": "io.apollo.mixinminecraft",
+  "refmap": "mixins.apollo.json",
+  "verbose": true,
+  "mixins": [
+    "MixinMinecraft"
+  ]
+}
