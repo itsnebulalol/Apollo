@@ -13,6 +13,9 @@
 
 package io.apollo;
 
+import io.apollo.utils.ApolloFontRenderer;
+
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
