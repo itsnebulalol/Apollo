@@ -59,6 +59,8 @@ dependencies {
         exclude module: 'gson'
         exclude module: 'commons-io'
     }
+    embed 'org.slick2d:slick2d-core:1.0.2'
+    embed 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 
 mixin {
