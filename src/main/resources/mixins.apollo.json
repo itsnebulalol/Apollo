@@ -5,6 +5,7 @@
   "refmap": "mixins.apollo.json",
   "verbose": true,
   "mixins": [
-    "MixinMinecraft"
+    "MixinMinecraft",
+    "MixinKeybinding"
   ]
 }

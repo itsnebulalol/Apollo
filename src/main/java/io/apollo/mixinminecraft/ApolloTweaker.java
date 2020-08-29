@@ -27,7 +27,7 @@ import java.util.List;
 /* Tweaker Used to Start Mixin Bootstrap - called in Launch Arguments */
 public class ApolloTweaker implements ITweaker {
 
-    // List of Launch Arguments for getLaunchArguments[]
+    // List of launch arguments for getLaunchArguments[]
     private final List<String> launchArguments = new ArrayList<>();
 
     @Override public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {

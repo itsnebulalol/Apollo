@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /* MixinBootstrap Events for Minecraft.class */
 public class MixinMinecraft {
 
-    // Called on Game Start - Used to Start Apollo
+    // Called on game start
     @Inject(method = "startGame", at = @At("RETURN"))
     private void onGameStart(CallbackInfo info) { Apollo.instance.postInitialisation(); }
 }
