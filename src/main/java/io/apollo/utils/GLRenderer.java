@@ -31,11 +31,11 @@ public class GLRenderer {
 
     // TODO: FIX ROUNDED RECT
 
-    /** GlScissor using minecraft screen positions.
+    /** {@link GL11} scissor using minecraft screen positions.
      * @param xPosition X start location
      * @param yPosition Y start location
-     * @param width glscissor width
-     * @param height glscissor height **/
+     * @param width scissor width
+     * @param height scissor height **/
     public static void glScissor(double xPosition, double yPosition, double width, double height) {
         ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
         GL11.glScissor((int) ((xPosition * Minecraft.getMinecraft().displayWidth) / scaledResolution.getScaledWidth()),

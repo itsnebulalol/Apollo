@@ -31,7 +31,7 @@ public class TestGui extends GuiScreen {
     /* Called when Gui is Opened in Screen size is Changes */
     public void initGui() {
         try {
-            apolloFontRenderer = new ApolloFontRenderer(ApolloFontRenderer.ROBOTO, 24);
+            apolloFontRenderer = new ApolloFontRenderer(ApolloFontRenderer.ROBOTO, 20);
         } catch (FontFormatException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -43,6 +43,7 @@ public class TestGui extends GuiScreen {
 
     /* Called Every Tick when Gui is Open - Used for Render Elements */
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        apolloFontRenderer.drawString("Apollo §9Client", 100, 200, new Color(56, 145, 222));
+        GLRenderer.drawRect(50, 50, 50, 50, Color.BLUE);
+        apolloFontRenderer.drawString("Apollo Client", 100, 200, new Color(255, 255, 255, 255));
     }
 }
