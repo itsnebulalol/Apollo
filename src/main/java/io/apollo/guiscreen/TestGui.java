@@ -44,8 +44,11 @@ public class TestGui extends GuiScreen {
 
     /* Called Every Tick when Gui is Open - Used for Render Elements */
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        DrawUtils.drawHallowCircle(100, 100, 50, Color.BLUE, 5);
-        DrawUtils.drawCircle(100, 100, 25, Color.CYAN);
+        DrawUtils.drawHallowCircle(100, 100, 50, new Color(0,0,0, 148), 10);
+        DrawUtils.drawCircle(100, 100, 25, new Color(0,0,0, 148));
+        DrawUtils.drawRectangle(150, 150, 100, 100, new Color(0,0,0, 148));
+        DrawUtils.drawBorderedRect(150, 150, 100, 100, 5, Color.CYAN, Color.BLACK);
+        DrawUtils.drawLine(100, 100, 300, 150, 10, new Color(0,0,0, 49));
         apolloFontRenderer.drawString("Apollo Client", 100, 200, new Color(255, 255, 255, 255));
     }
 }
