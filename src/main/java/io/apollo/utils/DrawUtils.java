@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -56,6 +57,7 @@ public class DrawUtils {
         GlStateManager.popMatrix();
         GL11.glLineWidth(2.0F);
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.bindTexture(0);
     }
 
     /** Draw filled circle on screen.
@@ -83,6 +85,7 @@ public class DrawUtils {
         GlStateManager.popAttrib();
         GlStateManager.popMatrix();
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.bindTexture(0);
     }
 
     /** Draw rectangle on screen.
@@ -107,6 +110,7 @@ public class DrawUtils {
         GL11.glDisable(3042);
         GlStateManager.popMatrix();
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.bindTexture(0);
     }
 
     /** Draw line on screen.
@@ -132,6 +136,7 @@ public class DrawUtils {
         GlStateManager.popMatrix();
         GL11.glLineWidth(2.0F);
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.bindTexture(0);
     }
 
     /** Draw rectangle with border on screen.
@@ -143,6 +148,56 @@ public class DrawUtils {
      * @param color color of rectangle
      * @param borderColor color of rectangle border **/
     public static void drawBorderedRect(float xPosition, float yPosition, float width, float height, float borderWidth, Color color, Color borderColor) {
+        // TODO:
+    }
+
+    /** Draw rounded rectangle.
+     * @param xPosition x location
+     * @param yPosition y location
+     * @param width width of rectangle
+     * @param height height of rectangle
+     * @param angle angle of rectangle corners
+     * @param color color of rectangle **/
+    public static void drawRoundedRectangle(float xPosition, float yPosition, float width, float height, float angle, Color color) {
+        // TODO:
+    }
+
+    /** Draw rounded rectangle with border.
+     * @param xPosition x location
+     * @param yPosition y location
+     * @param width width of rectangle
+     * @param height height of rectangle
+     * @param angle angle of rectangle corners
+     * @param borderWidth width of rectangle border
+     * @param color color of rectangle
+     * @param borderColor color of rectangle border **/
+    public static void drawBorderedRoundedRectangle(float xPosition, float yPosition, float width, float height, float angle, float borderWidth, Color color, Color borderColor) {
+        // TODO:
+    }
+
+    /** Draw textured rectangle on screen.
+     * @param resourceLocation ResourceLocation of texture
+     * @param xPosition x start location
+     * @param yPosition y start location
+     * @param width width of rectangle
+     * @param height height of rectangle **/
+    public static void drawTexturedRectangle(ResourceLocation resourceLocation, double xPosition, double yPosition, double width, double height) {
+        float u = 1, v = 1, uWidth = 1, vHeight = 1, textureWidth = 1, textureHeight = 1;
+        GL11.glEnable(GL11.GL_BLEND);
+        Minecraft.getMinecraft().getTextureManager().bindTexture(resourceLocation);
+        GL11.glBegin(GL11.GL_QUADS);
+        GL11.glTexCoord2d(u / textureWidth, v / textureHeight);
+        GL11.glVertex2d(xPosition, yPosition);
+        GL11.glTexCoord2d(u / textureWidth, (v + vHeight) / textureHeight);
+        GL11.glVertex2d(xPosition, yPosition + height);
+        GL11.glTexCoord2d((u + uWidth) / textureWidth, (v + vHeight) / textureHeight);
+        GL11.glVertex2d(xPosition + width, yPosition + height);
+        GL11.glTexCoord2d((u + uWidth) / textureWidth, v / textureHeight);
+        GL11.glVertex2d(xPosition + width, yPosition);
+        GL11.glEnd();
+        GL11.glDisable(GL11.GL_BLEND);
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.bindTexture(0);
     }
 
 }
