@@ -29,6 +29,8 @@ import java.awt.*;
 // Haven't tested most things in this class
 public class GLRenderer {
 
+    // TODO: FIX ROUNDED RECT
+
     /** GlScissor using minecraft screen positions.
      * @param xPosition X start location
      * @param yPosition Y start location

@@ -102,6 +102,8 @@ public class ApolloFontRenderer extends UnicodeFont {
         float green = (float) (color.hashCode() >> 8 & 255) / 255.0F;
         float blue = (float) (color.hashCode() & 255) / 255.0F;
         float alpha = (float) (color.hashCode() >> 24 & 255) / 255.0F;
+        xPosition *= resolution.getScaleFactor();
+        yPosition *= resolution.getScaleFactor();
 
         GL11.glPushMatrix();
         GlStateManager.scale(1 / (float) resolution.getScaleFactor(), 1 / (float) resolution.getScaleFactor(), 1 / (float) resolution.getScaleFactor());
@@ -113,6 +115,11 @@ public class ApolloFontRenderer extends UnicodeFont {
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         // TODO : DRAW TEXT
+
+        for (String string : COLOR_CODE_PATTERN.split(text)) {
+            super.drawString(xPosition, yPosition, string, color);
+            xPosition += this.getWidth(string) * resolution.getScaleFactor();
+        }
 
         GlStateManager.color(1F, 1F, 1F, 1F);
         GlStateManager.bindTexture(0);

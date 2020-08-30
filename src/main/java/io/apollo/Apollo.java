@@ -13,9 +13,6 @@
 
 package io.apollo;
 
-import io.apollo.utils.ApolloFontRenderer;
-
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -29,11 +26,11 @@ public class Apollo {
     // Public client instance used to retrieve any aspect of Apollo.
     public static final Apollo instance = new Apollo();
 
-    // Main constructor used to instanciate all aspects of Apollo.
+    // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() { }
 
     /** Log Apollo instance stats after construction. **/
-    public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings!"); }
+    public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings! " + NAME); }
 
     /** Used to log Apollo messages to console
      * @param message any string to be displayed in console. **/
