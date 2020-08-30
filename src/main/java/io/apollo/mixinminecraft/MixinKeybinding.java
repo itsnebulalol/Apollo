@@ -23,9 +23,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(KeyBinding.class)
-/* MixinBootstrap Events for Keybinding.class */
-public class MixinKeybinding {
+/** MixinBootstrap Events for Keybinding.class.
+ * @author Nora | Nora#0001
+ * @since 1.0.0 **/
+@Mixin(KeyBinding.class) public class MixinKeybinding {
 
     // Called when key is pressed
     @Inject(method = "onTick", at = @At("HEAD"))

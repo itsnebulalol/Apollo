@@ -1,7 +1,6 @@
 /*
  * ****************************************************************
  *  Copyright (C) 2020-2021 developed by Icovid
- *  Class Authors : Nora [Nora#0001]
  *
  *  ApolloTweaker.java is part of Apollo Client. [8/28/20, 2:36 PM]
  *
@@ -24,12 +23,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-/* Tweaker Used to Start Mixin Bootstrap - called in Launch Arguments */
+/** Tweaker used to start mixin bootstrap - called in launch arguments.
+ * @author Nora | Nora#0001
+ * @since 1.0.0 **/
 public class ApolloTweaker implements ITweaker {
 
     // List of launch arguments for getLaunchArguments[]
     private final List<String> launchArguments = new ArrayList<>();
 
+    /** Accepts program run information.
+     * @param args launch arguments
+     * @param gameDir client working directory
+     * @param assetsDir directory of client assets
+     * @param profile client version **/
     @Override public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
         this.launchArguments.addAll(args);
 
@@ -49,6 +55,8 @@ public class ApolloTweaker implements ITweaker {
         }
     }
 
+    /** Inject mixin class load into client.
+     * @param classLoader {@link LaunchClassLoader} of mixin environment **/
     @Override public void injectIntoClassLoader(LaunchClassLoader classLoader) {
         MixinBootstrap.init();
 
@@ -60,7 +68,11 @@ public class ApolloTweaker implements ITweaker {
         env.setSide(MixinEnvironment.Side.CLIENT);
     }
 
+    /** Get class to start client.
+     * @return class path **/
     @Override public String getLaunchTarget() { return "net.minecraft.client.main.Main"; }
 
+    /** Get client launch arguments.
+     * @return array of arguments **/
     @Override public String[] getLaunchArguments() { return launchArguments.toArray(new String[0]); }
 }

@@ -25,11 +25,12 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-/* Various Functions to Draw Gui Objects using GL11 and WorldRenderer */
-// Haven't tested most things in this class
+/** Various functions to draw gui objects using GL11 and WorldRenderer.
+ * @author Icovid | Icovid#3888
+ * @since 1.0.0 **/
 public class GLRenderer {
 
-    // TODO: FIX ROUNDED RECT
+    // TODO: FIX ROUNDED RECT and MAKE SCALE
 
     /** {@link GL11} scissor using minecraft screen positions.
      * @param xPosition X start location
@@ -157,7 +158,7 @@ public class GLRenderer {
      * @param yPosition y start location
      * @param radius radius of circle
      * @param color color of circle **/
-    public static void drawCircle(int xPosition, int yPosition, int radius, Color color) {
+    public static void drawHallowCircle(int xPosition, int yPosition, float radius, Color color) {
         float red = (float) (color.hashCode() >> 16 & 255) / 255.0F;
         float blue = (float) (color.hashCode() >> 8 & 255) / 255.0F;
         float green = (float) (color.hashCode() & 255) / 255.0F;
@@ -188,7 +189,7 @@ public class GLRenderer {
      * @param yPosition y start location
      * @param radius radius of circle
      * @param color color of circle **/
-    public static void drawFilledCircle(int xPosition, int yPosition, float radius, Color color) {
+    public static void drawCircle(int xPosition, int yPosition, float radius, Color color) {
         GlStateManager.pushAttrib();
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();

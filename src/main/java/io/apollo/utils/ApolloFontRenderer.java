@@ -1,7 +1,6 @@
 /*
  * ****************************************************************
  *  Copyright (C) 2020-2021 developed by Icovid
- *  Note : Based on HyperiumFontRenderer.java
  *
  *  ApolloFontRenderer.java is part of Apollo Client. [8/28/20, 9:51 PM]
  *
@@ -33,6 +32,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+/** Font rendered used for all Apollo guis.
+ * @author Icovid | Icovid#3888
+ * @see org.newdawn.slick.UnicodeFont
+ * @since 1.0.0 **/
 public class ApolloFontRenderer extends UnicodeFont {
 
     // Public fonts used in Apollo Guis.
@@ -116,10 +119,7 @@ public class ApolloFontRenderer extends UnicodeFont {
 
         // TODO : DRAW TEXT
 
-        for (String string : COLOR_CODE_PATTERN.split(text)) {
-            super.drawString(xPosition, yPosition, string, color);
-            xPosition += this.getWidth(string) * resolution.getScaleFactor();
-        }
+        super.drawString(xPosition, yPosition, text, color);
 
         GlStateManager.color(1F, 1F, 1F, 1F);
         GlStateManager.bindTexture(0);

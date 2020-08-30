@@ -16,7 +16,9 @@ package io.apollo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/* Main class for Apollo; holds all instances used through out client */
+/** Main class for Apollo; holds all instances used through out client.
+ * @author Icovid | Icovid#3888
+ * @since 1.0.0 **/
 public class Apollo {
 
     // Apollo information used for display title and credits info.

@@ -14,6 +14,7 @@
 package io.apollo.guiscreen;
 
 import io.apollo.utils.ApolloFontRenderer;
+import io.apollo.utils.DrawUtils;
 import io.apollo.utils.GLRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import org.newdawn.slick.SlickException;
@@ -43,7 +44,8 @@ public class TestGui extends GuiScreen {
 
     /* Called Every Tick when Gui is Open - Used for Render Elements */
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        GLRenderer.drawRect(50, 50, 50, 50, Color.BLUE);
+        DrawUtils.drawHallowCircle(100, 100, 50, Color.BLUE, 5);
+        DrawUtils.drawCircle(100, 100, 25, Color.CYAN);
         apolloFontRenderer.drawString("Apollo Client", 100, 200, new Color(255, 255, 255, 255));
     }
 }
