@@ -34,13 +34,11 @@ public class Apollo {
 
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {
-        SettingsManager.registerSettings(new test("TEST", "idk", Category.PLAYER, true, 0));
+        SettingsManager.registerSettings(new test("test", "test", Category.PLAYER, true, 0));
     }
 
     /** Log Apollo instance stats after construction. **/
-    public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings! ");
-    SettingsManager.log();
-    }
+    public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings! "); }
 
     /** Used to log Apollo messages to console.
      * @param message any string to be displayed in console. **/

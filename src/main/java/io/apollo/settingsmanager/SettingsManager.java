@@ -8,7 +8,6 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SettingsManager {
 
@@ -18,19 +17,16 @@ public class SettingsManager {
         for (Class<?> clazz : new Class<?>[] { object.getClass(), object.getClass().getSuperclass() }) {
             for (Class<?> classObject : TypeToken.of(clazz).getTypes().rawTypes()) {
                 for (Field field : classObject.getDeclaredFields()) {
+                    if (field.getAnnotation(SettingsValue.class) != null) {
                     StringBuilder jsonPathBuilder = new StringBuilder("");
                     if (object instanceof Module) jsonPathBuilder.append(((Module) object).name + ".");
-                    if (!field.getAnnotation(SettingsValue.class).key().equals("null")) jsonPathBuilder.append(field.getAnnotation(SettingsValue.class).key() + ".");
+                    jsonPathBuilder.append(field.getAnnotation(SettingsValue.class).key() + ".");
                     jsonPathBuilder.append(field.getName());
-                    settings.add(new Setting(field, field.getName(), field.getAnnotation(SettingsValue.class).description(), jsonPathBuilder.toString()));
+                    Setting setting = new Setting(field, field.getName(), field.getAnnotation(SettingsValue.class).description(), jsonPathBuilder.toString());
+                    settings.add(setting);
+                    Apollo.log(setting.name + " : " + setting.description + " : " + setting.jsonPath); }
                 }
             }
-        }
-    }
-
-    public static void log() {
-        for (Setting setting : settings) {
-            Apollo.log(setting.name + " : " + setting.description + " : " + setting.jsonPath);
         }
     }
 

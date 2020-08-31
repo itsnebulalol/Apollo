@@ -1,6 +1,7 @@
 package io.apollo.modulemanager;
 
 import io.apollo.Apollo;
+import io.apollo.settingsmanager.SettingsValue;
 
 import java.util.ArrayList;
 

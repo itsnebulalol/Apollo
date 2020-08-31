@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = ElementType.FIELD)
 public @interface SettingsValue {
-    String key() default "null";
+    String key() default "";
     String description() default "Awesome Setting the Developer Offered no Description for!";
 }
