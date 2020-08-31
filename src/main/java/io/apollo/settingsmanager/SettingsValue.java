@@ -12,4 +12,5 @@ import java.lang.annotation.Target;
 @Target(value = ElementType.FIELD)
 public @interface SettingsValue {
     String key() default "null";
+    String description() default "Awesome Setting the Developer Offered no Description for!";
 }
