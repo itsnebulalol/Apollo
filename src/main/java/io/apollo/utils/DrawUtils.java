@@ -1,6 +1,7 @@
 package io.apollo.utils;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -37,7 +38,7 @@ public class DrawUtils {
      * @param color color of circle
      * @param lineWidth width of circle outline **/
     // TODO: FIX GAPS - NOT SHOWN ON LAPTOP
-    public static void drawHallowCircle(float xPosition, float yPosition, float radius, Color color, float lineWidth) {
+    public static void drawHallowCircle(float xPosition, float yPosition, float radius, float lineWidth, Color color) {
         GlStateManager.pushMatrix();
         GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
         GL11.glEnable(2848);
@@ -88,6 +89,17 @@ public class DrawUtils {
         GlStateManager.bindTexture(0);
     }
 
+    /** Draw partial circle on screen based on angle.
+     * @param xPosition x start location
+     * @param yPosition y start location
+     * @param radius radius of angle
+     * @param startAngle Start orientation of angle
+     * @param endAngle end orientation of angle
+     * @param color color of angle
+     * @implNote Strait Angles - 90|180|270|360 **/
+    public static void drawPartialCircle(float xPosition, float yPosition, float radius, float startAngle, float endAngle, Color color) { }
+
+
     /** Draw rectangle on screen.
      * @param xPosition x start location
      * @param yPosition y start location
@@ -95,23 +107,32 @@ public class DrawUtils {
      * @param height height of rectangle
      * @param color color of rectangle **/
     public static void drawRectangle(float xPosition, float yPosition, float width, float height, Color color) {
-        GlStateManager.pushMatrix();
-        GL11.glEnable(3042);
-        GL11.glDisable(3553);
-        GL11.glBlendFunc(770, 771);
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
-        GL11.glBegin(7);
-        GL11.glVertex2f(xPosition, yPosition + height);
-        GL11.glVertex2f(xPosition + width, yPosition + height);
-        GL11.glVertex2f(xPosition + width, yPosition);
-        GL11.glVertex2f(xPosition, yPosition);
-        GL11.glEnd();
-        GL11.glEnable(3553);
-        GL11.glDisable(3042);
-        GlStateManager.popMatrix();
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+        worldrenderer.pos(xPosition, yPosition + height, 0.0D).endVertex();
+        worldrenderer.pos(xPosition + width, yPosition + height, 0.0D).endVertex();
+        worldrenderer.pos(xPosition + width, yPosition, 0.0D).endVertex();
+        worldrenderer.pos(xPosition, yPosition, 0.0D).endVertex();
+        tessellator.draw();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
         GlStateManager.bindTexture(0);
+        GlStateManager.color(1f, 1f, 1f, 1f);
     }
+
+    /** Draw rounded rectangle.
+     * @param xPosition x location
+     * @param yPosition y location
+     * @param width width of rectangle
+     * @param height height of rectangle
+     * @param angle angle of rectangle corners
+     * @param color color of rectangle **/
+    public static void drawRoundedRectangle(float xPosition, float yPosition, float width, float height, float angle, Color color) { }
 
     /** Draw line on screen.
      * @param xPosition x start location
@@ -138,43 +159,6 @@ public class DrawUtils {
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
         GlStateManager.bindTexture(0);
     }
-
-    /** Draw rectangle with border on screen.
-     * @param xPosition x start location
-     * @param yPosition y start location
-     * @param width width of rectangle
-     * @param height height of rectangle
-     * @param borderWidth width of rectangle border
-     * @param color color of rectangle
-     * @param borderColor color of rectangle border **/
-    public static void drawBorderedRect(float xPosition, float yPosition, float width, float height, float borderWidth, Color color, Color borderColor) {
-        // TODO:
-    }
-
-    /** Draw rounded rectangle.
-     * @param xPosition x location
-     * @param yPosition y location
-     * @param width width of rectangle
-     * @param height height of rectangle
-     * @param angle angle of rectangle corners
-     * @param color color of rectangle **/
-    public static void drawRoundedRectangle(float xPosition, float yPosition, float width, float height, float angle, Color color) {
-        // TODO:
-    }
-
-    /** Draw rounded rectangle with border.
-     * @param xPosition x location
-     * @param yPosition y location
-     * @param width width of rectangle
-     * @param height height of rectangle
-     * @param angle angle of rectangle corners
-     * @param borderWidth width of rectangle border
-     * @param color color of rectangle
-     * @param borderColor color of rectangle border **/
-    public static void drawBorderedRoundedRectangle(float xPosition, float yPosition, float width, float height, float angle, float borderWidth, Color color, Color borderColor) {
-        // TODO:
-    }
-
     /** Draw textured rectangle on screen.
      * @param resourceLocation ResourceLocation of texture
      * @param xPosition x start location

@@ -101,16 +101,12 @@ public class ApolloFontRenderer extends UnicodeFont {
      * @implNote use /n for new line and § for color codes **/
     @Override public void drawString(float xPosition, float yPosition, String text, org.newdawn.slick.Color color) {
         ScaledResolution resolution = new ScaledResolution(Minecraft.getMinecraft());
-        float red = (float) (color.hashCode() >> 16 & 255) / 255.0F;
-        float green = (float) (color.hashCode() >> 8 & 255) / 255.0F;
-        float blue = (float) (color.hashCode() & 255) / 255.0F;
-        float alpha = (float) (color.hashCode() >> 24 & 255) / 255.0F;
         xPosition *= resolution.getScaleFactor();
         yPosition *= resolution.getScaleFactor();
 
-        GL11.glPushMatrix();
+        GlStateManager.pushMatrix();
         GlStateManager.scale(1 / (float) resolution.getScaleFactor(), 1 / (float) resolution.getScaleFactor(), 1 / (float) resolution.getScaleFactor());
-        GlStateManager.color(red, green, blue, alpha);
+        GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
 
         GlStateManager.disableLighting();
         GlStateManager.enableBlend();
