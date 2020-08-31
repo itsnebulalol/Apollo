@@ -67,14 +67,14 @@ public class DrawUtils {
      * @param yPosition y start location
      * @param radius radius of circle
      * @param color color of circle **/
-    public static void drawCircle(int xPosition, int yPosition, float radius, Color color) {
+    public static void drawCircle(float xPosition, float yPosition, float radius, Color color) {
         GL11.glPushMatrix();
         GL11.glEnable(3042);
         GL11.glDisable(3553);
         GL11.glBlendFunc(770, 771);
         GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
         WorldRenderer worldRenderer = Tessellator.getInstance().getWorldRenderer();
-        worldRenderer.begin(6, DefaultVertexFormats.POSITION);
+        worldRenderer.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION);
         worldRenderer.pos(xPosition, yPosition, 0).endVertex();
         for (int i = 0; i <= 100; i++) {
             double angle = (Math.PI * 2 * i / 100) + Math.toRadians(180);
@@ -84,8 +84,6 @@ public class DrawUtils {
         GL11.glEnable(3553);
         GL11.glDisable(3042);
         GL11.glPopMatrix();
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-        GlStateManager.bindTexture(0);
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
         GlStateManager.bindTexture(0);
     }
@@ -118,6 +116,8 @@ public class DrawUtils {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glLineWidth(2.0F);
         GL11.glPopMatrix();
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.bindTexture(0);
     }
 
     /** Draw partial circle on screen based on angle.
@@ -126,16 +126,15 @@ public class DrawUtils {
      * @param radius radius of angle
      * @param startAngle Start orientation of angle
      * @param endAngle end orientation of angle
-     * @param color color of angle
-     * @implNote Strait Angles - 90|180|270|360 **/
+     * @param color color of angle **/
     public static void drawPartialCircle(float xPosition, float yPosition, float radius, int startAngle, int endAngle, Color color) {
         GL11.glPushMatrix();
         GL11.glEnable(3042);
         GL11.glDisable(3553);
         GL11.glBlendFunc(770, 771);
-        GL11.glColor4f((float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, (float) color.getAlpha() / 255);
+        GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
         WorldRenderer worldRenderer = Tessellator.getInstance().getWorldRenderer();
-        worldRenderer.begin(6, DefaultVertexFormats.POSITION);
+        worldRenderer.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION);
         worldRenderer.pos(xPosition, yPosition, 0).endVertex();
         for (int i = (int) (startAngle / 360.0 * 100); i <= (int) (endAngle / 360.0 * 100); i++) {
             double angle = (Math.PI * 2 * i / 100) + Math.toRadians(180);
@@ -156,18 +155,17 @@ public class DrawUtils {
      * @param height height of rectangle
      * @param color color of rectangle **/
     public static void drawRectangle(float xPosition, float yPosition, float width, float height, Color color) {
-        Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        WorldRenderer worldrenderer = Tessellator.getInstance().getWorldRenderer();
         GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
         worldrenderer.begin(7, DefaultVertexFormats.POSITION);
         worldrenderer.pos(xPosition, yPosition + height, 0.0D).endVertex();
         worldrenderer.pos(xPosition + width, yPosition + height, 0.0D).endVertex();
         worldrenderer.pos(xPosition + width, yPosition, 0.0D).endVertex();
         worldrenderer.pos(xPosition, yPosition, 0.0D).endVertex();
-        tessellator.draw();
+        Tessellator.getInstance().draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
         GlStateManager.bindTexture(0);
@@ -191,23 +189,21 @@ public class DrawUtils {
      * @param color color of line **/
     // TODO: FIX LINE FADING AT END - NOT SHOWN ON LAPTOP
     public static void drawLine(float xPosition, float yPosition, float x1, float y1, float width, Color color) {
-        GlStateManager.pushMatrix();
-        GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
-        GL11.glEnable(2848);
-        GL11.glDisable(3553);
-        GL11.glEnable(2848);
-        GL11.glEnable(3042);
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
         GL11.glLineWidth(width);
-        GL11.glBegin(2);
-        GL11.glVertex2f(xPosition, yPosition);
-        GL11.glVertex2f(x1, y1);
-        GL11.glEnd();
-        GL11.glDisable(2848);
-        GL11.glEnable(3553);
-        GlStateManager.popMatrix();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        WorldRenderer worldrenderer = Tessellator.getInstance().getWorldRenderer();
+        GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
+        worldrenderer.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION);
+        worldrenderer.pos(xPosition, yPosition, 0.0D).endVertex();
+        worldrenderer.pos(x1, y1, 0.0D).endVertex();
+        Tessellator.getInstance().draw();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
         GL11.glLineWidth(2.0F);
-        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
         GlStateManager.bindTexture(0);
+        GlStateManager.color(1f, 1f, 1f, 1f);
     }
 
     /** Draw textured rectangle on screen.
@@ -216,7 +212,7 @@ public class DrawUtils {
      * @param yPosition y start location
      * @param width width of rectangle
      * @param height height of rectangle **/
-    public static void drawTexturedRectangle(ResourceLocation resourceLocation, double xPosition, double yPosition, double width, double height) {
+    public static void drawTexturedRectangle(ResourceLocation resourceLocation, float xPosition, float yPosition, float width, float height) {
         float u = 1, v = 1, uWidth = 1, vHeight = 1, textureWidth = 1, textureHeight = 1;
         GL11.glEnable(GL11.GL_BLEND);
         Minecraft.getMinecraft().getTextureManager().bindTexture(resourceLocation);
@@ -235,4 +231,26 @@ public class DrawUtils {
         GlStateManager.bindTexture(0);
     }
 
+    /** Draw polygon based on number of sides.
+     * @param xPosition x start location
+     * @param yPosition y start location
+     * @param radius radius of polygon
+     * @param sides number of sides in polygon
+     * @param color color of polygon **/
+    public static void drawRegularPolygon(float xPosition, float yPosition, float radius, float sides, Color color) {
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        WorldRenderer worldrenderer = Tessellator.getInstance().getWorldRenderer();
+        GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
+        worldrenderer.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION);
+        worldrenderer.pos(xPosition, yPosition, 0).endVertex();
+        for(int i = 0; i <= sides ;i++) {
+            double angle = ((Math.PI*2) * i / sides) + Math.toRadians(180);
+            worldrenderer.pos(xPosition + Math.sin(angle) * radius, yPosition + Math.cos(angle) * radius, 0).endVertex();
+        }
+        Tessellator.getInstance().draw();
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
+    }
 }
