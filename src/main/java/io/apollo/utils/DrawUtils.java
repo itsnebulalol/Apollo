@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL14;
 
 import java.awt.*;
 
@@ -36,16 +37,16 @@ public class DrawUtils {
      * @param yPosition y start location
      * @param radius radius of circle
      * @param color color of circle
-     * @param lineWidth width of circle outline **/
+     * @param thickness width of circle outline **/
     // TODO: FIX GAPS - NOT SHOWN ON LAPTOP
-    public static void drawHallowCircle(float xPosition, float yPosition, float radius, float lineWidth, Color color) {
+    public static void drawHollowCircle(float xPosition, float yPosition, float radius, float thickness, Color color) {
         GlStateManager.pushMatrix();
         GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
         GL11.glEnable(2848);
         GL11.glDisable(3553);
         GL11.glEnable(2848);
         GL11.glEnable(3042);
-        GL11.glLineWidth(lineWidth);
+        GL11.glLineWidth(thickness);
         GL11.glBegin(2);
         for (int i = 0; i < 70; i++) {
             float x = radius * MathHelper.cos((float) (i * 0.08975979010256552D));
@@ -67,24 +68,24 @@ public class DrawUtils {
      * @param radius radius of circle
      * @param color color of circle **/
     public static void drawCircle(int xPosition, int yPosition, float radius, Color color) {
-        GlStateManager.pushAttrib();
-        GlStateManager.pushMatrix();
+        GL11.glPushMatrix();
+        GL11.glEnable(3042);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
         GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
-        GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
-        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GlStateManager.disableTexture2D();
-        GL11.glBegin(GL11.GL_TRIANGLE_FAN);
-        for (int i = 0; i < 50; i++) {
-            float x = xPosition + radius * MathHelper.sin((float) (i * (6.28318530718 / 50)));
-            float y = yPosition + radius * MathHelper.cos((float) (i * (6.28318530718 / 50)));
-            GL11.glVertex2d(x, y);
+        WorldRenderer worldRenderer = Tessellator.getInstance().getWorldRenderer();
+        worldRenderer.begin(6, DefaultVertexFormats.POSITION);
+        worldRenderer.pos(xPosition, yPosition, 0).endVertex();
+        for (int i = 0; i <= 100; i++) {
+            double angle = (Math.PI * 2 * i / 100) + Math.toRadians(180);
+            worldRenderer.pos(xPosition + Math.sin(angle) * radius, yPosition + Math.cos(angle) * radius, 0).endVertex();
         }
-        GL11.glEnd();
-        GlStateManager.enableTexture2D();
-        GlStateManager.disableBlend();
-        GlStateManager.popAttrib();
-        GlStateManager.popMatrix();
+        Tessellator.getInstance().draw();
+        GL11.glEnable(3553);
+        GL11.glDisable(3042);
+        GL11.glPopMatrix();
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.bindTexture(0);
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
         GlStateManager.bindTexture(0);
     }
@@ -96,9 +97,57 @@ public class DrawUtils {
      * @param startAngle Start orientation of angle
      * @param endAngle end orientation of angle
      * @param color color of angle
+     * @param thickness width of circle outline
      * @implNote Strait Angles - 90|180|270|360 **/
-    public static void drawPartialCircle(float xPosition, float yPosition, float radius, float startAngle, float endAngle, Color color) { }
+    // TODO: FIX GAPS - NOT SHOWN ON LAPTOP
+    public static void drawHollowPartialCircle(float xPosition, float yPosition, float radius, int startAngle, int endAngle, float thickness, Color color) {
+        GL11.glPushMatrix();
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(2848);
+        GL11.glLineWidth(thickness);
+        GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
+        GL11.glBegin(3);
+        float f1 = 0.017453292F;
+        for(int j = startAngle; j <= endAngle; ++j) {
+            float f = (float)(j - 90) * f1;
+            GL11.glVertex2f(xPosition + (float)Math.cos((double)f) * radius, yPosition + (float)Math.sin((double)f) * radius);
+        }
+        GL11.glEnd();
+        GL11.glEnable(3553);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glLineWidth(2.0F);
+        GL11.glPopMatrix();
+    }
 
+    /** Draw partial circle on screen based on angle.
+     * @param xPosition x start location
+     * @param yPosition y start location
+     * @param radius radius of angle
+     * @param startAngle Start orientation of angle
+     * @param endAngle end orientation of angle
+     * @param color color of angle
+     * @implNote Strait Angles - 90|180|270|360 **/
+    public static void drawPartialCircle(float xPosition, float yPosition, float radius, int startAngle, int endAngle, Color color) {
+        GL11.glPushMatrix();
+        GL11.glEnable(3042);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glColor4f((float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, (float) color.getAlpha() / 255);
+        WorldRenderer worldRenderer = Tessellator.getInstance().getWorldRenderer();
+        worldRenderer.begin(6, DefaultVertexFormats.POSITION);
+        worldRenderer.pos(xPosition, yPosition, 0).endVertex();
+        for (int i = (int) (startAngle / 360.0 * 100); i <= (int) (endAngle / 360.0 * 100); i++) {
+            double angle = (Math.PI * 2 * i / 100) + Math.toRadians(180);
+            worldRenderer.pos(xPosition + Math.sin(angle) * radius, yPosition + Math.cos(angle) * radius, 0).endVertex();
+        }
+        Tessellator.getInstance().draw();
+        GL11.glEnable(3553);
+        GL11.glDisable(3042);
+        GL11.glPopMatrix();
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        GlStateManager.bindTexture(0);
+    }
 
     /** Draw rectangle on screen.
      * @param xPosition x start location
@@ -140,6 +189,7 @@ public class DrawUtils {
      * @param x1 x end location
      * @param y1 y end location
      * @param color color of line **/
+    // TODO: FIX LINE FADING AT END - NOT SHOWN ON LAPTOP
     public static void drawLine(float xPosition, float yPosition, float x1, float y1, float width, Color color) {
         GlStateManager.pushMatrix();
         GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
@@ -159,6 +209,7 @@ public class DrawUtils {
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
         GlStateManager.bindTexture(0);
     }
+
     /** Draw textured rectangle on screen.
      * @param resourceLocation ResourceLocation of texture
      * @param xPosition x start location

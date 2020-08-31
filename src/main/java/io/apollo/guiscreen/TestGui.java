@@ -47,7 +47,9 @@ public class TestGui extends GuiScreen {
         DrawUtils.drawRectangle(100, 100, 100, 100, Color.BLACK);
         DrawUtils.drawLine(100, 100, 200, 200, 10, Color.CYAN);
         DrawUtils.drawCircle(145, 125, 10, Color.CYAN);
-        DrawUtils.drawHallowCircle(125, 145, 10, 5, Color.CYAN);
+        DrawUtils.drawHollowCircle(125, 145, 10, 5, Color.CYAN);
+        DrawUtils.drawHollowPartialCircle(50, 50, 20, 0, 360, 10, Color.BLACK);
+        DrawUtils.drawPartialCircle(50, 100, 20, 0, 360, Color.BLACK);
         apolloFontRenderer.drawString("Apollo Client", 100, 200, new Color(255, 255, 255, 255));
     }
 }

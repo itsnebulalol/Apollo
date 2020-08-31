@@ -31,7 +31,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
     // Called when key is pressed
     @Inject(method = "onTick", at = @At("HEAD"))
     private static void keyHook(int key, CallbackInfo callbackInfo) {
-        if (key == Keyboard.KEY_RSHIFT) Minecraft.getMinecraft().displayGuiScreen(new TestGui());
-        Apollo.log("Started Test GUI");
+        if (key == Keyboard.KEY_RSHIFT) {
+            Minecraft.getMinecraft().displayGuiScreen(new TestGui());
+            Apollo.log("Started Test GUI");
+        }
     }
 }
