@@ -29,12 +29,13 @@ public class Apollo {
     public static final Apollo instance = new Apollo();
 
     // Main constructor used to instantiate all aspects of Apollo.
-    public Apollo() { }
+    public Apollo() {
+    }
 
     /** Log Apollo instance stats after construction. **/
-    public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings! " + NAME); }
+    public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings! "); }
 
-    /** Used to log Apollo messages to console
+    /** Used to log Apollo messages to console.
      * @param message any string to be displayed in console. **/
     public static void log (String... message) { for (String out : message)  System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [Apollo] " + out); }
 

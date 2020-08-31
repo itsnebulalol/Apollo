@@ -101,6 +101,7 @@ public class ApolloFontRenderer extends UnicodeFont {
      * @implNote use /n for new line and § for color codes **/
     @Override public void drawString(float xPosition, float yPosition, String text, org.newdawn.slick.Color color) {
         ScaledResolution resolution = new ScaledResolution(Minecraft.getMinecraft());
+        GlStateManager.bindTexture(0);
         xPosition *= resolution.getScaleFactor();
         yPosition *= resolution.getScaleFactor();
 
