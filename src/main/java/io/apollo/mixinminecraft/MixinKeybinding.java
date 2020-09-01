@@ -24,11 +24,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** MixinBootstrap Events for Keybinding.class.
- * @author Nora | Nora#0001
+ * @author Icovid | Icovid#3888
  * @since 1.0.0 **/
 @Mixin(KeyBinding.class) public class MixinKeybinding {
 
-    // Called when key is pressed
+    /** Called on key press.
+     * @param key key code on key pressed **/
     @Inject(method = "onTick", at = @At("HEAD"))
     private static void keyHook(int key, CallbackInfo callbackInfo) {
         if (key == Keyboard.KEY_RSHIFT) {
