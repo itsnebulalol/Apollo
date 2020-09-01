@@ -1,15 +1,14 @@
-/*
- * ****************************************************************
- *  Copyright (C) 2020-2021 developed by Icovid
- *
- *  TestGui.java is part of Apollo Client. [8/29/20, 11:13 AM]
- *
- *  TestGui.java can not be copied and/or distributed without the express
- *  permission of Icovid
- *
- *  Contact: Icovid#3888
- * ****************************************************************
- */
+/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+ Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
+ All Contributors can be found in the README.md
+ 
+ TestGui.java is part of Apollo Client. 8/31/20, 8:51 PM
+ 
+ TestGui.java can not be copied and/or distributed without the express
+ permission of Icovid
+ 
+ Contact: Icovid#3888 @ https://discord.com
+ ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
 package io.apollo.guiscreen;
 

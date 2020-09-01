@@ -1,15 +1,14 @@
-/*
- * ****************************************************************
- *  Copyright (C) 2020-2021 developed by Icovid
- *
- *  ApolloFontRenderer.java is part of Apollo Client. [8/28/20, 9:51 PM]
- *
- *  ApolloFontRenderer.java can not be copied and/or distributed without the express
- *  permission of Icovid
- *
- *  Contact: Icovid#3888
- * ****************************************************************
- */
+/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+ Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
+ All Contributors can be found in the README.md
+
+ ApolloFontRenderer.java is part of Apollo Client. 8/31/20, 8:51 PM
+
+ ApolloFontRenderer.java can not be copied and/or distributed without the express
+ permission of Icovid
+
+ Contact: Icovid#3888 @ https://discord.com
+ ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
 package io.apollo.utils;
 
