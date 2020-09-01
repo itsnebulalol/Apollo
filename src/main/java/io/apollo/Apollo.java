@@ -13,10 +13,6 @@
 
 package io.apollo;
 
-import io.apollo.modulemanager.Category;
-import io.apollo.modulemanager.test;
-import io.apollo.settingsmanager.SettingsManager;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,9 +29,7 @@ public class Apollo {
     public static final Apollo instance = new Apollo();
 
     // Main constructor used to instantiate all aspects of Apollo.
-    public Apollo() {
-        SettingsManager.registerSettings(new test("test", "test", Category.PLAYER, true, 0));
-    }
+    public Apollo() { }
 
     /** Log Apollo instance stats after construction. **/
     public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings! "); }
