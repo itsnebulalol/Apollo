@@ -44,19 +44,18 @@ public class JsonUtils {
     }
 
     /** get JSON object from a path.
-     * @param JsonPath path of object split with "."
+     * @param jsonPath path of object split with "/"
      * @param jsonObject object to parse
      * @return {@link JSONObject} that's been discovered **/
-    public static JSONObject JSONGetOrCreate(JSONObject jsonObject, String JsonPath) {
-        String[] objects = JsonPath.split(".");
+    public static JSONObject getOrCreateJSONObject(JSONObject jsonObject, String jsonPath) {
         JSONObject tempObject = jsonObject;
-        for (int i = 0; i < objects.length; i++) {
-            Apollo.log(objects[i]);
-            if (!tempObject.containsKey(objects[i])) tempObject.put(objects[i], new JSONObject());
-            else tempObject = (JSONObject) jsonObject.get(objects[i]);
+        for (String objectsName : jsonPath.split("/")) {
+            if (tempObject.get(objectsName) == null) tempObject.put(objectsName, new JSONObject());
+            else tempObject = (JSONObject) jsonObject.get(objectsName);
         }
         return tempObject;
     }
+
 
     public static void writeJSONtoFile(JSONObject jsonObject, File file) {
         try { new FileWriter(file).write(jsonObject.toJSONString());

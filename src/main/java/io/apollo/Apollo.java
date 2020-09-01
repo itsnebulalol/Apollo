@@ -41,8 +41,9 @@ public class Apollo {
     public Apollo() {
         if (!apolloDirectory.exists()) { try { apolloDirectory.mkdirs();  } catch (Exception ignored) { } log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath()); }
         this.moduleManager = new ModuleManager(settingsFile);
+        Apollo.log("Testing Json Utils");
         JSONObject object = JsonUtils.readJSONFromFile(settingsFile);
-        JSONObject object1 = JsonUtils.JSONGetOrCreate(object, "mod.test.1");
+        JsonUtils.getOrCreateJSONObject(object, "mod/test/1");
         JsonUtils.writeJSONtoFile(object, settingsFile);
     }
 
