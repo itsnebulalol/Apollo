@@ -12,10 +12,8 @@
 
 package io.apollo;
 
-import io.apollo.modulemanager.Module;
 import io.apollo.modulemanager.ModuleManager;
-import io.apollo.utils.JsonUtils;
-import org.json.simple.JSONObject;
+import io.apollo.settingsmanager.SettingManager;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -36,15 +34,13 @@ public class Apollo {
     // Public client instance used to retrieve any aspect of Apollo.
     public static final Apollo instance = new Apollo();
     public final ModuleManager moduleManager;
+    public final SettingManager settingManager;
 
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {
         if (!apolloDirectory.exists()) { try { apolloDirectory.mkdirs();  } catch (Exception ignored) { } log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath()); }
         this.moduleManager = new ModuleManager(settingsFile);
-        Apollo.log("Testing Json Utils");
-        JSONObject object = JsonUtils.readJSONFromFile(settingsFile);
-        JsonUtils.getOrCreateJSONObject(object, "mod/test/1");
-        JsonUtils.writeJSONtoFile(object, settingsFile);
+        this.settingManager = new SettingManager(settingsFile);
     }
 
     /** Log Apollo instance stats after construction. **/

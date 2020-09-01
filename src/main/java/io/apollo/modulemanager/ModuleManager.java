@@ -28,16 +28,12 @@ public class ModuleManager {
 
     /** Constructor to created ModuleManager.
      * @param settingsFile File to save module stats to **/
+    // TODO: setup module objects in file
     public ModuleManager(File settingsFile) {
         this.settingsFile = settingsFile;
-        this.preInitialisation();
-        try {
-            if (!settingsFile.exists()) settingsFile.createNewFile();
-        }
-        catch (IOException exception) { Apollo.log("Unable to Create Settings File! Aborting Module States"); }
-    }
+        this.preInitialisation(); }
 
     public final void preInitialisation() {
-        this.modules.add(new Module("test", "lol", Category.TEST, 0, true));
+        this.modules.add(new Module("test", "lol", Category.TEST, true));
     }
 }

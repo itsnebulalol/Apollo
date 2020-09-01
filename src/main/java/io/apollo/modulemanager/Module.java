@@ -13,6 +13,9 @@
 package io.apollo.modulemanager;
 
 import io.apollo.Apollo;
+import io.apollo.settingsmanager.Setting;
+
+import java.util.ArrayList;
 
 /** Module constructor for all mods.
  * @author Icovid | Icovid#3888
@@ -23,20 +26,18 @@ public class Module {
     public final String description;
     public final Category category;
     private boolean enabled;
-    public int key;
+    public final ArrayList<Setting> settings = new ArrayList<>();
 
-    public Module(String name, String description, Category category) { this(name, description, category, 0, false); }
-    public Module(String name, String description, Category category, Boolean enabled) { this(name, description, category, 0, enabled); }
+    public Module(String name, String description, Category category) { this(name, description, category, false); }
     /** Main constructor used for all modules.
      * @param name name of module
      * @param description description of module
-     * @param key key code to toggle module
+     * @param category category of module
      * @param enabled is module toggled **/
-    public Module(String name, String description, Category category, int key, boolean enabled) {
+    public Module(String name, String description, Category category, boolean enabled) {
         this.name = name;
         this.description = description;
         this.category = category;
-        this.key = key;
         this.enabled = enabled;
         this.moduleSetup();
     }
@@ -63,10 +64,6 @@ public class Module {
     /** Weather or not module is enabled.
      * @return boolean is enabled **/
     public boolean isEnabled() { return enabled; }
-
-    /** Sets module keybinding to value.
-     * @param key value it will be set **/
-    public void setKey(int key) { this.key = key; }
 
     /** Sets module enabled stats to value.
      * @param enabled value it will be set **/
