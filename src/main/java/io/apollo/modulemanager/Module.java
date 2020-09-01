@@ -43,7 +43,7 @@ public class Module {
 
     /** Get module stats from file and log creation to console **/
     public final void moduleSetup() {
-        Apollo.log("❖" + name + " module initiated with a category of " + category.toString().toLowerCase() + " and a toggle state of " + this.enabled);
+        Apollo.log("❖ " + name + " module initiated with a category of " + category.toString().toLowerCase() + " and a toggle state of " + this.enabled);
         this.setupModule();
     }
 
@@ -59,6 +59,14 @@ public class Module {
     public final void onModuleEnable() { this.onEnabled(); }
     /** Called when module is disabled and unregisters the event manager **/
     public final void onModuleDisable() { this.onDisable(); }
+
+    /** Weather or not module is enabled.
+     * @return boolean is enabled **/
+    public boolean isEnabled() { return enabled; }
+
+    /** Sets module keybinding to value.
+     * @param key value it will be set **/
+    public void setKey(int key) { this.key = key; }
 
     /** Sets module enabled stats to value.
      * @param enabled value it will be set **/

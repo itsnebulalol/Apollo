@@ -12,6 +12,10 @@
 
 package io.apollo;
 
+import io.apollo.modulemanager.Module;
+import io.apollo.modulemanager.ModuleManager;
+
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,11 +28,18 @@ public class Apollo {
     public static final String NAME = "Apollo", VERSION = "b0.1", MCVERSION = "1.8.9";
     public static final String[] DEVELOPERS = {"Icovid", "Nora", "isXander"};
 
+    public static final File apolloDirectory = new File(System.getProperty("user.dir") + "/" + NAME.toLowerCase());
+    public static final File settingsFile = new File(System.getProperty("user.dir") + "/" + NAME.toLowerCase() + "/settings.json");
+
     // Public client instance used to retrieve any aspect of Apollo.
     public static final Apollo instance = new Apollo();
+    public final ModuleManager moduleManager;
 
     // Main constructor used to instantiate all aspects of Apollo.
-    public Apollo() { }
+    public Apollo() {
+        if (!apolloDirectory.exists()) { try { apolloDirectory.mkdirs();  } catch (Exception ignored) { } log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath()); }
+        this.moduleManager = new ModuleManager(settingsFile);
+    }
 
     /** Log Apollo instance stats after construction. **/
     public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings! "); }

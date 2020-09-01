@@ -2,19 +2,20 @@
  Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
  All Contributors can be found in the README.md
 
- Category.java is part of Apollo Client. 8/31/20, 8:51 PM
+ JsonUtils.java is part of Apollo Client. 8/31/20, 10:34 PM
 
- Category.java can not be copied and/or distributed without the express
+ JsonUtils.java can not be copied and/or distributed without the express
  permission of Icovid
 
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package io.apollo.modulemanager;
+package io.apollo.utils;
 
-/** Category used by {@link Module}
+/** Various functions to help with JSON objects.
  * @author Icovid | Icovid#3888
  * @since 1.0.0 **/
-public enum Category {
-    TEST;
+public class JsonUtils {
+
+
 }
