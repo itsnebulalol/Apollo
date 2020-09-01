@@ -2,7 +2,7 @@
  Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
  All Contributors can be found in the README.md
 
- Apollo.java is part of Apollo Client. 8/31/20, 8:51 PM
+ Apollo.java is part of Apollo Client. 8/31/20, 10:47 PM
 
  Apollo.java can not be copied and/or distributed without the express
  permission of Icovid
@@ -14,6 +14,8 @@ package io.apollo;
 
 import io.apollo.modulemanager.Module;
 import io.apollo.modulemanager.ModuleManager;
+import io.apollo.utils.JsonUtils;
+import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -39,6 +41,9 @@ public class Apollo {
     public Apollo() {
         if (!apolloDirectory.exists()) { try { apolloDirectory.mkdirs();  } catch (Exception ignored) { } log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath()); }
         this.moduleManager = new ModuleManager(settingsFile);
+        JSONObject object = JsonUtils.readJSONFromFile(settingsFile);
+        JSONObject object1 = JsonUtils.JSONGetOrCreate(object, "mod.test.1");
+        JsonUtils.writeJSONtoFile(object, settingsFile);
     }
 
     /** Log Apollo instance stats after construction. **/
