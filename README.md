@@ -5,7 +5,7 @@
 Apollo is an Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](https://www.spongepowered.org) to hook into game events and inject into Minecraft. Apollo will have countless modules enjoyed by the forge community aswell as a SDK to develop and profit off youre own modules and cosmetics!
 
 - [Development Setup](#development-setup)
-- [Development Orginization Rules](#development-organization)
+- [Contribution Guidlines](#contribution-guidlines)
 - [License / Copyright](#copyright)
 
 ### Checklist:
@@ -53,7 +53,7 @@ This will download the dependencies and setup the run configuration for the proj
 
 ![Apollo.main](https://media.discordapp.net/attachments/747901986770518047/750931022694318120/Screen_Shot_2020-09-02_at_11.11.31_PM.png)
 
-# Development Organization 
+# Contribution Guidlines
 
 To stay organized with the rest of the team and keep a consistent code base I have laid out a few formatting rules all Apollo source must follow to be implemented. For a more in depth look into the code style we are looking for check out classes that have already been implimented and try and keep it mostly the same.
 
