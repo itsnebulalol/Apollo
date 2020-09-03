@@ -31,6 +31,11 @@ All Modules must be documented aswell. When adding any new modules create a new 
 | --- | --- |
 | example | example description|
 
+### Forum Post:
+
+- https://hypixel.net/threads/apollo-client-discord-new-hypixel-client.3219735/#post-22502168
+- https://hypixel.net/threads/apollo-client-sdk-update-for-apollo-client-development.3292568/#post-23178676
+
 # Development Setup
 
 First you will need to setup a development workspace with the Apollo source code. You can do this by downloading the repository, opening the `build.gradle` as a project in intelij and running the following commands from terminal or gradle window.
