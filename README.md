@@ -35,6 +35,8 @@ All Modules must be documented aswell. When adding any new modules create a new 
 
 ### Forum Post:
 
+If you create any forum post for the client put the link below so we can keep track of out social presense.
+
 - https://hypixel.net/threads/apollo-client-discord-new-hypixel-client.3219735/#post-22502168
 - https://hypixel.net/threads/apollo-client-sdk-update-for-apollo-client-development.3292568/#post-23178676
 
