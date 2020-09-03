@@ -100,7 +100,7 @@ Variables should be split in groups based on functionality and be given descript
 ```
 
 ### Functions
-all functions should have a correctly punctuated description and `@param` description for each in all lowercase. A `@return` description should be provided in same way if applicable. Functions should not contain `@author` and should be compact like shown below.
+all functions should have a correctly punctuated description and `@param` description for each in all lowercase. A `@return` description should be provided in same way if applicable. Functions should not contain `@author` unless author is different than that of the class and should be compact like shown below.
 
 ```java 
      /** {@link GL11} scissor using minecraft screen positions.
