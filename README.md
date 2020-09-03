@@ -21,7 +21,7 @@ Apollo is an Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](htt
 
 All Modules must be documented aswell. When adding any new modules create a new line to the table with the module name and a description of what it does.
 
-| Module | Moudle Description |
+| Name | Description |
 | --- | --- |
 | example | example description|
 
@@ -29,7 +29,7 @@ All Modules must be documented aswell. When adding any new modules create a new 
 
 All Events the are added to apollo must be documented below to help developers in future sdk. You must fill out the name of the event class and a description of when it is called.
 
-| Event | Event Description |
+| Name | Description |
 | --- | --- |
 | example | example description|
 
