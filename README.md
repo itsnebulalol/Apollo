@@ -8,7 +8,7 @@ Apollo is an Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](htt
 - [Contribution Guidlines](#contribution-guidlines)
 - [License / Copyright](#copyright)
 
-### Checklist:
+### Dev Checklist
 
 - [x] Module Backend
 - [ ] Event Backend
@@ -17,7 +17,7 @@ Apollo is an Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](htt
 - [ ] Main Module GUI
 - [ ] Color Codes / Text Wrap in FontRenderer
 
-### Modules:
+### Modules
 
 All Modules must be documented aswell. When adding any new modules create a new line to the table with the module name and a description of what it does.
 
@@ -25,7 +25,7 @@ All Modules must be documented aswell. When adding any new modules create a new 
 | --- | --- |
 | example | example description|
 
-### Events:
+### Events
 
 All Events the are added to apollo must be documented below to help developers in future sdk. You must fill out the name of the event class and a description of when it is called.
 
@@ -33,7 +33,7 @@ All Events the are added to apollo must be documented below to help developers i
 | --- | --- |
 | example | example description|
 
-### Forum Post:
+### Forum Post
 
 If you create any forum post for the client put the link below so we can keep track of our social presense.
 
@@ -127,6 +127,10 @@ Event functions are similar to most functions implemented in Apollo with one key
         new KeybindEvent.call(key);
     }
 ```
+
+### Pull Request
+
+Pull request should have a realevent title and a in depth description of anything it adds, removes, or improves.
 
 ### Copyright
 All classes should include the Apollo copyright from below. It will be ideal to set a copoyright profile in intlij to this so it will be automatically imputed to each class. However this isn't mandatory and can easily be implimented once merged with main branch so don't be to worried about it.
