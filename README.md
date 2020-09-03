@@ -91,7 +91,7 @@ Event functions are similar to most functions implemented in Apollo with one key
 ```
 
 ### Copyright
-All classes should include the Apollo copyright from below. It will be ideal to set a copoyright profile in intilJ to this so it will be automatically imputed to each class. However this isn't mandatory and can easily be inputed once merged with main branch so don't be to worried about it.
+All classes should include the Apollo copyright from below. It will be ideal to set a copoyright profile in intlij to this so it will be automatically imputed to each class. However this isn't mandatory and can easily be implimented once merged with main branch so don't be to worried about it.
 
 ```
 /*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
