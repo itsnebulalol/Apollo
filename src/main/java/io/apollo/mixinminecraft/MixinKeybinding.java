@@ -1,14 +1,13 @@
-/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
  Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
- All Contributors can be found in the README.md
- 
- MixinKeybinding.java is part of Apollo Client. 8/31/20, 8:51 PM
- 
+
+ MixinKeybinding.java is part of Apollo Client. 9/3/20, 12:06 AM
+
  MixinKeybinding.java can not be copied and/or distributed without the express
  permission of Icovid
- 
+
  Contact: Icovid#3888 @ https://discord.com
- ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
+ ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
 package io.apollo.mixinminecraft;
 
@@ -28,12 +27,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(KeyBinding.class) public class MixinKeybinding {
 
     /** Called on key press.
-     * @param key key code on key pressed **/
+     * @param key key code of key pressed **/
     @Inject(method = "onTick", at = @At("HEAD"))
     private static void keyHook(int key, CallbackInfo callbackInfo) {
-        if (key == Keyboard.KEY_RSHIFT) {
-            Minecraft.getMinecraft().displayGuiScreen(new TestGui());
-            Apollo.log("Started Test GUI");
-        }
+
     }
 }

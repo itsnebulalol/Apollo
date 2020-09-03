@@ -1,14 +1,13 @@
-/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
  Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
- All Contributors can be found in the README.md
 
- Module.java is part of Apollo Client. 8/31/20, 8:51 PM
+ Module.java is part of Apollo Client. 9/3/20, 12:06 AM
 
  Module.java can not be copied and/or distributed without the express
  permission of Icovid
 
  Contact: Icovid#3888 @ https://discord.com
- ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
+ ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
 package io.apollo.modulemanager;
 
@@ -25,6 +24,7 @@ public class Module {
     public final String name;
     public final String description;
     public final Category category;
+    public int priority = 5;
     private boolean enabled;
     public final ArrayList<Setting> settings = new ArrayList<>();
 
