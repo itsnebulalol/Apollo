@@ -23,6 +23,7 @@ import java.lang.reflect.Method;
 /**
  * Internal data class for storing event listener data.
  *
+ * @since 1.0.0
  * @author Nora Cos | Nora#0001
  */
 class EventListener {

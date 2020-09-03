@@ -14,7 +14,7 @@
 package io.apollo.mixinminecraft.network;
 
 import io.apollo.events.impl.chat.ActionBarEvent;
-import io.apollo.events.impl.chat.ChatEvent;
+import io.apollo.events.impl.chat.ChatReceivedEvent;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.network.play.server.S02PacketChat;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,11 +27,11 @@ public class MixinNetHandlerPlayClient {
     @Inject(method = "handleChat", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/PacketThreadUtil;checkThreadAndEnqueue(Lnet/minecraft/network/Packet;Lnet/minecraft/network/INetHandler;Lnet/minecraft/util/IThreadListener;)V", shift = At.Shift.AFTER), cancellable = true)
     private void onChatPacket(S02PacketChat packetIn, CallbackInfo callbackInfo) {
         boolean actionBar = packetIn.getType() == 2;
-        ChatEvent event;
+        ChatReceivedEvent event;
         if (actionBar) {
             event = new ActionBarEvent(packetIn.getChatComponent());
         } else {
-            event = new ChatEvent(packetIn.getChatComponent());
+            event = new ChatReceivedEvent(packetIn.getChatComponent());
         }
         event.post();
         if (event.isCanceled()) {

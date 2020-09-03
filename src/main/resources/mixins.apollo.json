@@ -7,6 +7,7 @@
   "mixins": [
     "MixinMinecraft",
     "MixinKeybinding",
-    "network.MixinNetHandlerPlayClient"
+    "network.MixinNetHandlerPlayClient",
+    "entity.MixinEntityPlayerSP"
   ]
 }

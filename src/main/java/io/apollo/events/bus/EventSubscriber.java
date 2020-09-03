@@ -24,6 +24,7 @@ import java.lang.annotation.Target;
  * a class that extends {@link io.apollo.events.Event}.
  *
  * @see EventBus
+ * @since 1.0.0
  * @author Nora Cos | Nora#0001
  */
 @Retention(value = RetentionPolicy.RUNTIME)

@@ -18,6 +18,7 @@ import io.apollo.events.Event;
 /**
  * Event fired every tick.
  *
+ * @since 1.0.0
  * @author Nora Cos | Nora#0001
  */
 public class GameLoopEvent extends Event { }
