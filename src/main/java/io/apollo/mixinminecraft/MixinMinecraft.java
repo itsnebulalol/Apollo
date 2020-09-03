@@ -12,6 +12,7 @@
 package io.apollo.mixinminecraft;
 
 import io.apollo.Apollo;
+import io.apollo.events.impl.GameLoopEvent;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,5 +26,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
     // Called on game start
     @Inject(method = "startGame", at = @At("RETURN"))
-    private void onGameStart(CallbackInfo info) { Apollo.instance.postInitialisation(); }
+    private void onGameStart(CallbackInfo info) { Apollo.INSTANCE.postInitialisation(); }
+
+    /**
+     * Post {@link GameLoopEvent} every tick.
+     *
+     * @param callbackInfo unused
+     * @author Nora Cos | #Nora#0001
+     */
+    @Inject(method = "runGameLoop", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;skipRenderWorld:Z", shift = At.Shift.AFTER))
+    private void runGameLoop(CallbackInfo callbackInfo) {
+        new GameLoopEvent().post();
+    }
 }
