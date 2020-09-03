@@ -5,11 +5,11 @@ Apollo is an Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](htt
 ### Checklist:
 
 - [x] Module Backend
-- [] Event Backend
-- [] Addon System
-- [] Hypixel Api Wrapper
-- [] Main Module GUI
-- [] Color Codes / Text Wrap in FontRenderer
+- [ ] Event Backend
+- [ ] Addon System
+- [ ] Hypixel Api Wrapper
+- [ ] Main Module GUI
+- [ ] Color Codes / Text Wrap in FontRenderer
 
 ### Events:
 
