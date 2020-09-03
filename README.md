@@ -1,3 +1,5 @@
+[![Discord](https://canary.discordapp.com/api/guilds/740991579342503936/widget.png) ](https://discord.gg/QWAunms)
+
 # Apollo
 
 Apollo is an Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](https://www.spongepowered.org) to hook into game events and inject into Minecraft. Apollo will have countless modules enjoyed by the forge community aswell as a SDK to develop and profit off youre own modules and cosmetics!
