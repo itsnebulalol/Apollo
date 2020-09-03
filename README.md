@@ -3,6 +3,8 @@
 Apollo is an Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](https://www.spongepowered.org) to hook into game events and inject into Minecraft.
 
 [Development Setup](#development-setup)
+[Development Orginization Rules](#development-organization)
+[License / Copyright](#copyright)
 
 ### Checklist:
 
@@ -29,7 +31,7 @@ All Modules must be documented aswell. When adding any new modules create a new 
 | --- | --- |
 | example | example description|
 
-## Development Setup
+# Development Setup
 
 First you will need to setup a development workspace with the Apollo source code. You can do this by downloading the repository, opening the `build.gradle` as a project in intelij and running the following commands from terminal or gradle window.
 
