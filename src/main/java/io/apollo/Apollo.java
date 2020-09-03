@@ -11,8 +11,10 @@
 
 package io.apollo;
 
+import io.apollo.events.bus.EventBus;
 import io.apollo.modulemanager.ModuleManager;
 import io.apollo.settingsmanager.SettingManager;
+import lombok.Getter;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -31,9 +33,12 @@ public class Apollo {
     public static final File settingsFile = new File(System.getProperty("user.dir") + "/" + NAME.toLowerCase() + "/settings.json");
 
     // Public client instance used to retrieve any aspect of Apollo.
-    public static final Apollo instance = new Apollo();
-    public final ModuleManager moduleManager;
-    public final SettingManager settingManager;
+    public static final Apollo INSTANCE = new Apollo();
+    public static final EventBus EVENT_BUS = new EventBus();
+    @Getter
+    private final ModuleManager moduleManager;
+    @Getter
+    private final SettingManager settingManager;
 
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {

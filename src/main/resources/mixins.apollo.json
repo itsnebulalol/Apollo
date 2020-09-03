@@ -6,6 +6,7 @@
   "verbose": true,
   "mixins": [
     "MixinMinecraft",
-    "MixinKeybinding"
+    "MixinKeybinding",
+    "network.MixinNetHandlerPlayClient"
   ]
 }
