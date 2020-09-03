@@ -1,3 +1,13 @@
+/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
+
+$file.fileName is part of Apollo Client. $today
+
+$file.fileName can not be copied and/or distributed without the express
+permission of Icovid
+
+Contact: Icovid#3888 @ https://discord.com
+⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 package io.apollo.utils.saving.OtherWay;
 
 import com.google.gson.JsonObject;
@@ -12,7 +22,7 @@ import java.io.IOException;
 
 public class Save {
     /** Saving booleans to a json (and other things prob)
-     * @author Pinkulu
+     * @author Pinkulu | pinkulu#6260
      * This will save it all in 1 file
      * **/
 
