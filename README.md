@@ -31,6 +31,13 @@ All classes should be headed with a short description of the class purpose, the 
 @Mixin(KeyBinding.class) public class MixinKeybinding {
 
 }
+
+/** Various functions to draw gui objects using GL11 and WorldRenderer.
+ * @author Icovid | Icovid#3888
+ * @since 1.0.0 **/
+public class GLRenderer {
+
+}
 ```
 
 ### Variables
