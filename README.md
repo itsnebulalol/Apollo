@@ -19,7 +19,7 @@ This will download the dependencies and setup the run configuration for the proj
 
 ## Development Organization 
 
-To stay organized with the rest of the team and keep a consistent code base I have laid out a few formatting rules all Apollo source must follow to be implemented.
+To stay organized with the rest of the team and keep a consistent code base I have laid out a few formatting rules all Apollo source must follow to be implemented. For a more in depth look into the code style we are looking for check out classes that have already been implimented and try and keep it mostly the same.
 
 ### Classes
 All classes should be headed with a short description of the class purpose, the author (with contact) and the version it was implemented in. As you can see below descriptions are compact and written with correct punctuation.
@@ -52,7 +52,7 @@ Variables should be split in groups based on functionality and be given descript
 ```
 
 ### Functions
-all functions should have a correctly punctuated description and `@param` description for each in all lowercase. A `@return` description should be provided in same way if applicable.
+all functions should have a correctly punctuated description and `@param` description for each in all lowercase. A `@return` description should be provided in same way if applicable. Functions should not contain `@author` and should be compact like shown below.
 
 ```java 
      /** {@link GL11} scissor using minecraft screen positions.
