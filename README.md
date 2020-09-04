@@ -136,6 +136,32 @@ Event functions are similar to most functions implemented in Apollo with one key
     }
 ```
 
+### JavaDoc / Inline Comments
+JavaDoc and inline comments should be more compacted than normal to avoid wasited space and personaly i just think it looks better. Comments also should be correctly punctuated with a capital letter to start and ending with a period.
+
+```
+/** Basic setting class. 
+ * <p>All setting types will be extended from this.<p>
+ * @author Icovid | Icovid#3888
+ * @since 1.0.0 **/
+ 
+/** Cancelable event class.
+ * <p>Events that extend this class will be cancelable.
+ * This means that if {@code cancel} is called,
+ * the action that triggered the event will not happen.</p>
+ * @author Nora Cos | Nora#0001
+ * @since 1.0.0 **/
+ 
+ /** Sets the priority of all methods with the specified event
+     * in <b>all instances</b> of the specified object.
+     * @param any object to change the priority of
+     * @param event event
+     * @param newPriority the new priority of the method **/
+
+// Apollo information used for display title and credits info.
+// Public client instance used to retrieve any aspect of Apollo.
+```
+
 ### Pull Request
 
 Pull request should have a realevent title and a in depth description of anything it adds, removes, or improves.
