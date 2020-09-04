@@ -2,10 +2,10 @@
 
 # Apollo
 
-Apollo is an Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](https://www.spongepowered.org) to hook into game events and inject into Minecraft. Apollo will have countless modules enjoyed by the forge community aswell as a SDK to develop and profit off youre own modules and cosmetics!
+Apollo is a Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](https://www.spongepowered.org) to hook into game events and inject into Minecraft. Apollo will have countless modules enjoyed by the forge community as well as an SDK to develop and profit off your own modules and cosmetics!
 
 - [Development Setup](#development-setup)
-- [Contribution Guidlines](#contribution-guidlines)
+- [Contribution Guidelines](#contribution-guidlines)
 - [License / Copyright](#copyright)
 
 ### Dev Checklist
@@ -17,11 +17,11 @@ Apollo is an Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](htt
 - [ ] Hypixel Api Wrapper
 - [ ] Main Module GUI
 - [ ] Color Codes / Text Wrap in FontRenderer
-- [ ] Add Discord Webhook to this Respository
+- [ ] Add Discord Webhook to this Repository
 
 ### Modules
 
-All Modules must be documented aswell. When adding any new modules create a new line to the table with the module name and a description of what it does.
+All Modules must be documented as well. When adding any new modules create a new line to the table with the module name and a description of what it does.
 
 | Name | Description |
 | --- | --- |
@@ -29,7 +29,7 @@ All Modules must be documented aswell. When adding any new modules create a new 
 
 ### Events
 
-All Events the are added to apollo must be documented below to help developers in future sdk. You must fill out the name of the event class and a description of when it is called.
+All Events that are added to apollo must be documented below to help developers in future SDK. You must fill out the name of the event class and a description of when it is called.
 
 | Name | Description |
 | --- | --- |
@@ -40,7 +40,7 @@ All Events the are added to apollo must be documented below to help developers i
 
 ### Forum Post
 
-If you create any forum post for the client put the link below so we can keep track of our social presense.
+If you create any forum post for the client put the link below so we can keep track of our social presence.
 
 - https://hypixel.net/threads/apollo-client-discord-new-hypixel-client.3219735/#post-22502168
 - https://hypixel.net/threads/apollo-client-sdk-update-for-apollo-client-development.3292568/#post-23178676
@@ -48,7 +48,7 @@ If you create any forum post for the client put the link below so we can keep tr
 
 # Development Setup
 
-First you will need to setup a development workspace with the Apollo source code. You can do this by downloading the repository, opening the `build.gradle` as a project in intelij and running the following commands from terminal or gradle window.
+First you will need to set up a development workspace with the Apollo source code. You can do this by downloading the repository, opening the `build.gradle` as a project in IntelliJ IDEA and running the following commands from terminal or gradle window.
 
 ```bash
 ./gradlew setupDecompWorkspace
@@ -61,15 +61,15 @@ This will download the dependencies and setup the run configuration for the proj
 
 ![Apollo.main](https://media.discordapp.net/attachments/747901986770518047/750931022694318120/Screen_Shot_2020-09-02_at_11.11.31_PM.png)
 
-Lastly to run the client you will need to bypass errors involving the Lombook dependencie we use to generate getters and setters at run time. You can do this by installing the Lombook intlij plugin from [this link](https://plugins.jetbrains.com/plugin/6317-lombok) or the intlij plugin repository.
+Lastly to run the client you will need to bypass errors involving the Lombok IntelliJ plugin we use to make writing Java more tolerable. You can do this by installing the Lombok IntelliJ plugin from [this link](https://plugins.jetbrains.com/plugin/6317-lombok) or the JetBrains plugin repository.
 
 ![plugin](https://media.discordapp.net/attachments/747901986770518047/751266941204693002/Screen_Shot_2020-09-03_at_9.26.33_PM.png)
 
 # Contribution Guidlines
 
-To stay organized with the rest of the team and keep a consistent code base I have laid out a few formatting rules all Apollo source must follow to be implemented. For a more in depth look into the code style we are looking for check out classes that have already been implimented and try and keep it mostly the same.
+To stay organized with the rest of the team and keep a consistent code base I have laid out a few formatting rules all Apollo source must follow to be implemented. For a more in depth look into the code style we are looking for check out classes that have already been implemented and try to keep it mostly the same.
 
-**Always work on seprate branch and talk to Icovid before merging.**
+**Always work on a separate branch and talk to Icovid before merging.**
 
 ### Classes
 All classes should be headed with a short description of the class purpose, the author (with contact) and the version it was implemented in. As you can see below descriptions are compact and written with correct punctuation.
@@ -91,7 +91,7 @@ public class GLRenderer {
 ```
 
 ### Variables
-Variables should be split in groups based on functionality and be given descriptions if applicable. Name depends on the type of variable but try and stay close to the format below.
+Variables should be split in groups based on functionality and be given descriptions if applicable. Name depends on the type of variable but try to stay close to the format below.
 
 ```java
     // Public fonts used in Apollo Guis.
@@ -141,7 +141,7 @@ Event functions are similar to most functions implemented in Apollo with one key
 ```
 
 ### JavaDoc / Inline Comments
-JavaDoc and inline comments should be more compacted than normal to avoid wasited space and personaly i just think it looks better. Comments also should be correctly punctuated with a capital letter to start and ending with a period.
+JavaDoc and inline comments should be more compacted than normal to avoid wasted space and personally I just think it looks better. Comments also should be correctly punctuated with a capital letter to start and ending with a period.
 
 ```java
 /** Basic setting class. 
@@ -168,10 +168,10 @@ JavaDoc and inline comments should be more compacted than normal to avoid wasite
 
 ### Pull Request
 
-Pull request should have a realevent title and a in depth description of anything it adds, removes, or improves.
+Pull request should have a relevant title and an in depth description of anything it adds, removes, or improves.
 
 ### Copyright
-All classes should include the Apollo copyright from below. It will be ideal to set a copoyright profile in intlij to this so it will be automatically imputed to each class. However this isn't mandatory and can easily be implimented once merged with main branch so don't be to worried about it.
+All classes should include the Apollo copyright from below. It will be ideal to set a copyright profile in IntelliJ to this so it will be automatically imputed to each class. However, this isn't mandatory and can easily be implemented once merged with main branch so don't be to worried about it.
 
 ```
 /*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
