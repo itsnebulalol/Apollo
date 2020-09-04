@@ -33,11 +33,11 @@ All Events that are added to apollo must be documented below to help developers 
 
 | Name | Description |
 | --- | --- |
-| GameLoopEvent | Event fired every tick. |
+| GameLoopEvent | Fired every tick. |
 | LeftClickEvent | Fired when left mouse button is pressed. |
 | RightClickEvent | Fired when right mouse button is pressed. |
-| KeyPressedEvent | Called when key is pressed. |
-| KeyReleasedEvent | Called when key is released. |
+| KeyPressedEvent | Fired when key is pressed. |
+| KeyReleasedEvent | Fired when key is released. |
 | ActionBarEvent | Fired when the Action Bar is updated. |
 | ChatReceivedEvent | Fired when the client receives a chat packet. |
 | PlayerChatEvent | Fired when the client sends a message to the server. |
