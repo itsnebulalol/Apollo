@@ -61,6 +61,10 @@ This will download the dependencies and setup the run configuration for the proj
 
 ![Apollo.main](https://media.discordapp.net/attachments/747901986770518047/750931022694318120/Screen_Shot_2020-09-02_at_11.11.31_PM.png)
 
+Lastly to run the client you will need to bypass errors involving the Lombook dependencie we use to generate getters and setters at run time. You can do this by installing the Lombook intlij plugin from [this link](https://plugins.jetbrains.com/plugin/6317-lombok) or the intlij plugin repository.
+
+![plugin](https://media.discordapp.net/attachments/747901986770518047/751266941204693002/Screen_Shot_2020-09-03_at_9.26.33_PM.png)
+
 # Contribution Guidlines
 
 To stay organized with the rest of the team and keep a consistent code base I have laid out a few formatting rules all Apollo source must follow to be implemented. For a more in depth look into the code style we are looking for check out classes that have already been implimented and try and keep it mostly the same.
