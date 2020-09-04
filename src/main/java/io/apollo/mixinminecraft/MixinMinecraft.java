@@ -20,20 +20,18 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** MixinBootstrap Events for Minecraft.class.
- * @author isXander | isXander#4285
+ * @author Icovid | Icovid#3888
  * @since 1.0.0 **/
 @Mixin(Minecraft.class) public class MixinMinecraft {
 
-    // Called on game start
+    /** Post {@link Apollo} start.
+     * @param callbackInfo unused **/
     @Inject(method = "startGame", at = @At("RETURN"))
-    private void onGameStart(CallbackInfo info) { Apollo.INSTANCE.postInitialisation(); }
+    private void onGameStart(CallbackInfo callbackInfo) { Apollo.INSTANCE.postInitialisation(); }
 
-    /**
-     * Post {@link GameLoopEvent} every tick.
-     *
+    /** Post {@link GameLoopEvent} every tick.
      * @param callbackInfo unused
-     * @author Nora Cos | #Nora#0001
-     */
+     * @author Nora Cos | #Nora#0001 */
     @Inject(method = "runGameLoop", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;skipRenderWorld:Z", shift = At.Shift.AFTER))
     private void runGameLoop(CallbackInfo callbackInfo) {
         new GameLoopEvent().post();

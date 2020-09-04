@@ -24,14 +24,11 @@ import org.spongepowered.asm.mixin.Shadow;
 public class MixinEntityPlayerSP {
     @Shadow @Final public NetHandlerPlayClient sendQueue;
 
-    /**
-     * Posts a {@link io.apollo.events.impl.chat.PlayerChatEvent}.
+    /** Posts a {@link io.apollo.events.impl.chat.PlayerChatEvent}.
      * If the event is canceled, prevent the client from sending any message.
-     *
-     * @author Nora Cos | Nora#0001
-     */
-    @Overwrite
-    public void sendChatMessage(String message) {
+     * @param  message message player sent
+     * @author Nora Cos | Nora#0001 **/
+    @Overwrite public void sendChatMessage(String message) {
         if (message != null) {
             PlayerChatEvent event = new PlayerChatEvent(message);
             if (!event.isCanceled()) {

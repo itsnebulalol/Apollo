@@ -11,7 +11,8 @@
 
 package io.apollo.settingsmanager;
 
-/** Basic setting class. All setting types will be extended from this.
+/** Basic setting class.
+ * <p>All setting types will be extended from this.</p>
  * @author Icovid | Icovid#3888
  * @since 1.0.0 **/
 public abstract class Setting {
