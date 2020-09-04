@@ -139,7 +139,7 @@ Event functions are similar to most functions implemented in Apollo with one key
 ### JavaDoc / Inline Comments
 JavaDoc and inline comments should be more compacted than normal to avoid wasited space and personaly i just think it looks better. Comments also should be correctly punctuated with a capital letter to start and ending with a period.
 
-```
+```java
 /** Basic setting class. 
  * <p>All setting types will be extended from this.<p>
  * @author Icovid | Icovid#3888
