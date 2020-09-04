@@ -1,13 +1,13 @@
-/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
+/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+ Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
 
-$file.fileName is part of Apollo Client. $today
+ Save.java is part of Apollo Client. 9/3/20, 8:54 PM
 
-$file.fileName can not be copied and/or distributed without the express
-permission of Icovid
+ Save.java can not be copied and/or distributed without the express
+ permission of Icovid
 
-Contact: Icovid#3888 @ https://discord.com
-⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
+ Contact: Icovid#3888 @ https://discord.com
+ ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 package io.apollo.utils.saving.OtherWay;
 
 import com.google.gson.JsonObject;
@@ -20,11 +20,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/** Saving booleans to a json (and other things prob)
+ * @author Pinkulu | pinkulu#6260 **/
 public class Save {
-    /** Saving booleans to a json (and other things prob)
-     * @author Pinkulu | pinkulu#6260
-     * This will save it all in 1 file
-     * **/
 
     /** run this whenever a change is made **/
     public static void saveConfig() {

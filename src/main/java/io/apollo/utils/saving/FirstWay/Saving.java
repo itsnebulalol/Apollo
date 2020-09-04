@@ -1,13 +1,13 @@
-/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
+/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+ Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
 
-$file.fileName is part of Apollo Client. $today
+ Saving.java is part of Apollo Client. 9/3/20, 8:54 PM
 
-$file.fileName can not be copied and/or distributed without the express
-permission of Icovid
+ Saving.java can not be copied and/or distributed without the express
+ permission of Icovid
 
-Contact: Icovid#3888 @ https://discord.com
-⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
+ Contact: Icovid#3888 @ https://discord.com
+ ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 package io.apollo.utils.saving.FirstWay;
 
 import java.io.File;

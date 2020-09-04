@@ -1,28 +1,25 @@
-/*
-⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
+/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+ Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
 
-$file.fileName is part of Apollo Client. $today
-
-$file.fileName can not be copied and/or distributed without the express
-permission of Icovid
-
-Contact: Icovid#3888 @ https://discord.com
-⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-*/
+ FileManager.java is part of Apollo Client. 9/3/20, 8:54 PM
+ 
+ FileManager.java can not be copied and/or distributed without the express
+ permission of Icovid
+ 
+ Contact: Icovid#3888 @ https://discord.com
+ ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 package io.apollo.utils.saving.FirstWay;
 
 import com.google.gson.Gson;
 import io.apollo.Apollo;
 
 import java.io.*;
-/** File manager for folders i guess
+
+/** File manager for folders.
  * @author Pinkulu | pinkulu#6260
- * taken from Eric Golde#3352
  * @since v1.0.0
  * this will make a folder for each mod, and add a toggle.json in each folder
  * (not sure if it will work as this is taken from my old client and will prob need some modifiying, cant test it out rn bc there arnt mods yet)
-
 run this whenever a change is made **/
 public class FileManager {
 

@@ -1,15 +1,13 @@
-/*
- * ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
- * Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
- *
- * EventSubscriber.java is part of Apollo Client. 2020-09-03, 2:06 p.m.
- *
- * EventSubscriber.java can not be copied and/or distributed without the express
- * permission of Icovid
- *
- * Contact: Icovid#3888 @ https://discord.com
- * ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
- */
+/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+ Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
+
+ EventSubscriber.java is part of Apollo Client. 9/3/20, 8:54 PM
+ 
+ EventSubscriber.java can not be copied and/or distributed without the express
+ permission of Icovid
+ 
+ Contact: Icovid#3888 @ https://discord.com
+ ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
 package io.apollo.events.bus;
 
@@ -18,23 +16,18 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * Annotation for all event listener methods.
+/** Annotation for all event listener methods.
  * The first parameter in methods annotated with this must be
  * a class that extends {@link io.apollo.events.Event}.
- *
  * @see EventBus
- * @since 1.0.0
  * @author Nora Cos | Nora#0001
- */
+ * @since 1.0.0 **/
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = ElementType.METHOD)
 public @interface EventSubscriber {
-    /**
-     * Priority of the event.
-     *
+
+    /** Priority of the event.
      * @see Priority
-     * @return event priority
-     */
+     * @return event priority */
     Priority priority() default Priority.NORMAL;
 }

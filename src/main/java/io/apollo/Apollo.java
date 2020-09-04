@@ -1,19 +1,18 @@
-/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
  Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
 
- Apollo.java is part of Apollo Client. 9/3/20, 12:06 AM
+ Apollo.java is part of Apollo Client. 9/3/20, 8:54 PM
 
  Apollo.java can not be copied and/or distributed without the express
  permission of Icovid
 
  Contact: Icovid#3888 @ https://discord.com
- ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
+ ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
 package io.apollo;
 
 import io.apollo.events.bus.EventBus;
 import io.apollo.modulemanager.ModuleManager;
-import io.apollo.settingsmanager.SettingManager;
 import lombok.Getter;
 
 import java.io.File;
@@ -35,16 +34,14 @@ public class Apollo {
     // Public client instance used to retrieve any aspect of Apollo.
     public static final Apollo INSTANCE = new Apollo();
     public static final EventBus EVENT_BUS = new EventBus();
-    @Getter
-    private final ModuleManager moduleManager;
-    @Getter
-    private final SettingManager settingManager;
+    @Getter private final ModuleManager moduleManager;
+//    @Getter private final SettingManager settingManager; TODO: might make settings save in constructor.
 
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {
         if (!apolloDirectory.exists()) { try { apolloDirectory.mkdirs();  } catch (Exception ignored) { } log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath()); }
         this.moduleManager = new ModuleManager(settingsFile);
-        this.settingManager = new SettingManager(settingsFile);
+//        this.settingManager = new SettingManager(settingsFile); TODO: might make settings save in constructor.
     }
 
     /** Log Apollo instance stats after construction. **/
