@@ -13,6 +13,8 @@ package io.apollo.modulemanager;
 
 import io.apollo.Apollo;
 import io.apollo.settingsmanager.Setting;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
@@ -24,8 +26,8 @@ public class Module {
     public final String name;
     public final String description;
     public final Category category;
-    public int priority = 5;
-    private boolean enabled;
+    @Setter public int priority = 5;
+    @Setter @Getter private boolean enabled;
     public final ArrayList<Setting> settings = new ArrayList<>();
 
     public Module(String name, String description, Category category) { this(name, description, category, false); }
@@ -60,14 +62,6 @@ public class Module {
     public final void onModuleEnable() { this.onEnabled(); }
     /** Called when module is disabled and unregisters the event manager **/
     public final void onModuleDisable() { this.onDisable(); }
-
-    /** Weather or not module is enabled.
-     * @return boolean is enabled **/
-    public boolean isEnabled() { return enabled; }
-
-    /** Sets module enabled stats to value.
-     * @param enabled value it will be set **/
-    public void setEnabled(Boolean enabled) { this.enabled = enabled; }
 
     /** Called when module is enabled.
      * @see #toggle() **/
