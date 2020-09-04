@@ -33,7 +33,10 @@ All Events the are added to apollo must be documented below to help developers i
 
 | Name | Description |
 | --- | --- |
-| example | example description|
+| GameLoopEvent | Event fired every tick. |
+| ActionBarEvent | Fired when the Action Bar is updated. |
+| ChatReceivedEvent | Fired when the client receives a chat packet. |
+| PlayerChatEvent | Fired when the client sends a message to the server. |
 
 ### Forum Post
 
