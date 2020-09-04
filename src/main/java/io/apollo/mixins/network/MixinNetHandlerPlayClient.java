@@ -9,7 +9,7 @@
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package io.apollo.mixinminecraft.network;
+package io.apollo.mixins.network;
 
 import io.apollo.events.impl.chat.ActionBarEvent;
 import io.apollo.events.impl.chat.ChatReceivedEvent;

@@ -23,8 +23,7 @@ public class ChatReceivedEvent extends CancelableEvent {
 
     @Getter private final IChatComponent chatComponent;
 
-    /** Fired when the client receives a chat packet and it is not an action bar packet.
-     * @param chatComponent chat component from the packet **/
+    /** @param chatComponent chat component from the packet **/
     public ChatReceivedEvent(IChatComponent chatComponent) {
         this.chatComponent = chatComponent;
     }

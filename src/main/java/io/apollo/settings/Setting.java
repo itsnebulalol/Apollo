@@ -9,7 +9,7 @@
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package io.apollo.settingsmanager;
+package io.apollo.settings;
 
 /** Basic setting class.
  * <p>All setting types will be extended from this.</p>

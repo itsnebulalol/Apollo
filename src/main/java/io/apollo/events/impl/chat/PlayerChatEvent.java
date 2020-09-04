@@ -22,8 +22,7 @@ public class PlayerChatEvent extends CancelableEvent {
 
     @Getter @Setter private String message;
 
-    /** Fired when the client sends a message to the server.
-     * @param chatMessage message being sent to the server **/
+    /** @param chatMessage message being sent to the server **/
     public PlayerChatEvent(String chatMessage) {
         message = chatMessage;
     }

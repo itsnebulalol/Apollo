@@ -18,8 +18,7 @@ import net.minecraft.util.IChatComponent;
  * @since 1.0.0 **/
 public class ActionBarEvent extends ChatReceivedEvent {
 
-    /** Fired when the Action Bar is updated.
-     * @param chatComponent action bar text **/
+    /** @param chatComponent action bar text **/
     public ActionBarEvent(IChatComponent chatComponent) {
         super(chatComponent);
     }

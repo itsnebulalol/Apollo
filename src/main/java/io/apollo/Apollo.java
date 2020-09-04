@@ -12,7 +12,7 @@
 package io.apollo;
 
 import io.apollo.events.bus.EventBus;
-import io.apollo.modulemanager.ModuleManager;
+import io.apollo.module.ModuleManager;
 import lombok.Getter;
 
 import java.io.File;
@@ -46,6 +46,9 @@ public class Apollo {
 
     /** Log Apollo instance stats after construction. **/
     public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings! "); }
+
+    // Called when game shuts down.
+    public void shutdown() {}
 
     /** Used to log Apollo messages to console.
      * @param message any string to be displayed in console. **/

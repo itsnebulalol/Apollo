@@ -9,9 +9,7 @@
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package io.apollo.modulemanager;
-
-import io.apollo.Apollo;
+package io.apollo.module;
 
 import java.io.*;
 import java.util.ArrayList;

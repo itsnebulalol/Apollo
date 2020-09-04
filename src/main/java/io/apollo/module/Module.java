@@ -9,10 +9,10 @@
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package io.apollo.modulemanager;
+package io.apollo.module;
 
 import io.apollo.Apollo;
-import io.apollo.settingsmanager.Setting;
+import io.apollo.settings.Setting;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,10 +23,10 @@ import java.util.ArrayList;
  * @since 1.0.0 **/
 public class Module {
 
-    public final String name;
-    public final String description;
-    public final Category category;
-    @Setter public int priority = 5;
+    @Getter private final String name;
+    @Getter private final String description;
+    @Getter private final Category category;
+    @Setter private int priority = 5;
     @Setter @Getter private boolean enabled;
     public final ArrayList<Setting> settings = new ArrayList<>();
 

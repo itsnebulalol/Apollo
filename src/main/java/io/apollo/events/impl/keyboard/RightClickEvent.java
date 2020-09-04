@@ -1,19 +1,20 @@
 /*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
  Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
 
- GameLoopEvent.java is part of Apollo Client. 9/3/20, 8:54 PM
- 
- GameLoopEvent.java can not be copied and/or distributed without the express
+ RightClickEvent.java is part of Apollo Client. 9/4/20, 5:19 PM
+
+ RightClickEvent.java can not be copied and/or distributed without the express
  permission of Icovid
- 
+
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package io.apollo.events.impl;
+package io.apollo.events.impl.keyboard;
 
 import io.apollo.events.Event;
 
-/** Event fired every tick.
- * @author Nora Cos | Nora#0001
+/** Fired when right mouse button is pressed.
+ * @author Icovid | Icovid#3888
  * @since 1.0.0 **/
-public class GameLoopEvent extends Event { }
+public class RightClickEvent extends Event {
+}

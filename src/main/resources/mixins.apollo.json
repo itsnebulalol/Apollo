@@ -1,11 +1,11 @@
 {
   "required": true,
   "compatibilityLevel": "JAVA_8",
-  "package": "io.apollo.mixinminecraft",
+  "package": "io.apollo.mixins",
   "refmap": "mixins.apollo.json",
   "verbose": true,
   "mixins": [
-    "MixinMinecraft",
+    "client.MixinMinecraft",
     "MixinKeybinding",
     "network.MixinNetHandlerPlayClient",
     "entity.MixinEntityPlayerSP"

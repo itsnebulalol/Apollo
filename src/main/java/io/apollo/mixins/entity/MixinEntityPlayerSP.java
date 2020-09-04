@@ -9,7 +9,7 @@
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package io.apollo.mixinminecraft.entity;
+package io.apollo.mixins.entity;
 
 import io.apollo.events.impl.chat.PlayerChatEvent;
 import net.minecraft.client.entity.EntityPlayerSP;
