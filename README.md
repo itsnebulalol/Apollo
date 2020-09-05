@@ -56,7 +56,7 @@ First you will need to set up a development workspace with the Apollo source cod
 
 ```bash
 ./gradlew setupDecompWorkspace
-./gradlew genIntiljRuns
+./gradlew genIntellijRuns
 ```
 
 ![Image of project](https://media.discordapp.net/attachments/747901986770518047/750929662795972740/Screen_Shot_2020-09-02_at_11.06.15_PM.png)
