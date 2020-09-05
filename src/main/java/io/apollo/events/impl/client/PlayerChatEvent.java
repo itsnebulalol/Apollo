@@ -1,7 +1,7 @@
 /*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
  Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
 
- PlayerChatEvent.java is part of Apollo Client. 9/3/20, 8:54 PM
+ PlayerChatEvent.java is part of Apollo Client. 9/4/20, 8:47 PM
 
  PlayerChatEvent.java can not be copied and/or distributed without the express
  permission of Icovid
@@ -9,7 +9,7 @@
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package io.apollo.events.impl.chat;
+package io.apollo.events.impl.client;
 
 import io.apollo.events.CancelableEvent;
 import lombok.Getter;

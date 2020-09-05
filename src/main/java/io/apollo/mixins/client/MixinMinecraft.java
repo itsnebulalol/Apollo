@@ -12,13 +12,13 @@
 package io.apollo.mixins.client;
 
 import io.apollo.Apollo;
-import io.apollo.events.impl.client.*;
-import io.apollo.events.impl.keyboard.KeyPressedEvent;
-import io.apollo.events.impl.keyboard.KeyReleasedEvent;
-import io.apollo.events.impl.keyboard.LeftClickEvent;
-import io.apollo.events.impl.keyboard.RightClickEvent;
-import io.apollo.events.impl.world.SinglePlayerJoinEvent;
+import io.apollo.events.impl.client.GameLoopEvent;
+import io.apollo.events.impl.client.input.KeyPressedEvent;
+import io.apollo.events.impl.client.input.KeyReleasedEvent;
+import io.apollo.events.impl.client.input.LeftClickEvent;
+import io.apollo.events.impl.client.input.RightClickEvent;
 import io.apollo.events.impl.world.LoadWorldEvent;
+import io.apollo.events.impl.world.SinglePlayerJoinEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.world.WorldSettings;

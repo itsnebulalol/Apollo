@@ -6,8 +6,8 @@
   "verbose": true,
   "mixins": [
     "client.MixinMinecraft",
-    "MixinKeybinding",
-    "network.MixinNetHandlerPlayClient",
-    "entity.MixinEntityPlayerSP"
+    "client.MixinSoundManager",
+    "entity.MixinEntityPlayerSP",
+    "network.MixinNetHandlerPlayClient"
   ]
 }
