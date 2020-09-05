@@ -6,7 +6,7 @@ Apollo is a Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](http
 
 - [Development Setup](#development-setup)
 - [Contribution Guidelines](#contribution-guidlines)
-- [License / Copyright](#license)
+- [License / Copyright](#copyright)
 
 ### Dev Checklist
 
@@ -56,7 +56,7 @@ First you will need to set up a development workspace with the Apollo source cod
 
 ```bash
 ./gradlew setupDecompWorkspace
-./gradlew genIntiljRuns
+./gradlew genIntellijRuns
 ```
 
 ![Image of project](https://media.discordapp.net/attachments/747901986770518047/750929662795972740/Screen_Shot_2020-09-02_at_11.06.15_PM.png)
@@ -174,17 +174,19 @@ JavaDoc and inline comments should be more compacted than normal to avoid wasted
 
 Pull request should have a relevant title and an in depth description of anything it adds, removes, or improves.
 
-## License 
+## Copyright 
 
+```
 This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published
+it under the terms of the GNU Affero General Public License as published
 by the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
- 
+
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Lesser General Public License for more details.
- 
-You should have received a copy of the GNU Lesser General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/ .
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+```
