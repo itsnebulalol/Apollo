@@ -21,6 +21,7 @@ package io.apollo;
 
 import io.apollo.events.bus.EventBus;
 import io.apollo.module.ModuleManager;
+import io.apollo.utils.colours.WaveChroma;
 import lombok.Getter;
 
 import java.io.File;
@@ -56,7 +57,8 @@ public class Apollo {
     public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings! "); }
 
     // Called when game shuts down.
-    public void shutdown() {}
+    public void shutdown() {
+    }
 
     /** Used to log Apollo messages to console.
      * @param message any string to be displayed in console. **/
