@@ -173,21 +173,3 @@ JavaDoc and inline comments should be more compacted than normal to avoid wasted
 ### Pull Request
 
 Pull request should have a relevant title and an in depth description of anything it adds, removes, or improves.
-
-### Copyright
-All classes should include the Apollo copyright from below. It will be ideal to set a copyright profile in IntelliJ to this so it will be automatically imputed to each class. However, this isn't mandatory and can easily be implemented once merged with main branch so don't be to worried about it.
-
-```
-/*⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-Copyright (C) 2020-2021 developed by Icovid and Apollo Development Team
-
-$file.fileName is part of Apollo Client. $today
-
-$file.fileName can not be copied and/or distributed without the express
-permission of Icovid
-
-Contact: Icovid#3888 @ https://discord.com
-⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
-```
-
-![show](https://media.discordapp.net/attachments/747901986770518047/750940281657884702/Screen_Shot_2020-09-02_at_11.48.16_PM.png?width=1500&height=859)
