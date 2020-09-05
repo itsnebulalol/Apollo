@@ -30,7 +30,7 @@ compileJava.options.encoding = 'UTF-8'
 
 minecraft {
     version = "1.8.9"
-    tweakClass = "io.apollo.mixinminecraft.ApolloTweaker"
+    tweakClass = "io.apollo.mixns.ApolloTweaker"
     runDir = "run"
     mappings = "stable_20"
     clientJvmArgs = ["-XX:-DisableExplicitGC"]
@@ -97,7 +97,7 @@ jar {
 jar {
     manifest.attributes(
             "MixinConfigs": 'mixins.apollo.json',
-            "TweakClass": 'io.apollo.mixinminecraft.ApolloTweaker',
+            "TweakClass": 'io.apollo.mixins.ApolloTweaker',
             "TweakOrder": 0,
             "Manifest-Version": 1.0
     )
