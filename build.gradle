@@ -30,7 +30,7 @@ compileJava.options.encoding = 'UTF-8'
 
 minecraft {
     version = "1.8.9"
-    tweakClass = "io.apollo.mixns.ApolloTweaker"
+    tweakClass = "io.apollo.mixins.ApolloTweaker"
     runDir = "run"
     mappings = "stable_20"
     clientJvmArgs = ["-XX:-DisableExplicitGC"]
