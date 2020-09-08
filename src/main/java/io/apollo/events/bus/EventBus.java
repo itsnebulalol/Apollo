@@ -134,32 +134,4 @@ public class EventBus {
     void sort(Class<? extends Event> eventClass) {
         listeners.get(eventClass).sort(Comparator.comparingInt(listener -> listener.getEventPriority().getId()));
     }
-
-    /** Internal data class for storing event listener data.
-     * @author Nora Cos | Nora#0001
-     * @since 1.0.0 **/
-    public static class EventListener {
-
-        @Getter
-        private final Object instance;
-        @Getter @Setter
-        private Method method;
-        @Getter private Priority eventPriority;
-
-        public EventListener(Object listener, Method method, Priority eventPriority) {
-            instance = listener;
-            this.method = method;
-            this.eventPriority = eventPriority;
-        }
-
-        /** Sets the event priority and sorts the event listeners.
-         * @param eventPriority new event priority
-         * @param classToSort event class **/
-        void setEventPriority(Priority eventPriority, Class<? extends Event> classToSort) {
-            this.eventPriority = eventPriority;
-            if (classToSort != null) {
-                Apollo.EVENT_BUS.sort(classToSort);
-            }
-        }
-    }
 }
