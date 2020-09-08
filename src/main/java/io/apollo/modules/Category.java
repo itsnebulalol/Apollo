@@ -23,5 +23,7 @@ package io.apollo.modules;
  * @author Icovid | Icovid#3888
  * @since 1.0.0 **/
 public enum Category {
-    TEST, UTIL
+    TEST,
+    DISCORD,
+    IMPORTANT
 }
