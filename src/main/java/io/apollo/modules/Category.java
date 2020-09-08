@@ -17,28 +17,11 @@
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package io.apollo.module;
+package io.apollo.modules;
 
-import java.io.*;
-import java.util.ArrayList;
-
-/** Holds all modules and sets up module settings.
+/** Category used by {@link Module}
  * @author Icovid | Icovid#3888
  * @since 1.0.0 **/
-public class ModuleManager {
-
-    // Settings file used to save setting states
-    public final File settingsFile;
-    public final ArrayList<Module> modules = new ArrayList<>();
-
-    /** Constructor to created ModuleManager.
-     * @param settingsFile File to save module stats to **/
-    // TODO: setup module objects in file
-    public ModuleManager(File settingsFile) {
-        this.settingsFile = settingsFile;
-        this.preInitialisation(); }
-
-    public final void preInitialisation() {
-        this.modules.add(new Module("test", "lol", Category.TEST, true));
-    }
+public enum Category {
+    TEST;
 }

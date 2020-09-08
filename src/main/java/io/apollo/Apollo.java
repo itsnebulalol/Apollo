@@ -20,7 +20,7 @@
 package io.apollo;
 
 import io.apollo.events.bus.EventBus;
-import io.apollo.module.ModuleManager;
+import io.apollo.modules.ModuleManager;
 import io.apollo.utils.colours.WaveChroma;
 import lombok.Getter;
 

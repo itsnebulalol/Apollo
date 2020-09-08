@@ -17,7 +17,7 @@
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package io.apollo.module;
+package io.apollo.modules;
 
 import io.apollo.Apollo;
 import io.apollo.settings.Setting;
