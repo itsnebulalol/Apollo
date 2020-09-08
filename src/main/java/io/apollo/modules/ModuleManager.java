@@ -19,6 +19,8 @@
 
 package io.apollo.modules;
 
+import io.apollo.modules.impl.example.ExampleModule;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -27,18 +29,19 @@ import java.util.ArrayList;
  * @since 1.0.0 **/
 public class ModuleManager {
 
-    // Settings file used to save setting states
-    public final File settingsFile;
+    // Settings file used to save setting states.
     public final ArrayList<Module> modules = new ArrayList<>();
 
-    /** Constructor to created ModuleManager.
-     * @param settingsFile File to save module stats to **/
-    // TODO: setup module objects in file
-    public ModuleManager(File settingsFile) {
-        this.settingsFile = settingsFile;
-        this.preInitialisation(); }
+    // Public module instances.
+    public final ExampleModule exampleModule = new ExampleModule();
 
+    // Add all modules here.
     public final void preInitialisation() {
-        this.modules.add(new Module("test", "lol", Category.TEST, true));
+        this.modules.add(exampleModule);
+    }
+
+    /** Constructor to created ModuleManager. **/
+    public ModuleManager() {
+        this.preInitialisation();
     }
 }

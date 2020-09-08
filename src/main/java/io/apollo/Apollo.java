@@ -21,8 +21,6 @@ package io.apollo;
 
 import io.apollo.events.bus.EventBus;
 import io.apollo.modules.ModuleManager;
-import io.apollo.utils.colours.WaveChroma;
-import lombok.Getter;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -43,14 +41,14 @@ public class Apollo {
     // Public client instance used to retrieve any aspect of Apollo.
     public static final Apollo INSTANCE = new Apollo();
     public static final EventBus EVENT_BUS = new EventBus();
-    @Getter private final ModuleManager moduleManager;
-//    @Getter private final SettingManager settingManager; TODO: might make settings save in constructor.
+    public static final ModuleManager MODULE_MANAGER = new ModuleManager();
 
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {
-        if (!apolloDirectory.exists()) { try { apolloDirectory.mkdirs();  } catch (Exception ignored) { } log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath()); }
-        this.moduleManager = new ModuleManager(settingsFile);
-//        this.settingManager = new SettingManager(settingsFile); TODO: might make settings save in constructor.
+        if (!apolloDirectory.exists()) {
+            try { apolloDirectory.mkdirs();  } catch (Exception ignored) { }
+            log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath());
+        }
     }
 
     /** Log Apollo instance stats after construction. **/

@@ -36,7 +36,7 @@ public class Module {
     @Getter private final Category category;
     @Setter private int priority = 5;
     @Setter @Getter private boolean enabled;
-    public final ArrayList<Setting> settings = new ArrayList<>();
+    @Getter private final ArrayList<Setting> settings = new ArrayList<>();
 
     public Module(String name, String description, Category category) { this(name, description, category, false); }
     /** Main constructor used for all modules.
@@ -50,6 +50,7 @@ public class Module {
         this.category = category;
         this.enabled = enabled;
         this.moduleSetup();
+        if (this.isEnabled()) Apollo.EVENT_BUS.register(this);
     }
 
     /** Get module stats from file and log creation to console **/
