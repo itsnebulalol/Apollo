@@ -49,7 +49,7 @@ public class Save {
     }
 
     /** run this when the game is Initializing **/
-    public static void loadConfig() {
+    private void loadConfig() {
         try {
             File file = new File(Apollo.apolloDirectory, "toggle.json");
             if (file.exists())
@@ -60,7 +60,7 @@ public class Save {
     }
 
     /** add the booleans from example **/
-    public static void readJson(File file) throws Throwable {
+    public void readJson(File file) throws Throwable {
         JsonParser parser = new JsonParser();
         JsonObject json = parser.parse(new FileReader(file)).getAsJsonObject();
         json = json.getAsJsonObject("Toggle");
