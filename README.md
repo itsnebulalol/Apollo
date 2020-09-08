@@ -12,9 +12,9 @@ Apollo is a Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](http
 
 - [x] Module Backend
 - [x] Event Backend
+- [x] Hypixel Api Wrapper(Slothpixel)
 - [ ] Add a lot of Events
 - [ ] Addon System
-- [ ] Hypixel Api Wrapper
 - [ ] Main Module GUI
 - [ ] Color Codes / Text Wrap in FontRenderer
 - [ ] Add Discord Webhook to this Repository
@@ -26,6 +26,8 @@ All Modules must be documented as well. When adding any new modules create a new
 | Name | Description |
 | --- | --- |
 | example | example description|
+| DiscordRP | Updates the Discord Rich Presents, based on what your doing|
+| Windowed Fullscreen | Lets you use other monitors while in Fullscreen|
 
 ### Events
 

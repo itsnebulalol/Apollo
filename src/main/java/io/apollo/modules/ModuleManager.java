@@ -19,9 +19,10 @@
 
 package io.apollo.modules;
 
-import io.apollo.modules.impl.example.ExampleModule;
+import io.apollo.modules.impl.example.DiscordRPModule;
+import io.apollo.examples.ExampleModule;
+import io.apollo.modules.impl.example.WindowedFullscreenModule;
 
-import java.io.*;
 import java.util.ArrayList;
 
 /** Holds all modules and sets up module settings.
@@ -34,10 +35,14 @@ public class ModuleManager {
 
     // Public module instances.
     public final ExampleModule exampleModule = new ExampleModule();
+    public final DiscordRPModule discordRPModule = new DiscordRPModule();
+    public final WindowedFullscreenModule windowedFullscreenModule = new WindowedFullscreenModule();
 
     // Add all modules here.
     public final void preInitialisation() {
         this.modules.add(exampleModule);
+        this.modules.add(discordRPModule);
+        this.modules.add(windowedFullscreenModule);
     }
 
     /** Constructor to created ModuleManager. **/
