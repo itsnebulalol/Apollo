@@ -44,9 +44,6 @@ dependencies {
     // The actual project
     implementation 'com.github.mew:Slothpixel-JVM:master-SNAPSHOT'
     implementation 'com.github.Vatuu:discord-rpc:1.6.2'
-    compile "org.slf4j:slf4j-simple:1.7.9"
-
-
 }
 repositories {
     maven { url "https://jitpack.io" }
