@@ -8,29 +8,6 @@ Apollo is a Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](http
 - [Contribution Guidelines](#contribution-guidlines)
 - [License / Copyright](#copyright)
 
-### Modules
-
-All Modules must be documented as well. When adding any new modules create a new line to the table with the module name and a description of what it does.
-
-| Name | Description |
-| --- | --- |
-| example | example description|
-
-### Events
-
-All Events that are added to apollo must be documented below to help developers in future SDK. You must fill out the name of the event class and a description of when it is called.
-
-| Name | Description |
-| --- | --- |
-| GameLoopEvent | Fired every tick. |
-| LeftClickEvent | Fired when left mouse button is pressed. |
-| RightClickEvent | Fired when right mouse button is pressed. |
-| KeyPressedEvent | Fired when key is pressed. |
-| KeyReleasedEvent | Fired when key is released. |
-| ActionBarEvent | Fired when the Action Bar is updated. |
-| ChatReceivedEvent | Fired when the client receives a chat packet. |
-| PlayerChatEvent | Fired when the client sends a message to the server. |
-
 ### Forum Post
 
 If you create any forum post for the client put the link below so we can keep track of our social presence.
