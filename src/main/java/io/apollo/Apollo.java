@@ -15,8 +15,8 @@
 
 package io.apollo;
 
-import com.google.common.eventbus.EventBus;
 import io.apollo.discord.DiscordRP;
+import io.apollo.events.bus.EventBus;
 import io.apollo.modules.ModuleManager;
 
 import java.io.File;
