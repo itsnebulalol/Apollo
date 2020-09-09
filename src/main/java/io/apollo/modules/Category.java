@@ -24,6 +24,6 @@ package io.apollo.modules;
  * @since 1.0.0 **/
 public enum Category {
     TEST,
-    DISCORD,
+    UTIL,
     IMPORTANT
 }

@@ -81,4 +81,6 @@ public class Module {
     /** Called on startup
      * @see #moduleSetup() **/
     public void setupModule() {}
+    /** Called on Shutdown **/
+    public void shutdown() {}
 }

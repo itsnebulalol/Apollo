@@ -15,9 +15,13 @@
 
 package io.apollo;
 
-import io.apollo.discord.DiscordRP;
 import io.apollo.events.bus.EventBus;
+import io.apollo.events.bus.EventSubscriber;
+import io.apollo.events.impl.client.input.KeyPressedEvent;
+import io.apollo.hud.ModulesGui;
 import io.apollo.modules.ModuleManager;
+import net.minecraft.client.Minecraft;
+import org.lwjgl.input.Keyboard;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -39,10 +43,10 @@ public class Apollo {
     public static final Apollo INSTANCE = new Apollo();
     public static final EventBus EVENT_BUS = new EventBus();
     public static final ModuleManager MODULE_MANAGER = new ModuleManager();
-    public static DiscordRP DISCORD_RP = new DiscordRP();
 
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {
+        log("Starting Client!");
         if (!apolloDirectory.exists()) {
             try { apolloDirectory.mkdirs();  } catch (Exception ignored) { }
             log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath());
@@ -50,19 +54,24 @@ public class Apollo {
     }
 
     /** Log Apollo instance stats after construction. **/
-    public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings! ");
-            //DiscordRP.Main("Test", "test2");
-        DISCORD_RP.start();
+    public void postInitialisation() {
+        log("Apollo Initiation Finished with 0 Modules and 0 Settings! ");
         MODULE_MANAGER.preInitialisation();
+        Apollo.EVENT_BUS.register(this);
     }
 
     // Called when game shuts down.
     public void shutdown() {
-        DISCORD_RP.shutdown();
+        log("Closing Client!");
+        log("Shutdown " + MODULE_MANAGER.shutdown() + " modules!");
     }
 
     /** Used to log Apollo messages to console.
      * @param message any string to be displayed in console. **/
-    public static void log (String... message) { for (String out : message)  System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [Apollo] " + out); }
+    public static void log (String... message) { for (String out : message) System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [Apollo] " + out); }
 
+    // TEST
+    @EventSubscriber public void onKeyDown (KeyPressedEvent event) {
+        if (event.getKeyCode() == Keyboard.KEY_RSHIFT) Minecraft.getMinecraft().displayGuiScreen(new ModulesGui());
+    }
 }

@@ -19,19 +19,18 @@
 
 package io.apollo.utils;
 
+import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StringUtils;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,17 +55,17 @@ public class ApolloFontRenderer extends UnicodeFont {
 
     // Pattern and codes to implement color codes into renderer.
     private static final Pattern COLOR_CODE_PATTERN = Pattern.compile("§[0123456789abcdefklmnor]");
-    private static final int[] COLOR_CODES = { 0x000000, 0x0000AA, 0x00AA00, 0x00AAAA, 0xAA0000, 0xAA00AA, 0xFFAA00, 0xAAAAAA, 0x555555, 0x5555FF, 0x55FF55, 0x55FFFF, 0xFF5555, 0xFF55FF, 0xFFFF55, 0xFFFFFF};
+    private static final int[] COLOR_CODES = {0x000000, 0x0000AA, 0x00AA00, 0x00AAAA, 0xAA0000, 0xAA00AA, 0xFFAA00, 0xAAAAAA, 0x555555, 0x5555FF, 0x55FF55, 0x55FFFF, 0xFF5555, 0xFF55FF, 0xFFFF55, 0xFFFFFF};
 
     /** Apollo FontRender using {@link UnicodeFont}.
      * @param fontName string of .ttf font file as {@link InputStream}
      * @param fontSize size font will be renderer **/
-    public ApolloFontRenderer(String fontName, float fontSize ) throws FontFormatException, IOException, SlickException { this(ApolloFontRenderer.class.getResourceAsStream(fontName), fontSize); }
+    @SneakyThrows public ApolloFontRenderer(String fontName, float fontSize) { this(ApolloFontRenderer.class.getResourceAsStream(fontName), fontSize); }
 
     /** Apollo FontRender using {@link UnicodeFont}.
      * @param fontStream {@link InputStream} of .ttf font file
-     * @param fontSize size font will be renderer **/
-    public ApolloFontRenderer(InputStream fontStream, float fontSize ) throws FontFormatException, IOException, SlickException {
+     * @param fontSize   size font will be renderer**/
+    @SneakyThrows  public ApolloFontRenderer(InputStream fontStream, float fontSize) {
         super(Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(fontSize * new ScaledResolution(Minecraft.getMinecraft()).getScaleFactor() / 2));
         this.addAsciiGlyphs();
         this.getEffects().add(new ColorEffect(Color.WHITE));
@@ -75,8 +74,8 @@ public class ApolloFontRenderer extends UnicodeFont {
 
     /** Apollo FontRender using {@link UnicodeFont}.
      * @param fontFile font .ttf {@link File}
-     * @param fontSize size font will be renderer **/
-    public ApolloFontRenderer(File fontFile, float fontSize ) throws FontFormatException, IOException, SlickException {
+     * @param fontSize size font will be renderer**/
+    @SneakyThrows public ApolloFontRenderer(File fontFile, float fontSize) {
         super(Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(fontSize * new ScaledResolution(Minecraft.getMinecraft()).getScaleFactor() / 2));
         this.addAsciiGlyphs();
         this.getEffects().add(new ColorEffect(Color.WHITE));
@@ -113,14 +112,14 @@ public class ApolloFontRenderer extends UnicodeFont {
 
         GlStateManager.pushMatrix();
         GlStateManager.scale(1 / (float) resolution.getScaleFactor(), 1 / (float) resolution.getScaleFactor(), 1 / (float) resolution.getScaleFactor());
-        GlStateManager.color((float)color.getRed() / 255.0F, (float)color.getGreen() / 255.0F, (float)color.getBlue() / 255.0F, (float)color.getAlpha() / 255.0F);
+        GlStateManager.color((float) color.getRed() / 255.0F, (float) color.getGreen() / 255.0F, (float) color.getBlue() / 255.0F, (float) color.getAlpha() / 255.0F);
 
         GlStateManager.disableLighting();
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-        // TODO : DRAW TEXT
+        // TODO : COLOR AND /n/r
 
         super.drawString(xPosition, yPosition, text, color);
 
@@ -185,43 +184,55 @@ public class ApolloFontRenderer extends UnicodeFont {
         this.drawCenteredString(text, xPosition, yPosition, color);
     }
 
-    /** Draw list of strings on screen.
-     * @param lines strings to be rendered
+    /**
+     * Draw list of strings on screen.
+     * @param lines     strings to be rendered
      * @param xPosition x location of text
      * @param yPosition start y location of text
-     * @param color color of text **/
+     * @param color     color of text
+     **/
     public void drawSplitString(ArrayList<String> lines, int xPosition, int yPosition, Color color) { this.drawString(String.join("\n", lines), xPosition, yPosition, color); }
 
-    /** Draw list of strings with shadow.
-     * @param lines strings to be rendered
+    /**
+     * Draw list of strings with shadow.
+     * @param lines     strings to be rendered
      * @param xPosition x location of text
      * @param yPosition start y location of text
-     * @param color color of text **/
-    public void drawSplitStringWithShadow(ArrayList<String> lines, int xPosition, int yPosition, Color color) { this.drawStringWithShadow(String.join("\n", lines), xPosition, yPosition, color); }
+     * @param color     color of text
+     **/
+    public void drawWrapStringWithShadow(ArrayList<String> lines, int xPosition, int yPosition, Color color) { this.drawStringWithShadow(String.join("\n", lines), xPosition, yPosition, color); }
 
-    /** Draw list of strings width shadow.
-     * @param lines strings to be rendered
-     * @param xPosition x location of text
-     * @param yPosition start y location of text
-     * @param color color of text
-     * @param shadowColor color of text shadow **/
-    public void drawSplitStringWithShadow(ArrayList<String> lines, int xPosition, int yPosition, Color color, Color shadowColor) { this.drawStringWithShadow(String.join("\n", lines), xPosition, yPosition, color, shadowColor); }
+    /**
+     * Draw list of strings width shadow.
+     * @param lines       strings to be rendered
+     * @param xPosition   x location of text
+     * @param yPosition   start y location of text
+     * @param color       color of text
+     * @param shadowColor color of text shadow
+     **/
+    public void drawWrapStringWithShadow(ArrayList<String> lines, int xPosition, int yPosition, Color color, Color shadowColor) { this.drawStringWithShadow(String.join("\n", lines), xPosition, yPosition, color, shadowColor); }
 
-    /** Spilt string if overlaps set width.
-     * @param text text to spilt
+    /**
+     * Spilt string if overlaps set width.
+     * @param text      text to spilt
      * @param wrapWidth width to split at
-     * @return array of split strings **/
-    public ArrayList<String> splitString(String text, int wrapWidth) {
+     * @return array of split strings
+     **/
+    public ArrayList<String> wrapStringAtWidth(String text, int wrapWidth) {
         ArrayList<String> lines = new ArrayList<>();
-        StringBuilder currentString = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
+        boolean ignoreWidth = true;
         for (String word : text.split(" ")) {
-            if (getWidth(currentString + " " + word) >= wrapWidth) {
-                lines.add(currentString.toString());
-                currentString = new StringBuilder();
+            if (ignoreWidth) stringBuilder.append(word).append(" ");
+            else if (this.getWidth(stringBuilder.append(word).append(" ").toString()) <= wrapWidth) {
+                stringBuilder.append(word).append(" ");
+                ignoreWidth = false;
+            } else {
+                lines.add(stringBuilder.toString());
+                stringBuilder = new StringBuilder();
+                ignoreWidth = true;
             }
-            currentString.append(word).append(" ");
         }
-        lines.add(currentString.toString());
         return lines;
     }
 }
