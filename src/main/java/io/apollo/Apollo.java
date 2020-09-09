@@ -15,9 +15,8 @@
 
 package io.apollo;
 
+import com.google.common.eventbus.EventBus;
 import io.apollo.discord.DiscordRP;
-import io.apollo.events.bus.EventBus;
-import io.apollo.modules.ModuleManager;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -27,7 +26,7 @@ import java.util.Date;
  * @author Icovid | Icovid#3888
  * @since 1.0.0 **/
 public class Apollo {
-    public static DiscordRP discordRP = new DiscordRP();
+
     // Apollo information used for display title and credits info.
     public static final String NAME = "Apollo", VERSION = "b0.1", MCVERSION = "1.8.9";
     public static final String[] DEVELOPERS = {"Icovid", "Nora", "isXander"};
@@ -39,6 +38,7 @@ public class Apollo {
     public static final Apollo INSTANCE = new Apollo();
     public static final EventBus EVENT_BUS = new EventBus();
     public static final ModuleManager MODULE_MANAGER = new ModuleManager();
+    public static DiscordRP DISCORD_RP = new DiscordRP();
 
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {
@@ -51,13 +51,13 @@ public class Apollo {
     /** Log Apollo instance stats after construction. **/
     public void postInitialisation() { log("Apollo Initiation Finished with 0 Modules and 0 Settings! ");
             //DiscordRP.Main("Test", "test2");
-        discordRP.start();
+        DISCORD_RP.start();
         MODULE_MANAGER.preInitialisation();
     }
 
     // Called when game shuts down.
     public void shutdown() {
-        discordRP.shutdown();
+        DISCORD_RP.shutdown();
     }
 
     /** Used to log Apollo messages to console.

@@ -19,10 +19,11 @@
 
 package io.apollo.hud;
 
+import io.apollo.utils.GLRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.ResourceLocation;
 
+import java.awt.*;
 import java.io.IOException;
 
 /** Main HUD to toggle modules and adjust settings. TODO: WIP
@@ -60,6 +61,6 @@ public class ModulesGui extends GuiScreen {
      * @param mouseX x position of cursor
      * @param mouseY y position of cursor **/
     public void drawModuleList(float yPosition, float xPosition, int mouseX, int mouseY) {
-
+        GLRenderer.drawRoundedRectangle(xPosition - (this.width * 693 / 2048), yPosition + (this.height * 36 / 1152), (this.width * 1385 / 2048), (this.height * 615 / 1152), this.height * 18 / 1152, new Color(0, 0, 0, 128));
     }
 }
