@@ -30,7 +30,7 @@ import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiMultiplayer;
 import org.newdawn.slick.Game;
 
-import static io.apollo.Apollo.discordRP;
+import static io.apollo.Apollo.DISCORD_RP;
 
 public class DiscordRPModule extends Module {
     public DiscordRPModule() { super("DiscordRP", "Updates Discord Rich Presents based on what your doing", Category.DISCORD, true); }
@@ -38,19 +38,19 @@ public class DiscordRPModule extends Module {
     @EventSubscriber
     public void onWorldLoad(LoadWorldEvent e){
         if(!Minecraft.getMinecraft().isSingleplayer()){
-            discordRP.update("Multiplayer", "IP: " + Minecraft.getMinecraft().getCurrentServerData().serverIP, "", "");
+            DISCORD_RP.update("Multiplayer", "IP: " + Minecraft.getMinecraft().getCurrentServerData().serverIP, "", "");
         }
         else{
-            discordRP.update("Singleplayer", "In Game", "", "");
+            DISCORD_RP.update("Singleplayer", "In Game", "", "");
         }
     }
     @EventSubscriber
     public void onTick(GameLoopEvent event){
         if(Minecraft.getMinecraft().currentScreen instanceof GuiMainMenu){
-            discordRP.update("Main Menu", "In Game", "", "");
+            DISCORD_RP.update("Main Menu", "In Game", "", "");
         }
         else if(Minecraft.getMinecraft().currentScreen instanceof GuiMultiplayer){
-            discordRP.update("Multiplayer Menu", "In Game", "", "");
+            DISCORD_RP.update("Multiplayer Menu", "In Game", "", "");
         }
     }
 }
