@@ -20,6 +20,8 @@ import io.apollo.events.bus.EventSubscriber;
 import io.apollo.events.impl.client.input.KeyPressedEvent;
 import io.apollo.hud.ModulesGui;
 import io.apollo.modules.ModuleManager;
+import io.apollo.utils.ApolloFontRenderer;
+import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 

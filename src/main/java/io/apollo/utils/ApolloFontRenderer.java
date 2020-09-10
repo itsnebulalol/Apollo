@@ -26,11 +26,13 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StringUtils;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,12 +62,12 @@ public class ApolloFontRenderer extends UnicodeFont {
     /** Apollo FontRender using {@link UnicodeFont}.
      * @param fontName string of .ttf font file as {@link InputStream}
      * @param fontSize size font will be renderer **/
-    @SneakyThrows public ApolloFontRenderer(String fontName, float fontSize) { this(ApolloFontRenderer.class.getResourceAsStream(fontName), fontSize); }
+    public ApolloFontRenderer(String fontName, float fontSize) throws FontFormatException, SlickException, IOException { this(ApolloFontRenderer.class.getResourceAsStream(fontName), fontSize); }
 
     /** Apollo FontRender using {@link UnicodeFont}.
      * @param fontStream {@link InputStream} of .ttf font file
      * @param fontSize   size font will be renderer**/
-    @SneakyThrows  public ApolloFontRenderer(InputStream fontStream, float fontSize) {
+    public ApolloFontRenderer(InputStream fontStream, float fontSize) throws IOException, FontFormatException, SlickException {
         super(Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(fontSize * new ScaledResolution(Minecraft.getMinecraft()).getScaleFactor() / 2));
         this.addAsciiGlyphs();
         this.getEffects().add(new ColorEffect(Color.WHITE));
@@ -75,7 +77,7 @@ public class ApolloFontRenderer extends UnicodeFont {
     /** Apollo FontRender using {@link UnicodeFont}.
      * @param fontFile font .ttf {@link File}
      * @param fontSize size font will be renderer**/
-    @SneakyThrows public ApolloFontRenderer(File fontFile, float fontSize) {
+    public ApolloFontRenderer(File fontFile, float fontSize) throws IOException, FontFormatException, SlickException {
         super(Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(fontSize * new ScaledResolution(Minecraft.getMinecraft()).getScaleFactor() / 2));
         this.addAsciiGlyphs();
         this.getEffects().add(new ColorEffect(Color.WHITE));
