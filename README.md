@@ -76,8 +76,6 @@ Lastly to run the client you will need to bypass errors involving the Lombok Int
 
 To stay organized with the rest of the team and keep a consistent code base I have laid out a few formatting rules all Apollo source must follow to be implemented. For a more in depth look into the code style we are looking for check out classes that have already been implemented and try to keep it mostly the same.
 
-**Always work on a separate branch and talk to Icovid before merging.**
-
 ### Classes
 All classes should be headed with a short description of the class purpose, the author (with contact) and the version it was implemented in. As you can see below descriptions are compact and written with correct punctuation.
 
