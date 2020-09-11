@@ -19,53 +19,44 @@ Contact: Icovid#3888 @ https://discord.com
 
 package io.apollo.hud;
 
+import io.apollo.Apollo;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 
 import java.io.IOException;
 
-/**
- * Main HUD to toggle modules and adjust settings. TODO: WIP
- *
+/** Main HUD to toggle modules and adjust settings. TODO: WIP
  * @author Icovid | Icovid#3888
- * @since 1.0.0 *
- */
+ * @since 1.0.0 * **/
 public class ModulesGui extends GuiScreen {
+
   /** Called when gui is opened. * */
   public void initGui() {}
 
   /** Called when gui is closed. * */
   public void onGuiClosed() {
-    mc.entityRenderer.switchUseShader();
+//    mc.entityRenderer.switchUseShader();
   }
 
-  /**
-   * Called when {@link GuiButton} is pressed.
-   *
+  /** Called when {@link GuiButton} is pressed.
    * @param button button pressed
-   * @throws IOException unused *
-   */
+   * @throws IOException unused * **/
   protected void actionPerformed(GuiButton button) throws IOException {}
 
-  /**
-   * Called every tick. used to draw elements on screen
-   *
+  /** Called every tick. used to draw elements on screen
    * @param mouseX x position of cursor
    * @param mouseY y position of cursor
-   * @param partialTicks tick per second of screen *
-   */
+   * @param partialTicks tick per second of screen * **/
   public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     this.drawModuleList(50, this.width / 2, mouseX, mouseY);
     super.drawScreen(mouseX, mouseY, partialTicks);
   }
 
-  /**
-   * Draws list of modules and handles hover event
-   *
+  /** Draws list of modules and handles hover event
    * @param yPosition x position of gui
    * @param xPosition y position of gui
    * @param mouseX x position of cursor
-   * @param mouseY y position of cursor *
-   */
-  public void drawModuleList(int yPosition, int xPosition, int mouseX, int mouseY) {}
+   * @param mouseY y position of cursor **/
+  public void drawModuleList(int yPosition, int xPosition, int mouseX, int mouseY) {
+  }
 }

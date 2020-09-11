@@ -19,28 +19,56 @@
 
 package io.apollo.hud.framework;
 
-import javafx.scene.layout.Pane;
 import lombok.Getter;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 
-/**
- * Hud Panel can be used to hold child object and organize UIs
- * <p>All child element of panel will follow panels resolution
- * unless specified otherwise with {@link HudElement}.resolution()</p>
+import java.util.ArrayList;
+
+/** Basic panel hold objects to display and resolution to display them at.
  * @author Icovid | Icovid#3888
  * @since 1.0.0 **/
-public class Panel extends HudElement {
+public class Panel {
 
-    @Getter private int width;
-    @Getter private int height;
+    @Getter private final String name;
+    @Getter private int xPosition;
+    @Getter private int yPosition;
 
-    public Panel (String name, int xPosition, int yPosition) { super(name, xPosition, yPosition); }
-    public Panel (String name) { super(name); }
+    @Getter private int scaledWidth;
+    @Getter private int scaledHeight;
+    @Getter private ScaledResolution scaledResolution;
 
-    @Override public Panel position (int xPosition, int yPosition) { return (Panel) super.position(xPosition, yPosition); }
-    @Override public Panel resolution (int resolutionWidth, int resolutionHeight) { return (Panel) super.resolution(resolutionWidth, resolutionHeight); }
-    @Override public Panel ignoreResolution () { return (Panel) super.ignoreResolution(); }
+    private final ArrayList<Element> elements = new ArrayList<>();
 
-    @Override public void draw () {
+    public Panel (String name, int xPosition, int yPosition) {
+        this.name = name;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+        this.scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
+        this.scaledHeight = scaledResolution.getScaledHeight();
+        this.scaledWidth = scaledResolution.getScaledWidth();
+    }
+
+    public Panel position (int xPosition, int yPosition) {
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+        return this;
+    }
+
+    public Panel resolution (int scaledWidth, int scaledHeight) {
+        this.scaledWidth = scaledWidth;
+        this.scaledHeight = scaledHeight;
+        this.scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
+        return this;
+    }
+
+    public Panel addElement (Element element) {
+        this.elements.add(element);
+        return this;
+    }
+
+    public void draw() {
 
     }
+
 }

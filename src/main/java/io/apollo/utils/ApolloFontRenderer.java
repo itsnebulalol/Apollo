@@ -186,40 +186,32 @@ public class ApolloFontRenderer extends UnicodeFont {
         this.drawCenteredString(text, xPosition, yPosition, color);
     }
 
-    /**
-     * Draw list of strings on screen.
+    /** Draw list of strings on screen.
      * @param lines     strings to be rendered
      * @param xPosition x location of text
      * @param yPosition start y location of text
-     * @param color     color of text
-     **/
+     * @param color     color of text **/
     public void drawSplitString(ArrayList<String> lines, int xPosition, int yPosition, Color color) { this.drawString(String.join("\n", lines), xPosition, yPosition, color); }
 
-    /**
-     * Draw list of strings with shadow.
+    /** Draw list of strings with shadow.
      * @param lines     strings to be rendered
      * @param xPosition x location of text
      * @param yPosition start y location of text
-     * @param color     color of text
-     **/
+     * @param color     color of text **/
     public void drawWrapStringWithShadow(ArrayList<String> lines, int xPosition, int yPosition, Color color) { this.drawStringWithShadow(String.join("\n", lines), xPosition, yPosition, color); }
 
-    /**
-     * Draw list of strings width shadow.
+    /** Draw list of strings width shadow.
      * @param lines       strings to be rendered
      * @param xPosition   x location of text
      * @param yPosition   start y location of text
      * @param color       color of text
-     * @param shadowColor color of text shadow
-     **/
+     * @param shadowColor color of text shadow **/
     public void drawWrapStringWithShadow(ArrayList<String> lines, int xPosition, int yPosition, Color color, Color shadowColor) { this.drawStringWithShadow(String.join("\n", lines), xPosition, yPosition, color, shadowColor); }
 
-    /**
-     * Spilt string if overlaps set width.
+    /** Spilt string if overlaps set width.
      * @param text      text to spilt
      * @param wrapWidth width to split at
-     * @return array of split strings
-     **/
+     * @return array of split strings **/
     public ArrayList<String> wrapStringAtWidth(String text, int wrapWidth) {
         ArrayList<String> lines = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
