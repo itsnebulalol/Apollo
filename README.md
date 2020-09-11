@@ -51,6 +51,7 @@ If you create any forum post for the client put the link below so we can keep tr
 - https://hypixel.net/threads/apollo-client-discord-new-hypixel-client.3219735/#post-22502168
 - https://hypixel.net/threads/apollo-client-sdk-update-for-apollo-client-development.3292568/#post-23178676
 - https://hypixel.net/threads/apollo-client-what-is-apollo-client-unique-1-8-9-pvp-client-for-hypixel-more.3304557/
+- https://hypixel.net/threads/apollo-★-awesome-new-hypixel-pvp-client-★.3328295/
 
 # Development Setup
 
@@ -74,8 +75,6 @@ Lastly to run the client you will need to bypass errors involving the Lombok Int
 # Contribution Guidlines
 
 To stay organized with the rest of the team and keep a consistent code base I have laid out a few formatting rules all Apollo source must follow to be implemented. For a more in depth look into the code style we are looking for check out classes that have already been implemented and try to keep it mostly the same.
-
-**Always work on a separate branch and talk to Icovid before merging.**
 
 ### Classes
 All classes should be headed with a short description of the class purpose, the author (with contact) and the version it was implemented in. As you can see below descriptions are compact and written with correct punctuation.
