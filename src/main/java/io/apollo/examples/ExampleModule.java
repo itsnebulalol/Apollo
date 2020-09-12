@@ -26,7 +26,7 @@ import io.apollo.modules.Category;
 import io.apollo.modules.Module;
 
 public class ExampleModule extends Module {
-    public ExampleModule() { super("ExampleModule", "Example Module", Category.TEST, true); }
+    public ExampleModule() { super("ExampleModule", "Example Module", Category.UTIL, true); }
 
     @EventSubscriber public void onChat (ChatReceivedEvent event) {
         Apollo.log("RECEIVED CHAT! : " + event.getChatComponent().getUnformattedText());

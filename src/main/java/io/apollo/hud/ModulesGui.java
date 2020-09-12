@@ -19,16 +19,24 @@ Contact: Icovid#3888 @ https://discord.com
 
 package io.apollo.hud;
 
-import io.apollo.Apollo;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
+import java.awt.*;
 import java.io.IOException;
 
 /** Main HUD to toggle modules and adjust settings. TODO: WIP
  * @author Icovid | Icovid#3888
  * @since 1.0.0 * **/
 public class ModulesGui extends GuiScreen {
+
+  private final int yOffset = 0;
+  private final int scaleFactor = 1200;
+  private final int xOffset = 0;
 
   /** Called when gui is opened. * */
   public void initGui() {}
@@ -47,8 +55,99 @@ public class ModulesGui extends GuiScreen {
    * @param mouseX x position of cursor
    * @param mouseY y position of cursor
    * @param partialTicks tick per second of screen * **/
-  public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-    this.drawModuleList(50, this.width / 2, mouseX, mouseY);
+  public void drawScreen(int mouseX, int mouseY, float partialTicks) { // TODO: 1024
+
+    WorldRenderer worldrenderer = Tessellator.getInstance().getWorldRenderer();
+    GlStateManager.enableBlend();
+    GlStateManager.disableTexture2D();
+
+    Color color = new Color(0, 0, 0, 107);
+    GlStateManager.color(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F, color.getAlpha() / 255.0F);
+
+    GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+
+    // BASE
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) - (this.height * 672 / this.scaleFactor) - xOffset, (this.height * 936 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 677 / this.scaleFactor) - xOffset, (this.height * 936 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 677 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 672 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) - (this.height * 684 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 672 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 672 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 684 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) - (this.height * 672 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 197 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 197 / this.scaleFactor) - xOffset, (this.height * 260 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 672 / this.scaleFactor) - xOffset, (this.height * 260 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) - (this.height * 197 / this.scaleFactor) - xOffset, (this.height * 331 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 184 / this.scaleFactor) - xOffset, (this.height * 331 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 184 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 197 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) - (this.height * 197 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 205 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 205 / this.scaleFactor) - xOffset, (this.height * 331 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 197 / this.scaleFactor) - xOffset, (this.height * 331 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) + (this.height * 192 / this.scaleFactor) - xOffset, (this.height * 331 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 205 / this.scaleFactor) - xOffset, (this.height * 331 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 205 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 192 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) + (this.height * 205 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 677 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 677 / this.scaleFactor) - xOffset, (this.height * 260 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 205 / this.scaleFactor) - xOffset, (this.height * 260 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) + (this.height * 677 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 690 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 690 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 677 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+
+//     OUTLINE
+    color = new Color(0, 0, 0, 125);
+    GlStateManager.color(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F, color.getAlpha() / 255.0F);
+
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) - (this.height * 689 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 684 / this.scaleFactor) - xOffset, (this.height * 923 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 684 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 689 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) - (this.height * 672 / this.scaleFactor) - xOffset, (this.height * 260 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 197 / this.scaleFactor) - xOffset, (this.height * 260 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 197 / this.scaleFactor) - xOffset, (this.height * 255 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 672 / this.scaleFactor) - xOffset, (this.height * 255 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) - (this.height * 184 / this.scaleFactor) - xOffset, (this.height * 309 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 179 / this.scaleFactor) - xOffset, (this.height * 309 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 179 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 184 / this.scaleFactor) - xOffset, (this.height * 273 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+    worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+    worldrenderer.pos((this.width / 2) - (this.height * 162 / this.scaleFactor) - xOffset, (this.height * 331 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 167 / this.scaleFactor) - xOffset, (this.height * 331 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) + (this.height * 167 / this.scaleFactor) - xOffset, (this.height * 326 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    worldrenderer.pos((this.width / 2) - (this.height * 162 / this.scaleFactor) - xOffset, (this.height * 326 / this.scaleFactor) + yOffset, 0.0D).endVertex();
+    Tessellator.getInstance().draw();
+
+    GlStateManager.enableTexture2D();
+    GlStateManager.disableBlend();
+
     super.drawScreen(mouseX, mouseY, partialTicks);
   }
 

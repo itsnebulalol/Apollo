@@ -33,12 +33,12 @@ public class ModuleManager {
     public final ArrayList<Module> modules = new ArrayList<>();
 
     // Public module instances.
-    public final DiscordRPModule discordRPModule = new DiscordRPModule();
+//    public final DiscordRPModule discordRPModule = new DiscordRPModule(); TODO: FIX ERRORS
     public final WindowedFullscreenModule windowedFullscreenModule = new WindowedFullscreenModule();
 
     // Add all modules here.
     public final void preInitialisation() {
-        this.modules.add(discordRPModule);
+//        this.modules.add(discordRPModule);
         this.modules.add(windowedFullscreenModule);
     }
 
