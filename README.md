@@ -25,7 +25,6 @@ All Modules must be documented as well. When adding any new modules create a new
 
 | Name | Description |
 | --- | --- |
-| example | example description|
 | DiscordRP | Updates the Discord Rich Presence, based on what your doing|
 | Windowed Fullscreen | Lets you use other monitors while in Fullscreen|
 
