@@ -1,13 +1,13 @@
 {
   "required": true,
   "compatibilityLevel": "JAVA_8",
-  "package": "io.apollo.mixins",
-  "refmap": "mixins.apollo.json",
+  "package": "ga.matthewtgm.mixins",
+  "refmap": "mixins.matthewtgm.json",
   "verbose": true,
   "mixins": [
     "client.MixinMinecraft",
-    "client.MixinSoundManager",
     "entity.MixinEntityPlayerSP",
+    "entity.MixinEntityPlayer",
     "network.MixinNetHandlerPlayClient"
   ]
 }
