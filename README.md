@@ -71,7 +71,7 @@ Lastly to run the client you will need to bypass errors involving the Lombok Int
 
 ![plugin](https://media.discordapp.net/attachments/747901986770518047/751266941204693002/Screen_Shot_2020-09-03_at_9.26.33_PM.png)
 
-# Contribution Guidlines
+# Contribution Guidelines
 
 To stay organized with the rest of the team and keep a consistent code base I have laid out a few formatting rules all Apollo source must follow to be implemented. For a more in depth look into the code style we are looking for check out classes that have already been implemented and try to keep it mostly the same.
 
