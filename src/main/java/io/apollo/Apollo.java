@@ -19,6 +19,7 @@ import io.apollo.events.bus.EventBus;
 import io.apollo.events.bus.EventSubscriber;
 import io.apollo.events.impl.client.input.KeyPressedEvent;
 import io.apollo.hud.ModulesGui;
+import io.apollo.hud.framework.objects.Rectangle;
 import io.apollo.modules.ModuleManager;
 import io.apollo.utils.ApolloFontRenderer;
 import lombok.SneakyThrows;
@@ -46,6 +47,11 @@ public class Apollo {
     public static final EventBus EVENT_BUS = new EventBus();
     public static final ModuleManager MODULE_MANAGER = new ModuleManager();
 
+    public Rectangle rectangle = new Rectangle("test")
+            .position(10, 10)
+            .outline(15)
+            .round(10).build();
+
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {
         log("Starting Client!");
@@ -53,6 +59,7 @@ public class Apollo {
             try { apolloDirectory.mkdirs();  } catch (Exception ignored) { }
             log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath());
         }
+        log(rectangle.getName() + ":" + rectangle.getWidth() + ":" + rectangle.getHeight());
     }
 
     /** Log Apollo instance stats after construction. **/
@@ -71,6 +78,11 @@ public class Apollo {
     /** Used to log Apollo messages to console.
      * @param message any string to be displayed in console. **/
     public static void log (String... message) { for (String out : message) System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [Apollo] " + out); }
+
+    /** Used to log Apollo errors to console.
+     * @param message any string to be displayed in console. **/
+    public static void error (String... message) { for (String out : message) System.err.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [Apollo-Error] " + out); }
+
 
     // TEST
     @EventSubscriber public void onKeyDown (KeyPressedEvent event) {
