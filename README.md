@@ -42,6 +42,7 @@ All Events that are added to apollo must be documented below to help developers 
 | ActionBarEvent | Fired when the Action Bar is updated. |
 | ChatReceivedEvent | Fired when the client receives a chat packet. |
 | PlayerChatEvent | Fired when the client sends a message to the server. |
+| AttackEntityEvent | Fired when the client attacks an entity. |
 
 ### Forum Post
 
