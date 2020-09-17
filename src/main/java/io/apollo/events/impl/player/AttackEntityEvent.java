@@ -1,7 +1,7 @@
-package ga.matthewtgm.events.impl.player;
+package io.apollo.events.impl.player;
 
-import ga.matthewtgm.events.CancellableEvent;
-import ga.matthewtgm.events.Event;
+import io.apollo.events.CancellableEvent;
+import io.apollo.events.Event;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
