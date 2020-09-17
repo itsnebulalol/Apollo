@@ -1,11 +1,11 @@
-package ga.matthewtgm.mixins.entity;
+package io.apollo.mixins.entity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 
-import ga.matthewtgm.events.impl.player.EventAttackEntity;
+import io.apollo.events.impl.player.EventAttackEntity;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
