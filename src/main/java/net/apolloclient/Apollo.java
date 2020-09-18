@@ -57,7 +57,7 @@ public class Apollo {
             try { apolloDirectory.mkdirs();  } catch (Exception ignored) { }
             log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath());
         }
-        log(rectangle.getName() + ":" + rectangle.getWidth() + ":" + rectangle.getHeight());
+        //log(rectangle.getName() + ":" + rectangle.getWidth() + ":" + rectangle.getHeight());
     }
 
     /** Log Apollo instance stats after construction. **/
