@@ -1,8 +1,8 @@
 {
   "required": true,
   "compatibilityLevel": "JAVA_8",
-  "package": "ga.matthewtgm.mixins",
-  "refmap": "mixins.matthewtgm.json",
+  "package": "io.apollo.mixins",
+  "refmap": "mixins.apollo.json",
   "verbose": true,
   "mixins": [
     "client.MixinMinecraft",
