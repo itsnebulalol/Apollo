@@ -22,7 +22,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'java'
 
 version = "1.0"
-group= "io.apollo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "net.apolloclient" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Apollo"
 
 sourceCompatibility = targetCompatibility = 1.8
@@ -30,7 +30,7 @@ compileJava.options.encoding = 'UTF-8'
 
 minecraft {
     version = "1.8.9"
-    tweakClass = "io.apollo.mixins.ApolloTweaker"
+    tweakClass = "net.apolloclient.mixins.ApolloTweaker"
     runDir = "run"
     mappings = "stable_20"
     clientJvmArgs = ["-XX:-DisableExplicitGC"]
@@ -113,7 +113,7 @@ jar {
 jar {
     manifest.attributes(
             "MixinConfigs": 'mixins.apollo.json',
-            "TweakClass": 'io.apollo.mixins.ApolloTweaker',
+            "TweakClass": 'net.apolloclient.mixins.ApolloTweaker',
             "TweakOrder": 0,
             "Manifest-Version": 1.0
     )
