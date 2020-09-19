@@ -64,49 +64,53 @@ public class AutoGGModule extends Module {
     }
 
     @Override public void setupModule () {
-        try {
-            // Make getting triggers async? If required?
-            // TODO: aync required
-            URL url = new URL("https://apolloclient.net/static/autogg-triggers.json");
-            URLConnection connection = url.openConnection();
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:19.0) Gecko/20100101 Firefox/19.0");
-            connection.connect();
-            BufferedReader serverResponse = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder resp = new StringBuilder();
-            serverResponse.lines().forEach(line -> resp.append(line).append("\n"));
-            serverResponse.close();
-            JsonArray response = new Gson().fromJson(resp.toString(), JsonArray.class);
+        new Thread("AutoGG Trigger Grabber") {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("https://apolloclient.net/static/autogg-triggers.json");
+                    URLConnection connection = url.openConnection();
+                    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:19.0) Gecko/20100101 Firefox/19.0");
+                    connection.connect();
+                    BufferedReader serverResponse = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder resp = new StringBuilder();
+                    serverResponse.lines().forEach(line -> resp.append(line).append("\n"));
+                    serverResponse.close();
+                    JsonArray response = new Gson().fromJson(resp.toString(), JsonArray.class);
 
-            response.forEach(element -> {
-                if (element.isJsonArray()) {
-                    JsonArray triggers = element.getAsJsonArray();
-                    triggers.forEach(string -> endingStrings.add(string.getAsString()));
+                    response.forEach(element -> {
+                        if (element.isJsonArray()) {
+                            JsonArray triggers = element.getAsJsonArray();
+                            triggers.forEach(string -> endingStrings.add(string.getAsString()));
+                        }
+                    });
+                } catch (Exception e) {
+                    Apollo.error("[AutoGG] Failed to get latest triggers. Using hardcoded.");
+                    endingStrings = Arrays.asList(
+                            "^ +1st Killer - ?\\[?\\w*\\+*\\]? \\w+ - \\d+(?: Kills?)?$",
+                            "^ *1st (?:Place ?)?(?:-|:)? ?\\[?\\w*\\+*\\]? \\w+(?: : \\d+| - \\d+(?: Points?)?| - \\d+(?: x .)?| \\(\\w+ .{1,6}\\) - \\d+ Kills?|: \\d+:\\d+| - \\d+ (?:Zombie )?(?:Kills?|Blocks? Destroyed)| - \\[LINK\\])?$",
+                            "^ +Winn(?:er #1 \\(\\d+ Kills\\): \\w+ \\(\\w+\\)|er(?::| - )(?:Hiders|Seekers|Defenders|Attackers|PLAYERS?|MURDERERS?|Red|Blue|RED|BLU|\\w+)(?: Team)?|ers?: ?\\[?\\w*\\+*\\]? \\w+(?:, ?\\[?\\w*\\+*\\]? \\w+)?|Team ?[\\:-] (?:Animals|Hunters|Red|Green|Blue|Yellow|RED|BLU|Survivors|Vampires))$",
+                            "^ +Alpha Infected: \\w+ \\(\\d+ infections?\\)$",
+                            "^ +Murderer: \\w+ \\(\\d+ Kills?\\)$",
+                            "^ +You survived \\d+ rounds!$",
+                            "^ +(?:UHC|SkyWars|The Bridge|Sumo|Classic|OP|MegaWalls|Bow|NoDebuff|Blitz|Combo|Bow Spleef) (?:Duel|Doubles|Teams|Deathmatch|2v2v2v2|3v3v3v3)? - \\d+:\\d+$",
+                            "^ +They captured all wools!$",
+                            "^ +Game over!$",
+                            "^ +[\\d\\.]+k?/[\\d\\.]+k? \\w+$",
+                            "^ +(?:Criminal|Cop)s won the game!$",
+                            "^ +\\[?\\w*\\+*\\]? \\w+ - \\d+ Final Kills$",
+                            "^ +Zombies - \\d*:?\\d+:\\d+ \\(Round \\d+\\)$",
+                            "^ +. YOUR STATISTICS .",
+                            "^MINOR EVENT! .+ in .+ ended$",
+                            "^DRAGON EGG OVER! Earned [\\d,]+XP [\\d,]g clicking the egg \\d+ times$",
+                            "^GIANT CAKE! Event ended! Cake's gone!$",
+                            "^PIT EVENT ENDED: .+ \\[INFO\\]$",
+                            "^\\[?\\w*\\+*\\]? ?\\w+ caught ?a?n? .+! .*$");
                 }
-            });
-        } catch (Exception e) {
-            Apollo.error("[AutoGG] Failed to get latest triggers. Using hardcoded.");
-            endingStrings = Arrays.asList(
-                    "^ +1st Killer - ?\\[?\\w*\\+*\\]? \\w+ - \\d+(?: Kills?)?$",
-                    "^ *1st (?:Place ?)?(?:-|:)? ?\\[?\\w*\\+*\\]? \\w+(?: : \\d+| - \\d+(?: Points?)?| - \\d+(?: x .)?| \\(\\w+ .{1,6}\\) - \\d+ Kills?|: \\d+:\\d+| - \\d+ (?:Zombie )?(?:Kills?|Blocks? Destroyed)| - \\[LINK\\])?$",
-                    "^ +Winn(?:er #1 \\(\\d+ Kills\\): \\w+ \\(\\w+\\)|er(?::| - )(?:Hiders|Seekers|Defenders|Attackers|PLAYERS?|MURDERERS?|Red|Blue|RED|BLU|\\w+)(?: Team)?|ers?: ?\\[?\\w*\\+*\\]? \\w+(?:, ?\\[?\\w*\\+*\\]? \\w+)?|Team ?[\\:-] (?:Animals|Hunters|Red|Green|Blue|Yellow|RED|BLU|Survivors|Vampires))$",
-                    "^ +Alpha Infected: \\w+ \\(\\d+ infections?\\)$",
-                    "^ +Murderer: \\w+ \\(\\d+ Kills?\\)$",
-                    "^ +You survived \\d+ rounds!$",
-                    "^ +(?:UHC|SkyWars|The Bridge|Sumo|Classic|OP|MegaWalls|Bow|NoDebuff|Blitz|Combo|Bow Spleef) (?:Duel|Doubles|Teams|Deathmatch|2v2v2v2|3v3v3v3)? - \\d+:\\d+$",
-                    "^ +They captured all wools!$",
-                    "^ +Game over!$",
-                    "^ +[\\d\\.]+k?/[\\d\\.]+k? \\w+$",
-                    "^ +(?:Criminal|Cop)s won the game!$",
-                    "^ +\\[?\\w*\\+*\\]? \\w+ - \\d+ Final Kills$",
-                    "^ +Zombies - \\d*:?\\d+:\\d+ \\(Round \\d+\\)$",
-                    "^ +. YOUR STATISTICS .",
-                    "^MINOR EVENT! .+ in .+ ended$",
-                    "^DRAGON EGG OVER! Earned [\\d,]+XP [\\d,]g clicking the egg \\d+ times$",
-                    "^GIANT CAKE! Event ended! Cake's gone!$",
-                    "^PIT EVENT ENDED: .+ \\[INFO\\]$",
-                    "^\\[?\\w*\\+*\\]? ?\\w+ caught ?a?n? .+! .*$");
-        }
-        // TODO: change to input stream json file
+                // TODO: change to input stream json file
+                try { join(); } catch (InterruptedException ignored) {}
+            }
+        }.start();
     }
 
     @EventSubscriber(priority = Priority.LOW)
