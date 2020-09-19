@@ -20,7 +20,7 @@
 package net.apolloclient.modules.impl.gameplay;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import net.apolloclient.Apollo;
 import net.apolloclient.events.bus.EventSubscriber;
 import net.apolloclient.events.bus.Priority;
@@ -54,8 +54,14 @@ public class AutoGGModule extends Module {
     private final Pattern shoutPattern = Pattern.compile("\\.get(SHOUT) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
     private final Pattern spectatorPattern = Pattern.compile("\\.get(SPECTATOR) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
 
-    private List<String> endingStrings = new ArrayList<>();
-    private final List<Pattern> endingPatterns = new ArrayList<>();
+    // Patterns to match if the game is over.
+    private final List<Pattern> wins = new ArrayList<>();
+
+    // Patterns to match if an event has happened.
+    private final List<Pattern> events = new ArrayList<>();
+
+    // Patterns to match if its a normal message (Doesn't say GG)
+    private final List<Pattern> normal = new ArrayList<>();
 
     private int tick = -1;
 
@@ -77,17 +83,17 @@ public class AutoGGModule extends Module {
                     StringBuilder resp = new StringBuilder();
                     serverResponse.lines().forEach(line -> resp.append(line).append("\n"));
                     serverResponse.close();
-                    JsonArray response = new Gson().fromJson(resp.toString(), JsonArray.class);
+                    JsonObject response = new Gson().fromJson(resp.toString(), JsonObject.class);
 
-                    response.forEach(element -> {
-                        if (element.isJsonArray()) {
-                            JsonArray triggers = element.getAsJsonArray();
-                            triggers.forEach(string -> endingStrings.add(string.getAsString()));
-                        }
-                    });
+                    JsonObject version = response.getAsJsonObject("version");
+                    Apollo.log("[AutoGG] Using triggers v" + version.get("version").getAsString() + " (" + version.get("date").getAsString() + ")");
+
+                    response.getAsJsonArray("wins").forEach(trigger -> wins.add(Pattern.compile(trigger.getAsString())));
+                    response.getAsJsonArray("events").forEach(trigger -> events.add(Pattern.compile(trigger.getAsString())));
+                    response.getAsJsonArray("normal").forEach(trigger -> normal.add(Pattern.compile(trigger.getAsString())));
                 } catch (Exception e) {
                     Apollo.error("[AutoGG] Failed to get latest triggers. Using hardcoded.");
-                    endingStrings = Arrays.asList(
+                    List<String> endingStrings = Arrays.asList(
                             "^ +1st Killer - ?\\[?\\w*\\+*\\]? \\w+ - \\d+(?: Kills?)?$",
                             "^ *1st (?:Place ?)?(?:-|:)? ?\\[?\\w*\\+*\\]? \\w+(?: : \\d+| - \\d+(?: Points?)?| - \\d+(?: x .)?| \\(\\w+ .{1,6}\\) - \\d+ Kills?|: \\d+:\\d+| - \\d+ (?:Zombie )?(?:Kills?|Blocks? Destroyed)| - \\[LINK\\])?$",
                             "^ +Winn(?:er #1 \\(\\d+ Kills\\): \\w+ \\(\\w+\\)|er(?::| - )(?:Hiders|Seekers|Defenders|Attackers|PLAYERS?|MURDERERS?|Red|Blue|RED|BLU|\\w+)(?: Team)?|ers?: ?\\[?\\w*\\+*\\]? \\w+(?:, ?\\[?\\w*\\+*\\]? \\w+)?|Team ?[\\:-] (?:Animals|Hunters|Red|Green|Blue|Yellow|RED|BLU|Survivors|Vampires))$",
@@ -102,13 +108,25 @@ public class AutoGGModule extends Module {
                             "^ +\\[?\\w*\\+*\\]? \\w+ - \\d+ Final Kills$",
                             "^ +Zombies - \\d*:?\\d+:\\d+ \\(Round \\d+\\)$",
                             "^ +. YOUR STATISTICS .",
-                            "^MINOR EVENT! .+ in .+ ended$",
+                            "^MINOR EVENT! .+ in .+ ended$");
+                    for (String trigger : endingStrings) { wins.add(Pattern.compile(trigger)); }
+
+                    List<String> eventStrings = Arrays.asList(
                             "^DRAGON EGG OVER! Earned [\\d,]+XP [\\d,]g clicking the egg \\d+ times$",
                             "^GIANT CAKE! Event ended! Cake's gone!$",
                             "^PIT EVENT ENDED: .+ \\[INFO\\]$",
                             "^\\[?\\w*\\+*\\]? ?\\w+ caught ?a?n? .+! .*$");
+                    for (String trigger : eventStrings) { events.add(Pattern.compile(trigger)); }
+
+                    List<String> normalStrings = Arrays.asList(
+                            "(?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
+                            "\\.get(TEAM) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
+                            "Guild > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
+                            "Party > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
+                            "\\.get(SHOUT) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
+                            "\\.get(SPECTATOR) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
+                    for (String trigger : normalStrings) { normal.add(Pattern.compile(trigger)); }
                 }
-                for (String trigger : endingStrings) { endingPatterns.add(Pattern.compile(trigger)); }
                 // TODO: change to input stream json file
                 try { join(); } catch (InterruptedException ignored) {}
             }
@@ -134,7 +152,7 @@ public class AutoGGModule extends Module {
         if (this.tick == 0) {
             if (isEnabled())  {
                 // TODO: Make command/message configurable.
-                Minecraft.getMinecraft().thePlayer.sendChatMessage("/ac gg"); // getSettings().stream().filter(setting -> setting.name.equals("Message").findFirst().get())
+                Minecraft.getMinecraft().thePlayer.sendChatMessage("/ac GG"); // getSettings().stream().filter(setting -> setting.name.equals("Message").findFirst().get())
             }
             this.tick = -1;
         } else {
@@ -145,16 +163,11 @@ public class AutoGGModule extends Module {
     }
 
     private boolean isNormalMessage(String message) {
-        return this.chatPattern.matcher(message).matches() ||
-                this.teamPattern.matcher(message).matches() ||
-                this.guildPattern.matcher(message).matches() ||
-                this.partyPattern.matcher(message).matches() ||
-                this.shoutPattern.matcher(message).matches() ||
-                this.spectatorPattern.matcher(message).matches();
+        return this.normal.stream().anyMatch(s -> s.matcher(message).find());
     }
 
     private boolean isEndOfGame(String message) {
-        return this.endingPatterns.stream().anyMatch(s -> s.matcher(message).find());
+        return this.wins.stream().anyMatch(s -> s.matcher(message).find()) || this.events.stream().anyMatch(s -> s.matcher(message).find());
     }
 
 }
