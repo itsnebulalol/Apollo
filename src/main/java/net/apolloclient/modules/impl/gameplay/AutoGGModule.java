@@ -150,7 +150,7 @@ public class AutoGGModule extends Module {
     }
 
     private boolean isEndOfGame(String message) {
-        return this.endingStrings.stream().anyMatch(message::contains);
+        return this.endingStrings.stream().anyMatch(s -> Pattern.compile(message).matcher(message).find());
     }
 
 }
