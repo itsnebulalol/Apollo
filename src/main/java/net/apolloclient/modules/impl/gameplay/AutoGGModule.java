@@ -67,9 +67,7 @@ public class AutoGGModule extends Module {
         try {
             // Make getting triggers async? If required?
             // TODO: aync required
-            // Grab triggers from Sk1er's website.
-            URL url = new URL("https://static.sk1er.club/autogg/regex_triggers.json");
-            // TODO: change url
+            URL url = new URL("https://apolloclient.net/static/autogg-triggers.json");
             URLConnection connection = url.openConnection();
             connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:19.0) Gecko/20100101 Firefox/19.0");
             connection.connect();
