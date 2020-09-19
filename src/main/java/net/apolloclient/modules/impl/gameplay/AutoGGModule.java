@@ -55,6 +55,7 @@ public class AutoGGModule extends Module {
     private final Pattern spectatorPattern = Pattern.compile("\\.get(SPECTATOR) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
 
     private List<String> endingStrings = new ArrayList<>();
+    private final List<Pattern> endingPatterns = new ArrayList<>();
 
     private int tick = -1;
 
@@ -107,6 +108,7 @@ public class AutoGGModule extends Module {
                             "^PIT EVENT ENDED: .+ \\[INFO\\]$",
                             "^\\[?\\w*\\+*\\]? ?\\w+ caught ?a?n? .+! .*$");
                 }
+                for (String trigger : endingStrings) { endingPatterns.add(Pattern.compile(trigger)); }
                 // TODO: change to input stream json file
                 try { join(); } catch (InterruptedException ignored) {}
             }
@@ -152,7 +154,7 @@ public class AutoGGModule extends Module {
     }
 
     private boolean isEndOfGame(String message) {
-        return this.endingStrings.stream().anyMatch(s -> Pattern.compile(message).matcher(message).find());
+        return this.endingPatterns.stream().anyMatch(s -> s.matcher(message).find());
     }
 
 }
