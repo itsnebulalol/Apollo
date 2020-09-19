@@ -19,7 +19,7 @@
 
 package net.apolloclient.modules;
 
-import net.apolloclient.modules.impl.AutoGGModule;
+import net.apolloclient.modules.impl.gameplay.AutoGGModule;
 
 import java.util.ArrayList;
 
@@ -32,18 +32,12 @@ public class ModuleManager {
     public final ArrayList<Module> modules = new ArrayList<>();
 
     // Public module instances.
-    public AutoGGModule autoGG = new AutoGGModule();
+    public final AutoGGModule autoGG = new AutoGGModule();
 
     // Add all modules here.
     public final int preInitialisation() {
-        modules.add(autoGG);
+        this.modules.add(autoGG);
         return modules.size();
-    }
-
-    /** Constructor to created ModuleManager. **/
-    public ModuleManager() {
-        // Runs twice when uncommented.
-        //this.preInitialisation();
     }
 
     /** Called when game is closed.

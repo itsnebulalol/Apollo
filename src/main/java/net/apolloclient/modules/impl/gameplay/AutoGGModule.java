@@ -17,7 +17,7 @@
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package net.apolloclient.modules.impl;
+package net.apolloclient.modules.impl.gameplay;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -46,27 +46,30 @@ import java.util.regex.Pattern;
  */
 public class AutoGGModule extends Module {
 
-    private Pattern chatPattern = Pattern.compile("(?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-    private Pattern teamPattern = Pattern.compile("\\.get(TEAM) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-    private Pattern guildPattern = Pattern.compile("Guild > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-    private Pattern partyPattern = Pattern.compile("Party > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-    private Pattern shoutPattern = Pattern.compile("\\.get(SHOUT) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-    private Pattern spectatorPattern = Pattern.compile("\\.get(SPECTATOR) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
+    // Chat patters for isNormalMessage(...).
+    private final Pattern chatPattern = Pattern.compile("(?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
+    private final Pattern teamPattern = Pattern.compile("\\.get(TEAM) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
+    private final Pattern guildPattern = Pattern.compile("Guild > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
+    private final Pattern partyPattern = Pattern.compile("Party > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
+    private final Pattern shoutPattern = Pattern.compile("\\.get(SHOUT) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
+    private final Pattern spectatorPattern = Pattern.compile("\\.get(SPECTATOR) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
 
     private List<String> endingStrings = new ArrayList<>();
 
     private int tick = -1;
 
-    /**
-     * Sets up triggers.
-     */
+    /** Sets up triggers. **/
     public AutoGGModule() {
         super("AutoGG", "Automatically say GG at the end of a game.", Category.GAMEPLAY, true);
+    }
+
+    @Override public void setupModule () {
         try {
             // Make getting triggers async? If required?
-
+            // TODO: aync required
             // Grab triggers from Sk1er's website.
             URL url = new URL("https://static.sk1er.club/autogg/regex_triggers.json");
+            // TODO: change url
             URLConnection connection = url.openConnection();
             connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:19.0) Gecko/20100101 Firefox/19.0");
             connection.connect();
@@ -105,6 +108,7 @@ public class AutoGGModule extends Module {
                     "^PIT EVENT ENDED: .+ \\[INFO\\]$",
                     "^\\[?\\w*\\+*\\]? ?\\w+ caught ?a?n? .+! .*$");
         }
+        // TODO: change to input stream json file
     }
 
     @EventSubscriber(priority = Priority.LOW)
