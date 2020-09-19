@@ -36,7 +36,7 @@ public class Apollo {
     public static final String NAME = "Apollo", VERSION = "b0.1", MCVERSION = "1.8.9";
 
     public static final File apolloDirectory = new File(System.getProperty("user.dir") + "/" + NAME.toLowerCase());
-    public static final File settingsFile = new File(System.getProperty("user.dir") + "/" + NAME.toLowerCase() + "/settings.json");
+    public static final File settingsFile = new File(System.getProperty("user.dir") + "/" + NAME.toLowerCase() + "/settings.txt");
 
     // Public client instance used to retrieve any aspect of Apollo.
     public static final Apollo INSTANCE = new Apollo();
@@ -54,8 +54,7 @@ public class Apollo {
 
     /** Log Apollo instance stats after construction. **/
     public void postInitialisation() {
-        log("Apollo Initiation Finished with 0 Modules and 0 Settings! ");
-        MODULE_MANAGER.preInitialisation();
+        log("Apollo Initiation Finished with " + MODULE_MANAGER.preInitialisation() + " Modules and 0 Settings! ");
         Apollo.EVENT_BUS.register(this);
     }
 
