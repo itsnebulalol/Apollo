@@ -75,7 +75,7 @@ public class AutoGGModule extends Module {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("https://apolloclient.net/static/autogg-triggers.json");
+                    URL url = new URL("https://static.apolloclient.net/autogg-triggers.json");
                     URLConnection connection = url.openConnection();
                     connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:19.0) Gecko/20100101 Firefox/19.0");
                     connection.connect();
