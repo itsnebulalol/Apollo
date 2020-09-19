@@ -19,8 +19,8 @@
 
 package net.apolloclient.utils.shader;
 
-import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

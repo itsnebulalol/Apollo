@@ -19,8 +19,8 @@
 
 package net.apolloclient.events.impl.client;
 
-import net.apolloclient.events.CancelableEvent;
 import lombok.Getter;
+import net.apolloclient.events.CancelableEvent;
 import net.minecraft.client.audio.ISound;
 
 /** Fired sound is played on client.

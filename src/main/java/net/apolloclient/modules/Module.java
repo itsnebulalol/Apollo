@@ -19,10 +19,10 @@
 
 package net.apolloclient.modules;
 
-import net.apolloclient.Apollo;
-import net.apolloclient.settings.Setting;
 import lombok.Getter;
 import lombok.Setter;
+import net.apolloclient.Apollo;
+import net.apolloclient.settings.Setting;
 
 import java.util.ArrayList;
 

@@ -21,7 +21,6 @@ package net.apolloclient.examples;
 import zone.nora.slothpixel.Slothpixel;
 import zone.nora.slothpixel.player.Player;
 import zone.nora.slothpixel.player.stats.bedwars.BedWars;
-import zone.nora.slothpixel.player.stats.tkr.Tkr;
 
 public class SlothpixelExample {
     public static void main() {

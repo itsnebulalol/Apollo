@@ -19,10 +19,10 @@
 
 package net.apolloclient.events.bus;
 
-import net.apolloclient.Apollo;
-import net.apolloclient.events.Event;
 import lombok.Getter;
 import lombok.Setter;
+import net.apolloclient.Apollo;
+import net.apolloclient.events.Event;
 
 import java.lang.reflect.Method;
 

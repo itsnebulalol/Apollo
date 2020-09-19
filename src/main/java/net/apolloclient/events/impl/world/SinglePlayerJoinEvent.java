@@ -19,8 +19,8 @@
 
 package net.apolloclient.events.impl.world;
 
-import net.apolloclient.events.Event;
 import lombok.Getter;
+import net.apolloclient.events.Event;
 import net.minecraft.world.WorldSettings;
 
 /** Fired when player joins single player world.

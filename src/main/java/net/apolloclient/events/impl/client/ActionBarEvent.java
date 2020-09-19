@@ -19,15 +19,19 @@
 
 package net.apolloclient.events.impl.client;
 
+import lombok.Getter;
+import net.apolloclient.events.Event;
 import net.minecraft.util.IChatComponent;
 
 /** Fired when the Action Bar is updated.
  * @author Nora Cos | Nora#0001
  * @since 1.0.0 **/
-public class ActionBarEvent extends ChatReceivedEvent {
+public class ActionBarEvent extends Event {
+
+    @Getter private final IChatComponent chatComponent;
 
     /** @param chatComponent action bar text **/
     public ActionBarEvent(IChatComponent chatComponent) {
-        super(chatComponent);
+        this.chatComponent = chatComponent;
     }
 }

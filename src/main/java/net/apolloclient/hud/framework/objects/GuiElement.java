@@ -19,8 +19,8 @@
 
 package net.apolloclient.hud.framework.objects;
 
-import net.apolloclient.hud.framework.Panel;
 import lombok.Getter;
+import net.apolloclient.hud.framework.Panel;
 
 /** Gui element class all objects extend
  * @author Icovid | Icovid#3888

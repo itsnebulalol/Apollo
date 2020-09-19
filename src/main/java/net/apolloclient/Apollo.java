@@ -19,7 +19,6 @@ import net.apolloclient.events.bus.EventBus;
 import net.apolloclient.events.bus.EventSubscriber;
 import net.apolloclient.events.impl.client.input.KeyPressedEvent;
 import net.apolloclient.hud.ModulesGui;
-import net.apolloclient.hud.framework.objects.Rectangle;
 import net.apolloclient.modules.ModuleManager;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
@@ -35,7 +34,6 @@ public class Apollo {
 
     // Apollo information used for display title and credits info.
     public static final String NAME = "Apollo", VERSION = "b0.1", MCVERSION = "1.8.9";
-    public static final String[] DEVELOPERS = {"Icovid", "Nora", "isXander"};
 
     public static final File apolloDirectory = new File(System.getProperty("user.dir") + "/" + NAME.toLowerCase());
     public static final File settingsFile = new File(System.getProperty("user.dir") + "/" + NAME.toLowerCase() + "/settings.json");
@@ -45,11 +43,6 @@ public class Apollo {
     public static final EventBus EVENT_BUS = new EventBus();
     public static final ModuleManager MODULE_MANAGER = new ModuleManager();
 
-    public Rectangle rectangle = new Rectangle("test")
-            .position(10, 10)
-            .outline(15)
-            .round(10).build();
-
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {
         log("Starting Client!");
@@ -57,7 +50,6 @@ public class Apollo {
             try { apolloDirectory.mkdirs();  } catch (Exception ignored) { }
             log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath());
         }
-        //log(rectangle.getName() + ":" + rectangle.getWidth() + ":" + rectangle.getHeight());
     }
 
     /** Log Apollo instance stats after construction. **/

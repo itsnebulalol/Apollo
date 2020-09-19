@@ -19,6 +19,7 @@
 
 package net.apolloclient.mixins.network;
 
+import net.apolloclient.Apollo;
 import net.apolloclient.events.impl.client.ActionBarEvent;
 import net.apolloclient.events.impl.client.ChatReceivedEvent;
 import net.minecraft.client.network.NetHandlerPlayClient;
@@ -37,14 +38,9 @@ public class MixinNetHandlerPlayClient {
     /** Post {@link ActionBarEvent} or {@link ChatReceivedEvent} at chat packet.
      * @param callbackInfo unused
      * @param packetIn chat packet received **/
-    @Inject(method = "handleChat", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/PacketThreadUtil;checkThreadAndEnqueue(Lnet/minecraft/network/Packet;Lnet/minecraft/network/INetHandler;Lnet/minecraft/util/IThreadListener;)V", shift = At.Shift.AFTER), cancellable = true)
+    @Inject(method = "handleChat", at = @At(value = "HEAD"), cancellable = false)
     private void onChatPacket(S02PacketChat packetIn, CallbackInfo callbackInfo) {
-        ChatReceivedEvent event;
-        if (packetIn.getType() == 2) event = new ActionBarEvent(packetIn.getChatComponent());
-        else event = new ChatReceivedEvent(packetIn.getChatComponent());
-        event.post();
-        if (event.isCanceled()) {
-            callbackInfo.cancel();
-        }
+        if (packetIn.getType() == 2) Apollo.EVENT_BUS.post(new ActionBarEvent(packetIn.getChatComponent()));
+        else Apollo.EVENT_BUS.post(new ChatReceivedEvent(packetIn.getChatComponent()));
     }
 }

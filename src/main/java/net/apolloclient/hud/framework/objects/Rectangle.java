@@ -19,9 +19,9 @@
 
 package net.apolloclient.hud.framework.objects;
 
-import net.apolloclient.Apollo;
 import lombok.Getter;
 import lombok.Setter;
+import net.apolloclient.Apollo;
 import net.apolloclient.hud.framework.Panel;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

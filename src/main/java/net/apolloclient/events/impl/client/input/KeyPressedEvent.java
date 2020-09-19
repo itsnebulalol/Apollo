@@ -19,8 +19,8 @@
 
 package net.apolloclient.events.impl.client.input;
 
-import net.apolloclient.events.Event;
 import lombok.Getter;
+import net.apolloclient.events.Event;
 
 /** Fired when key is pressed.
  * @author Icovid | Icovid#3888
