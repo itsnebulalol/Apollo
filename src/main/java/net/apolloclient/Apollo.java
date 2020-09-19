@@ -54,8 +54,8 @@ public class Apollo {
 
     /** Log Apollo instance stats after construction. **/
     public void postInitialisation() {
-        log("Apollo Initiation Finished with 0 Modules and 0 Settings! ");
-        MODULE_MANAGER.preInitialisation();
+        int modules = MODULE_MANAGER.preInitialisation();
+        log("Apollo Initiation Finished with " + modules + " Modules and 0 Settings! ");
         Apollo.EVENT_BUS.register(this);
     }
 

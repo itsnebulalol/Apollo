@@ -32,12 +32,14 @@ public class ModuleManager {
     // Public module instances.
 
     // Add all modules here.
-    public final void preInitialisation() {
+    public final int preInitialisation() {
+        return modules.size();
     }
 
     /** Constructor to created ModuleManager. **/
     public ModuleManager() {
-        this.preInitialisation();
+        // Runs twice when uncommented.
+        //this.preInitialisation();
     }
 
     /** Called when game is closed.
