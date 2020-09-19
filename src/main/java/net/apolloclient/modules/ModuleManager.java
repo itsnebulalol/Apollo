@@ -19,6 +19,8 @@
 
 package net.apolloclient.modules;
 
+import net.apolloclient.modules.impl.AutoGGModule;
+
 import java.util.ArrayList;
 
 /** Holds all modules and sets up module settings.
@@ -30,9 +32,11 @@ public class ModuleManager {
     public final ArrayList<Module> modules = new ArrayList<>();
 
     // Public module instances.
+    public AutoGGModule autoGG = new AutoGGModule();
 
     // Add all modules here.
     public final int preInitialisation() {
+        modules.add(autoGG);
         return modules.size();
     }
 
