@@ -19,8 +19,6 @@
 
 package net.apolloclient.modules;
 
-import net.apolloclient.modules.impl.util.WindowedFullscreenModule;
-
 import java.util.ArrayList;
 
 /** Holds all modules and sets up module settings.
@@ -32,13 +30,9 @@ public class ModuleManager {
     public final ArrayList<Module> modules = new ArrayList<>();
 
     // Public module instances.
-//    public final DiscordRPModule discordRPModule = new DiscordRPModule(); TODO: FIX ERRORS
-    public final WindowedFullscreenModule windowedFullscreenModule = new WindowedFullscreenModule();
 
     // Add all modules here.
     public final void preInitialisation() {
-//        this.modules.add(discordRPModule);
-        this.modules.add(windowedFullscreenModule);
     }
 
     /** Constructor to created ModuleManager. **/

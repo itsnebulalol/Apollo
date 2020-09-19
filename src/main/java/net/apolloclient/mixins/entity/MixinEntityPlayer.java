@@ -10,16 +10,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** Mixin Event
+/** Mixin Events for EntityPlayer.class.
  * @author MatthewTGM | MatthewTGM#4058
- */
+ * @since 1.0.0 **/
 @Mixin(EntityPlayer.class)
 public class MixinEntityPlayer {
 
     /** posts a {@link AttackEntityEvent}. **/
     @Inject(method = "attackTargetEntityWithCurrentItem", at = @At("RETURN")) public void attackTargetEntityWithCurrentItem(Entity targetEntity, CallbackInfo ci) {
-        if(targetEntity != null) {
-            AttackEntityEvent event = new AttackEntityEvent(Minecraft.getMinecraft().thePlayer, targetEntity);
-        }
+        if(targetEntity != null) { new AttackEntityEvent(targetEntity).post(); }
     }
 }

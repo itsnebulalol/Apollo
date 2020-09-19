@@ -19,9 +19,11 @@
 
 package net.apolloclient.utils.shader;
 
-import net.apolloclient.utils.ShaderProgram;
-
+/** loads blur shader.
+ * @author Basilicous | Basilicous#7866
+ * @since 1.0.0 **/
 public class BlurShader extends ShaderProgram {
+
     private static final String VERTEX_FILE = "resources/shaders/hblur.vsh";
     private static final String FRAGMENT_FILE = "resources/shaders/hblur.fsh";
 
