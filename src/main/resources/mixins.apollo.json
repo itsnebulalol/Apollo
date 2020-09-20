@@ -6,8 +6,9 @@
   "verbose": true,
   "mixins": [
     "client.MixinMinecraft",
-    "entity.MixinEntityPlayerSP",
     "entity.MixinEntityPlayer",
+    "entity.MixinEntityPlayerSP",
+    "gui.MixinGuiScreen",
     "network.MixinNetHandlerPlayClient"
   ]
 }
