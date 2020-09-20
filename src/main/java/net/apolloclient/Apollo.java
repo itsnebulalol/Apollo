@@ -72,12 +72,10 @@ public class Apollo {
      * @param message any string to be displayed in console. **/
     public static void error (String... message) { for (String out : message) System.err.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [Apollo-Error] " + out); }
 
+
+    // TEST
     @EventSubscriber
     public void onKeyDown (KeyPressedEvent event) {
-        if (event.getKeyCode() == Keyboard.KEY_RSHIFT) {
-            if (Minecraft.getMinecraft().currentScreen == null) {
-                Minecraft.getMinecraft().displayGuiScreen(new ModulesGui());
-            }
-        }
+        if (event.getKeyCode() == Keyboard.KEY_RSHIFT) Minecraft.getMinecraft().displayGuiScreen(new ModulesGui());
     }
 }
