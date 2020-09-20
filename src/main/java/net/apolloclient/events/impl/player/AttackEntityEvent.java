@@ -4,6 +4,9 @@ import net.apolloclient.events.Event;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
+/** Mixin event for attacking entities.
+* @author MatthewTGM | MatthewTGM#4058
+*/
 public class AttackEntityEvent extends Event
 {
     public final Entity target;

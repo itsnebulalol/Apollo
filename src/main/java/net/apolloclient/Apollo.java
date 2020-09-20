@@ -59,14 +59,12 @@ public class Apollo {
     /** Log Apollo instance stats after construction. **/
     public void postInitialisation() {
         log("Apollo Initiation Finished with " + MODULE_MANAGER.preInitialisation() + " Modules and 0 Settings! ");
-        discordRichPresence.start();
         Apollo.EVENT_BUS.register(this);
     }
 
     // Called when game shuts down.
     public void shutdown() {
         log("Closing Client!");
-        discordRichPresence.shutdown();
         log("Shutdown " + MODULE_MANAGER.shutdown() + " modules!");
     }
 

@@ -18,6 +18,15 @@ public abstract class MixinRender<T extends Entity> {
 
     @Shadow protected abstract void renderLivingLabel(T entityIn, String str, double x, double y, double z, int maxDistance);
 
+    /**
+    * @param entity the entity which is being called
+    * @param x TODO
+    * @param y TODO
+    * @param z TODO
+    * @param entityYaw the yaw of the entity
+    * @param partialTicks TODO
+    * @param callbackInfo unused
+    */
     @Inject(method = "doRender", at = @At("HEAD"))
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo callbackInfo) {
         if(entity instanceof EntityPlayerSP) {

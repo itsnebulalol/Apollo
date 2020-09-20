@@ -27,17 +27,11 @@ import java.util.List;
 @Mixin(GuiMainMenu.class)
 public class MixinGuiMainMenu extends GuiScreen {
 
-    /**
-     * @author MatthewTGM | MatthewTGM#4058
-     */
         @Overwrite public void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_) {
             this.buttonList.add(new GuiButton(1, this.width / 2 - 100, p_73969_1_, I18n.format("menu.singleplayer", new Object[0])));
             this.buttonList.add(new GuiButton(2, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 1, I18n.format("menu.multiplayer", new Object[0])));
         }
 
-    /**
-     * @author MatthewTGM | MatthewTGM#4058
-     */
     public void renderBackgroundImage(ResourceLocation image) {
 
     }
