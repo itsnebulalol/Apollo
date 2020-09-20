@@ -24,55 +24,24 @@ import java.util.List;
 public class QuickplayModule extends Module {
 
     private JsonObject data;
-    private List<Game> games = new ArrayList<>();
+    private List<Game> games;
 
     public QuickplayModule() {
         super("Quickplay", "Choose a game to play in a good-looking menu.", Category.UTIL, true);
     }
 
     @Override
-    public void setup() {
-        new Thread("Quickplay Games Grabber") {
-            @Override
-            public void run() {
-                Gson gson = new Gson();
-                try {
-                    URL url = new URL("https://static.apolloclient.net/quickplay-games.json");
-                    URLConnection connection = url.openConnection();
-                    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:19.0) Gecko/20100101 Firefox/19.0");
-                    connection.connect();
-                    BufferedReader serverResponse = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    StringBuilder resp = new StringBuilder();
-                    serverResponse.lines().forEach(line -> resp.append(line).append("\n"));
-                    serverResponse.close();
-                    data = gson.fromJson(resp.toString(), JsonObject.class);
+    public void setup() throws Exception {
+        games = new ArrayList<>();
+        Gson gson = new Gson();
+        data = gson.fromJson(this.getDataFromUrlOrLocal("quickplay-games.json"), JsonObject.class);
 
-                    JsonObject version = data.getAsJsonObject("version");
-                    Apollo.log("[Quickplay] Using games list v" + version.get("version").getAsString() + " (" + version.get("date").getAsString() + ")");
+        JsonObject version = data.getAsJsonObject("version");
+        Apollo.log("[Quickplay] Using games list v" + version.get("version").getAsString() + " (" + version.get("date").getAsString() + ")");
 
-                    data.getAsJsonArray("games").forEach(game -> games.add(gson.fromJson(game, Game.class)));
-                } catch (Exception e) {
-                    Apollo.error("[Quickplay] Failed to get games.");
-                    // TODO: Hardcode default games?
-                    JsonObject defaultData = new JsonObject();
-                    JsonObject version = new JsonObject();
-                    version.addProperty("date", "09/20/2020");
-                    version.addProperty("version", "0");
-                    version.addProperty("note", "Default Games (Failed to grab from Apollo servers)");
-                    defaultData.add("version", version);
-                    JsonArray games = new JsonArray();
-                    JsonObject failed = new JsonObject();
-                    failed.addProperty("name", "Error");
-                    failed.addProperty("icon", "https://hypixel.net/styles/hypixel-uix/hypixel/game-icons/SkyBlock-64.png"); // TODO: Replace with error icon.
-                    games.add(failed);
-                    defaultData.add("games", games);
-                    data = defaultData;
-                    setEnabled(false);
-                }
-                data.getAsJsonArray("games").forEach(game -> games.add(gson.fromJson(game, Game.class)));
-                try { join(); } catch (InterruptedException ignored) {}
-            }
-        }.start();
+        data.getAsJsonArray("games").forEach(game -> games.add(gson.fromJson(game, Game.class)));
+
+        data.getAsJsonArray("games").forEach(game -> games.add(gson.fromJson(game, Game.class)));
     }
 
     @EventSubscriber

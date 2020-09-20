@@ -44,6 +44,8 @@ public class Module {
     private final ArrayList<Setting> settings = new ArrayList<>();
     private final HashMap<String, Exception> errors = new HashMap<>();
 
+    public static enum ExceptionType{ STARTUP, ENABLE, DISABLE, EVENT, IO }
+
     /** @param name name of module
      * @param description description of module
      * @param category category of module
@@ -65,11 +67,7 @@ public class Module {
     /** Get module stats from file and log creation to console **/
     public final void moduleSetup() {
         Apollo.log("Initiating " + this.name.toUpperCase() + "!");
-        try { this.setup(); } catch (Exception exception) {
-            errors.put("Setup Error", exception);
-            Apollo.error("[" + this.name + "] Encountered an error when setting up! : " + exception.getMessage());
-            exception.printStackTrace();
-        }
+        try { this.setup(); } catch (Exception exception) { handleException(ExceptionType.STARTUP, exception); }
     }
 
     /** Set enabled state opposite of what it is currently.
@@ -81,13 +79,9 @@ public class Module {
     }
 
     /** Called when module is enabled and registers the event manager **/
-    public final void onModuleEnable() { try { this.onEnabled(); } catch (Exception exception) {
-        errors.put("Enabling Error", exception);
-        Apollo.error("[" + this.name + "] Encountered an error when enabling! : " + exception.getMessage());} }
+    public final void onModuleEnable() { try { this.onEnabled(); } catch (Exception exception) { handleException(ExceptionType.ENABLE, exception); } }
     /** Called when module is disabled and unregisters the event manager **/
-    public final void onModuleDisable() { try { this.onDisable(); } catch (Exception exception) {
-        errors.put("Disabling Error", exception);
-        Apollo.error("[" + this.name + "] Encountered an error when disabling! : " + exception.getMessage()); } }
+    public final void onModuleDisable() { try { this.onDisable(); } catch (Exception exception) { handleException(ExceptionType.DISABLE, exception); } }
 
     /** Getters and Setters used because i don't know how to make lombok final. **/
     public final String getName () { return name; }
@@ -120,12 +114,20 @@ public class Module {
     /** Called on Shutdown **/
     public void shutdown() {}
 
+    /** Called when module encounters an exception
+     * @param exception encountered **/
+    public void handleException(ExceptionType exceptionType, Exception exception) {
+        this.errors.put(exceptionType.toString().toUpperCase() + "Exception - " + this.name, exception);
+        Apollo.error("[" + this.name + "]" + " " + exceptionType.toString().toUpperCase() + " Exception - " + exception.toString());
+    }
+
     /** Download data from data base.
      * @param filename name of file in database / local
      * @return string of file
      * @throws Exception any exception encountered  **/
     public final String getDataFromUrlOrLocal(String filename) throws Exception {
-        try { URLConnection urlConnection = new URL("https://static.apolloclient.net/" + filename).openConnection();
+        try {
+            URLConnection urlConnection = new URL("https://static.apolloclient.net/" + filename).openConnection();
             urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:19.0) Gecko/20100101 Firefox/19.0");
             urlConnection.connect();
             BufferedReader serverResponse = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -133,6 +135,7 @@ public class Module {
             serverResponse.close();
             return response;
         } catch (Exception exception) {
+            this.handleException(ExceptionType.IO, exception);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Module.class.getResourceAsStream("/other/" + filename)));
             String response = bufferedReader.lines().collect(Collectors.joining());
             bufferedReader.close();

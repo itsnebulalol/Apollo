@@ -52,9 +52,6 @@ public class Rectangle extends GuiElement{
     @Getter @Setter private int topRightCorner = 0;
     @Getter @Setter private int bottomLeftCorner = 0;
     @Getter @Setter private int bottomRightCorner = 0;
-    // Gaps to adjust corners
-    @Getter private float xGap = 1f;
-    @Getter private float yGap = 1f;
 
     /** @param name name of the rectangle **/
     public Rectangle (String name) { super(name); }
@@ -117,13 +114,6 @@ public class Rectangle extends GuiElement{
         return this;
     }
 
-    /** Makes corners strength by offset. set as percent **/
-    public Rectangle cornerOffsets(float xGap, float yGap) {
-        this.xGap = xGap;
-        this.yGap = yGap;
-        return this;
-    }
-
     public Rectangle outline(int amount) {
         this.outlineLeft = amount;
         this.outlineRight = amount;
@@ -164,13 +154,6 @@ public class Rectangle extends GuiElement{
         } if (this.topRightCorner > ((this.y2 - this.y1) / 2)) {  this.topRightCorner = ((this.y2 - this.y1) / 2);
         } if (this.bottomRightCorner > ((this.y2 - this.y1) / 2)) {  this.bottomRightCorner = ((this.y2 - this.y1) / 2);
         } if (this.bottomLeftCorner > ((this.y2 - this.y1) / 2)) {  this.bottomLeftCorner = ((this.y2 - this.y1) / 2);
-        } if (this.xGap > 1f || this.yGap > 1f) {
-            Apollo.error("[framework-" + this.name + "] Rectangle gap offsets was to large and have been reduced!");
-        } if (this.xGap > 1f) this.xGap = 1f;
-        if (this.yGap > 1f) this.yGap = 1f;
-        if (this.x1 == -1 || this.y1 == -1) {
-        Apollo.error("[framework-" + this.name + "] Rectangle has no position and could not be created!");
-        return null;
         } return this;
     }
 

@@ -41,31 +41,18 @@ import java.util.regex.Pattern;
  */
 public class AutoGGModule extends Module {
 
-    // Chat patters for isNormalMessage(...).
-    private final Pattern chatPattern = Pattern.compile("(?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-    private final Pattern teamPattern = Pattern.compile("\\.get(TEAM) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-    private final Pattern guildPattern = Pattern.compile("Guild > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-    private final Pattern partyPattern = Pattern.compile("Party > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-    private final Pattern shoutPattern = Pattern.compile("\\.get(SHOUT) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-    private final Pattern spectatorPattern = Pattern.compile("\\.get(SPECTATOR) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-
     // Patterns to match if the game is over.
     private List<Pattern> wins;
-
     // Patterns to match if an event has happened.
     private List<Pattern> events;
-
     // Patterns to match if its a normal message (Doesn't say GG)
     private List<Pattern> normal;
 
     private int tick = -1;
 
-    /** Sets up triggers. **/
-    public AutoGGModule() {
-        super("AutoGG", "Automatically say GG at the end of a game.", Category.GAMEPLAY, true);
-    }
+    public AutoGGModule() { super("AutoGG", "Automatically say GG at the end of a game.", Category.GAMEPLAY, true); }
 
-    // TODO: wins show null
+    /** Sets up triggers. **/
     @Override public void setup () throws Exception {
         wins = new ArrayList<>();
         events = new ArrayList<>();
