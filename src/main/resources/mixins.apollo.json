@@ -8,7 +8,6 @@
     "client.MixinMinecraft",
     "entity.MixinEntityPlayer",
     "entity.MixinEntityPlayerSP",
-    "gui.MixinGuiScreen",
     "network.MixinNetHandlerPlayClient"
   ]
 }
