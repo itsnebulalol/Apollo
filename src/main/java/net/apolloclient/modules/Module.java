@@ -19,28 +19,37 @@
 
 package net.apolloclient.modules;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.apolloclient.Apollo;
 import net.apolloclient.settings.Setting;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
 /** Module constructor for all mods.
  * @author Icovid | Icovid#3888
  * @since 1.0.0 **/
 public class Module {
 
-    @Getter private final String name;
-    @Getter private final String description;
-    @Getter private final Category category;
-    @Setter private int priority = 5;
-    @Setter @Getter private boolean enabled;
-    @Getter private final ArrayList<Setting> settings = new ArrayList<>();
+    private final String name;
+    private final String description;
+    private final Category category;
+    private int priority = 5;
+    private boolean enabled;
+    private final ArrayList<Setting> settings = new ArrayList<>();
+    private final HashMap<String, Exception> errors = new HashMap<>();
 
+    /** @param name name of module
+     * @param description description of module
+     * @param category category of module
+     * @implNote enabled defaulted to false. **/
     public Module(String name, String description, Category category) { this(name, description, category, false); }
-    /** Main constructor used for all modules.
-     * @param name name of module
+    /** @param name name of module
      * @param description description of module
      * @param category category of module
      * @param enabled is module toggled **/
@@ -55,32 +64,79 @@ public class Module {
 
     /** Get module stats from file and log creation to console **/
     public final void moduleSetup() {
-        Apollo.log("❖ " + name + " module initiated with a category of " + category.toString().toLowerCase() + " and a toggle state of " + this.enabled);
-        this.setupModule();
+        Apollo.log("Initiating " + this.name.toUpperCase() + "!");
+        try { this.setup(); } catch (Exception exception) {
+            errors.put("Setup Error", exception);
+            Apollo.error("[" + this.name + "] Encountered an error when setting up! : " + exception.getMessage());
+            exception.printStackTrace();
+        }
     }
 
     /** Set enabled state opposite of what it is currently.
      * @return Boolean it was set too **/
-    public final Boolean toggle() {
-        this.setEnabled(!enabled);
+    @NotNull public final Boolean toggle() {
+        this.enabled = !enabled;
         if (enabled) { this.onModuleEnable(); return true; }
         else { this.onModuleDisable(); return false; }
     }
 
     /** Called when module is enabled and registers the event manager **/
-    public final void onModuleEnable() { this.onEnabled(); }
+    public final void onModuleEnable() { try { this.onEnabled(); } catch (Exception exception) {
+        errors.put("Enabling Error", exception);
+        Apollo.error("[" + this.name + "] Encountered an error when enabling! : " + exception.getMessage());} }
     /** Called when module is disabled and unregisters the event manager **/
-    public final void onModuleDisable() { this.onDisable(); }
+    public final void onModuleDisable() { try { this.onDisable(); } catch (Exception exception) {
+        errors.put("Disabling Error", exception);
+        Apollo.error("[" + this.name + "] Encountered an error when disabling! : " + exception.getMessage()); } }
+
+    /** Getters and Setters used because i don't know how to make lombok final. **/
+    public final String getName () { return name; }
+    public final String getDescription () { return description; }
+    public final Category getCategory () { return category; }
+    public final int getPriority () { return priority; }
+    public final boolean isEnabled () { return enabled; }
+    public final ArrayList<Setting> getSettings () { return settings; }
+    public final HashMap<String, Exception> getErrors () { return errors; }
+    /** Set priority of module in event system **/
+    public final void setPriority (int priority) { this.priority = priority; }
+
+    /** Set toggle state of module
+     * @param enabled toggle state */
+    public void setEnabled (boolean enabled) {
+        this.enabled = enabled;
+        if (!this.isEnabled()) Apollo.EVENT_BUS.unregister(this);
+        else Apollo.EVENT_BUS.register(this);
+    }
 
     /** Called when module is enabled.
      * @see #toggle() **/
-    public void onEnabled() {}
+    public void onEnabled() throws Exception {}
     /** Called when module is disabled.
      * @see #toggle() **/
-    public void onDisable() {}
+    public void onDisable() throws Exception {}
     /** Called on startup
      * @see #moduleSetup() **/
-    public void setupModule() {}
+    public void setup () throws Exception {}
     /** Called on Shutdown **/
     public void shutdown() {}
+
+    /** Download data from data base.
+     * @param filename name of file in database / local
+     * @return string of file
+     * @throws Exception any exception encountered  **/
+    public final String getDataFromUrlOrLocal(String filename) throws Exception {
+        try { URLConnection urlConnection = new URL("https://static.apolloclient.net/" + filename).openConnection();
+            urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:19.0) Gecko/20100101 Firefox/19.0");
+            urlConnection.connect();
+            BufferedReader serverResponse = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            String response = serverResponse.lines().collect(Collectors.joining());
+            serverResponse.close();
+            return response;
+        } catch (Exception exception) {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Module.class.getResourceAsStream("/other/" + filename)));
+            String response = bufferedReader.lines().collect(Collectors.joining());
+            bufferedReader.close();
+            return response;
+        }
+    }
 }

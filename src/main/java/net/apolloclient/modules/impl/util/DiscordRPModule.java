@@ -29,7 +29,7 @@ public class DiscordRPModule extends Module {
     }
 
     @Override
-    public void setupModule() {
+    public void setup() {
         currentTime = System.currentTimeMillis();
         eventHandlers = new DiscordEventHandlers.Builder().setReadyEventHandler(discordUser -> {
             Apollo.log("[Discord Rich Presence] Found " + discordUser.username + "#" + discordUser.discriminator + "!");

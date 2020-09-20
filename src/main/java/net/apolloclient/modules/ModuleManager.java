@@ -20,8 +20,8 @@
 package net.apolloclient.modules;
 
 import net.apolloclient.modules.impl.gameplay.AutoGGModule;
-import net.apolloclient.modules.impl.util.QuickplayModule;
 import net.apolloclient.modules.impl.util.DiscordRPModule;
+import net.apolloclient.modules.impl.util.QuickplayModule;
 
 import java.util.ArrayList;
 

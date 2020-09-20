@@ -31,7 +31,7 @@ public class QuickplayModule extends Module {
     }
 
     @Override
-    public void setupModule() {
+    public void setup() {
         new Thread("Quickplay Games Grabber") {
             @Override
             public void run() {
@@ -68,7 +68,6 @@ public class QuickplayModule extends Module {
                     defaultData.add("games", games);
                     data = defaultData;
                     setEnabled(false);
-                    Apollo.EVENT_BUS.unregister(this); // TODO: Automatically unregister when disabled.
                 }
                 data.getAsJsonArray("games").forEach(game -> games.add(gson.fromJson(game, Game.class)));
                 try { join(); } catch (InterruptedException ignored) {}
