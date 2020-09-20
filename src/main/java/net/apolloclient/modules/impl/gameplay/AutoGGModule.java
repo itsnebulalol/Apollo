@@ -31,12 +31,7 @@ import net.apolloclient.modules.Module;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IChatComponent;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -70,67 +65,16 @@ public class AutoGGModule extends Module {
         super("AutoGG", "Automatically say GG at the end of a game.", Category.GAMEPLAY, true);
     }
 
-    @Override public void setupModule () {
-        new Thread("AutoGG Trigger Grabber") {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("https://static.apolloclient.net/autogg-triggers.json");
-                    URLConnection connection = url.openConnection();
-                    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 5.1; rv:19.0) Gecko/20100101 Firefox/19.0");
-                    connection.connect();
-                    BufferedReader serverResponse = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    StringBuilder resp = new StringBuilder();
-                    serverResponse.lines().forEach(line -> resp.append(line).append("\n"));
-                    serverResponse.close();
-                    JsonObject response = new Gson().fromJson(resp.toString(), JsonObject.class);
+    // TODO: wins show null
+    @Override public void setup () throws Exception {
+        JsonObject response = new Gson().fromJson(this.getDataFromUrlOrLocal("autogg-triggers.json"), JsonObject.class);
+        Apollo.log(response.toString());
+        JsonObject version = response.getAsJsonObject("version");
+        Apollo.log("[AutoGG] Using triggers v" + version.get("version").getAsString() + " (" + version.get("date").getAsString() + ")");
 
-                    JsonObject version = response.getAsJsonObject("version");
-                    Apollo.log("[AutoGG] Using triggers v" + version.get("version").getAsString() + " (" + version.get("date").getAsString() + ")");
-
-                    response.getAsJsonArray("wins").forEach(trigger -> wins.add(Pattern.compile(trigger.getAsString())));
-                    response.getAsJsonArray("events").forEach(trigger -> events.add(Pattern.compile(trigger.getAsString())));
-                    response.getAsJsonArray("normal").forEach(trigger -> normal.add(Pattern.compile(trigger.getAsString())));
-                } catch (Exception e) {
-                    Apollo.error("[AutoGG] Failed to get latest triggers. Using hardcoded.");
-                    List<String> endingStrings = Arrays.asList(
-                            "^ +1st Killer - ?\\[?\\w*\\+*\\]? \\w+ - \\d+(?: Kills?)?$",
-                            "^ *1st (?:Place ?)?(?:-|:)? ?\\[?\\w*\\+*\\]? \\w+(?: : \\d+| - \\d+(?: Points?)?| - \\d+(?: x .)?| \\(\\w+ .{1,6}\\) - \\d+ Kills?|: \\d+:\\d+| - \\d+ (?:Zombie )?(?:Kills?|Blocks? Destroyed)| - \\[LINK\\])?$",
-                            "^ +Winn(?:er #1 \\(\\d+ Kills\\): \\w+ \\(\\w+\\)|er(?::| - )(?:Hiders|Seekers|Defenders|Attackers|PLAYERS?|MURDERERS?|Red|Blue|RED|BLU|\\w+)(?: Team)?|ers?: ?\\[?\\w*\\+*\\]? \\w+(?:, ?\\[?\\w*\\+*\\]? \\w+)?|Team ?[\\:-] (?:Animals|Hunters|Red|Green|Blue|Yellow|RED|BLU|Survivors|Vampires))$",
-                            "^ +Alpha Infected: \\w+ \\(\\d+ infections?\\)$",
-                            "^ +Murderer: \\w+ \\(\\d+ Kills?\\)$",
-                            "^ +You survived \\d+ rounds!$",
-                            "^ +(?:UHC|SkyWars|The Bridge|Sumo|Classic|OP|MegaWalls|Bow|NoDebuff|Blitz|Combo|Bow Spleef) (?:Duel|Doubles|Teams|Deathmatch|2v2v2v2|3v3v3v3)? - \\d+:\\d+$",
-                            "^ +They captured all wools!$",
-                            "^ +Game over!$",
-                            "^ +[\\d\\.]+k?/[\\d\\.]+k? \\w+$",
-                            "^ +(?:Criminal|Cop)s won the game!$",
-                            "^ +\\[?\\w*\\+*\\]? \\w+ - \\d+ Final Kills$",
-                            "^ +Zombies - \\d*:?\\d+:\\d+ \\(Round \\d+\\)$",
-                            "^ +. YOUR STATISTICS .",
-                            "^MINOR EVENT! .+ in .+ ended$");
-                    for (String trigger : endingStrings) { wins.add(Pattern.compile(trigger)); }
-
-                    List<String> eventStrings = Arrays.asList(
-                            "^DRAGON EGG OVER! Earned [\\d,]+XP [\\d,]g clicking the egg \\d+ times$",
-                            "^GIANT CAKE! Event ended! Cake's gone!$",
-                            "^PIT EVENT ENDED: .+ \\[INFO\\]$",
-                            "^\\[?\\w*\\+*\\]? ?\\w+ caught ?a?n? .+! .*$");
-                    for (String trigger : eventStrings) { events.add(Pattern.compile(trigger)); }
-
-                    List<String> normalStrings = Arrays.asList(
-                            "(?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
-                            "\\.get(TEAM) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
-                            "Guild > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
-                            "Party > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
-                            "\\.get(SHOUT) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
-                            "\\.get(SPECTATOR) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
-                    for (String trigger : normalStrings) { normal.add(Pattern.compile(trigger)); }
-                }
-                // TODO: change to input stream json file
-                try { join(); } catch (InterruptedException ignored) {}
-            }
-        }.start();
+        response.getAsJsonArray("wins").forEach(trigger -> wins.add(Pattern.compile(trigger.getAsString())));
+        response.getAsJsonArray("events").forEach(trigger -> events.add(Pattern.compile(trigger.getAsString())));
+        response.getAsJsonArray("normal").forEach(trigger -> normal.add(Pattern.compile(trigger.getAsString())));
     }
 
     @EventSubscriber(priority = Priority.LOW)

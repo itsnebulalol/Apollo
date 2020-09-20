@@ -45,17 +45,15 @@ public class Apollo {
 
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {
-        log("Starting Client!");
+        log("Starting " + NAME + " " + VERSION + "...");
         if (!apolloDirectory.exists()) {
             try { apolloDirectory.mkdirs();  } catch (Exception ignored) { }
             log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath());
         }
         Runtime.getRuntime().addShutdownHook(new Thread("Apollo Shutdown") {
-            @Override
-            public void run() {
-                shutdown();
-            }
+            @Override public void run() { shutdown();}
         });
+        log("Creating Module Instances...");
     }
 
     /** Log Apollo instance stats after construction. **/

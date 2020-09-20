@@ -1,10 +1,10 @@
-[
-  {
+{
+  "version": {
     "date":"09/19/2020",
-    "version":"0.1",
-    "note":"Initial Commit."
+    "version":"0.2F",
+    "note":"Added Normal Messages and changed format"
   },
-  [
+  "wins": [
     "^ +1st Killer - ?\\[?\\w*\\+*\\]? \\w+ - \\d+(?: Kills?)?$",
     "^ *1st (?:Place ?)?(?:-|:)? ?\\[?\\w*\\+*\\]? \\w+(?: : \\d+| - \\d+(?: Points?)?| - \\d+(?: x .)?| \\(\\w+ .{1,6}\\) - \\d+ Kills?|: \\d+:\\d+| - \\d+ (?:Zombie )?(?:Kills?|Blocks? Destroyed)| - \\[LINK\\])?$",
     "^ +Winn(?:er #1 \\(\\d+ Kills\\): \\w+ \\(\\w+\\)|er(?::| - )(?:Hiders|Seekers|Defenders|Attackers|PLAYERS?|MURDERERS?|Red|Blue|RED|BLU|\\w+)(?: Team)?|ers?: ?\\[?\\w*\\+*\\]? \\w+(?:, ?\\[?\\w*\\+*\\]? \\w+)?|Team ?[\\:-] (?:Animals|Hunters|Red|Green|Blue|Yellow|RED|BLU|Survivors|Vampires))$",
@@ -20,11 +20,19 @@
     "^ +Zombies - \\d*:?\\d+:\\d+ \\(Round \\d+\\)$",
     "^ +. YOUR STATISTICS ."
   ],
-  [
+  "events": [
     "^MINOR EVENT! .+ in .+ ended$",
     "^DRAGON EGG OVER! Earned [\\d,]+XP [\\d,]g clicking the egg \\d+ times$",
     "^GIANT CAKE! Event ended! Cake's gone!$",
     "^PIT EVENT ENDED: .+ \\[INFO\\]$",
     "^\\[?\\w*\\+*\\]? ?\\w+ caught ?a?n? .+! .*$"
+  ],
+  "normal": [
+    "(?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
+    "\\.get(TEAM) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
+    "Guild > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
+    "Party > (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
+    "\\.get(SHOUT) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)",
+    "\\.get(SPECTATOR) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)"
   ]
-]
+}
