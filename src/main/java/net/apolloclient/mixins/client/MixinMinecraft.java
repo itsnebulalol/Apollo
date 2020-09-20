@@ -21,6 +21,7 @@ package net.apolloclient.mixins.client;
 
 import net.apolloclient.Apollo;
 import net.apolloclient.events.impl.client.GameLoopEvent;
+import net.apolloclient.events.impl.client.GuiSwitchEvent;
 import net.apolloclient.events.impl.client.input.KeyPressedEvent;
 import net.apolloclient.events.impl.client.input.KeyReleasedEvent;
 import net.apolloclient.events.impl.client.input.LeftClickEvent;
@@ -28,6 +29,7 @@ import net.apolloclient.events.impl.client.input.RightClickEvent;
 import net.apolloclient.events.impl.world.LoadWorldEvent;
 import net.apolloclient.events.impl.world.SinglePlayerJoinEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.world.WorldSettings;
 import org.lwjgl.input.Keyboard;
@@ -96,6 +98,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
     @Inject(method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;)V", at = @At("HEAD"))
     private void loadWorld(WorldClient worldClient, CallbackInfo callbackInfo) {
         new LoadWorldEvent(worldClient).post();
+    }
+
+    @Inject(method = "displayGuiScreen", at = @At("RETURN"))
+    public void drawScreen(GuiScreen guiScreenIn, CallbackInfo ci) {
+        GuiSwitchEvent event = new GuiSwitchEvent(guiScreenIn);
+        event.post();
     }
 
 
