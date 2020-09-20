@@ -33,7 +33,7 @@ public class DiscordRPModule extends Module {
         currentTime = System.currentTimeMillis();
         eventHandlers = new DiscordEventHandlers.Builder().setReadyEventHandler(discordUser -> {
             Apollo.log("[Discord Rich Presence] Found " + discordUser.username + "#" + discordUser.discriminator + "!");
-            update("", "Launching...", LOGO_SQUARE);
+            update("In the Main Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
         }).build();
         onEnabled();
         new Thread("Apollo DiscordRPC") {
