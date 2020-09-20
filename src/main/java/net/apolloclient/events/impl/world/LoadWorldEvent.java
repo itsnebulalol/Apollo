@@ -19,8 +19,8 @@
 
 package net.apolloclient.events.impl.world;
 
-import lombok.Getter;
 import net.apolloclient.events.Event;
+import lombok.Getter;
 import net.minecraft.client.multiplayer.WorldClient;
 
 /** Fired when player world is changed.

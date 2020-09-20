@@ -17,10 +17,13 @@ package net.apolloclient;
 
 import net.apolloclient.events.bus.EventBus;
 import net.apolloclient.events.bus.EventSubscriber;
+import net.apolloclient.events.impl.client.GuiSwitchEvent;
 import net.apolloclient.events.impl.client.input.KeyPressedEvent;
 import net.apolloclient.hud.ModulesGui;
 import net.apolloclient.modules.ModuleManager;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.gui.GuiOptions;
 import org.lwjgl.input.Keyboard;
 
 import java.io.File;
@@ -42,6 +45,7 @@ public class Apollo {
     public static final Apollo INSTANCE = new Apollo();
     public static final EventBus EVENT_BUS = new EventBus();
     public static final ModuleManager MODULE_MANAGER = new ModuleManager();
+    public static final DiscordRichPresence discordRichPresence = new DiscordRichPresence();
 
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {
@@ -55,12 +59,14 @@ public class Apollo {
     /** Log Apollo instance stats after construction. **/
     public void postInitialisation() {
         log("Apollo Initiation Finished with " + MODULE_MANAGER.preInitialisation() + " Modules and 0 Settings! ");
+        discordRichPresence.start();
         Apollo.EVENT_BUS.register(this);
     }
 
     // Called when game shuts down.
     public void shutdown() {
         log("Closing Client!");
+        discordRichPresence.shutdown();
         log("Shutdown " + MODULE_MANAGER.shutdown() + " modules!");
     }
 

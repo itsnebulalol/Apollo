@@ -6,7 +6,7 @@ import net.minecraft.client.gui.GuiScreen;
 
 public class GuiSwitchEvent extends Event {
 
-    @Getter private GuiScreen guiScreen;
+    @Getter public GuiScreen guiScreen;
 
     /**
      * @param guiScreen the GuiScreen.
