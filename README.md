@@ -27,6 +27,8 @@ All Modules must be documented as well. When adding any new modules create a new
 | --- | --- |
 | DiscordRP | Updates the Discord Rich Presence, based on what your doing|
 | Windowed Fullscreen | Lets you use other monitors while in Fullscreen|
+| AutoGG | Automatically says GG at the end of the game|
+| Quickplay (W.I.P) | Quickly get into a game using a fancy menu|
 
 ### Events
 
@@ -44,6 +46,7 @@ All Events that are added to apollo must be documented below to help developers 
 | PlayerChatEvent | Fired when the client sends a message to the server. |
 | AttackEntityEvent | Fired when the client attacks an entity. |
 | ClientChatReceivedEvent | Fired when the client receives a chat message. |
+| GuiSwitchEvent | Fired when a GUI is opened. |
 
 ### Forum Post
 
