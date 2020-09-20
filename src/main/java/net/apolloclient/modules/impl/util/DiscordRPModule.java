@@ -51,6 +51,11 @@ public class DiscordRPModule extends Module {
     }
 
     @Override
+    public void shutdown() {
+        onDisable();
+    }
+
+    @Override
     public void onEnabled() {
         // 757271929399803914 <-- old
         if (eventHandlers != null)

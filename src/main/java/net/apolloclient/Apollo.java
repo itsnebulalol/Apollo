@@ -50,6 +50,12 @@ public class Apollo {
             try { apolloDirectory.mkdirs();  } catch (Exception ignored) { }
             log("Created Apollo Directory: " + apolloDirectory.getAbsolutePath());
         }
+        Runtime.getRuntime().addShutdownHook(new Thread("Apollo Shutdown") {
+            @Override
+            public void run() {
+                shutdown();
+            }
+        });
     }
 
     /** Log Apollo instance stats after construction. **/
