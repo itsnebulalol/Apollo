@@ -20,6 +20,7 @@
 package net.apolloclient.modules;
 
 import net.apolloclient.modules.impl.gameplay.AutoGGModule;
+import net.apolloclient.modules.impl.util.QuickplayModule;
 
 import java.util.ArrayList;
 
@@ -33,10 +34,12 @@ public class ModuleManager {
 
     // Public module instances.
     public final AutoGGModule autoGG = new AutoGGModule();
+    public final QuickplayModule quickplay = new QuickplayModule();
 
     // Add all modules here.
     public final int preInitialisation() {
         this.modules.add(autoGG);
+        this.modules.add(quickplay);
         return modules.size();
     }
 
