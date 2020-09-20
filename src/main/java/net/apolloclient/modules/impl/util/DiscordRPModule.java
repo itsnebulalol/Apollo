@@ -17,7 +17,12 @@ public class DiscordRPModule extends Module {
 
     private static long currentTime;
 
-    private static final String LOGO = "apollo";
+    private static final String LOGO_WHITE = "apollowhite";
+    private static final String LOGO_SQUARE = "apollologo2";
+    private static final String LOGO_ROUND = "apollologo";
+
+    private static DiscordEventHandlers eventHandlers;
+    private static DiscordRichPresence discordRichPresence;
 
     public DiscordRPModule() {
         super("Discord Rich Presence", "Show what you are doing to everyone on Discord.", Category.UTIL, true);
@@ -26,11 +31,11 @@ public class DiscordRPModule extends Module {
     @Override
     public void setupModule() {
         currentTime = System.currentTimeMillis();
-        DiscordEventHandlers eventHandlers = new DiscordEventHandlers.Builder().setReadyEventHandler(discordUser -> {
-            Apollo.log(discordUser.username + discordUser.discriminator + " has logged in!");
-            update("", "Launching...", LOGO); // TODO: Change to actual logo.
+        eventHandlers = new DiscordEventHandlers.Builder().setReadyEventHandler(discordUser -> {
+            Apollo.log("[Discord Rich Presence] Found " + discordUser.username + "#" + discordUser.discriminator + "!");
+            update("", "Launching...", LOGO_SQUARE);
         }).build();
-        DiscordRPC.discordInitialize("728315613893886011", eventHandlers, true);
+        onEnabled();
         new Thread("Apollo DiscordRPC") {
             @Override
             public void run() {
@@ -45,7 +50,17 @@ public class DiscordRPModule extends Module {
         DiscordRPC.discordShutdown();
     }
 
-    public static void update(DiscordRichPresence discordRichPresence) {
+    @Override
+    public void onEnabled() {
+        // 757271929399803914 <-- old
+        if (eventHandlers != null)
+            DiscordRPC.discordInitialize("728315613893886011", eventHandlers, true);
+        if (discordRichPresence != null)
+            DiscordRPC.discordUpdatePresence(discordRichPresence);
+    }
+
+    public static void update(DiscordRichPresence drp) {
+        discordRichPresence = drp;
         DiscordRPC.discordUpdatePresence(discordRichPresence);
     }
 
@@ -82,17 +97,17 @@ public class DiscordRPModule extends Module {
     @EventSubscriber
     public void onGuiSwitch(GuiSwitchEvent event) {
         if (event.getGuiScreen() instanceof GuiMainMenu) {
-            update("In the Main Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO);
+            update("In the Main Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
         } else if (event.getGuiScreen() instanceof GuiMultiplayer) {
-            update("In the Multiplayer Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO);
+            update("In the Multiplayer Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
         } else if (event.getGuiScreen() instanceof GuiSelectWorld) {
-            update("In the Singleplayer Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO);
+            update("In the Singleplayer Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
         } else if (event.getGuiScreen() == null) {
             if (Minecraft.getMinecraft().isIntegratedServerRunning()) {
                 String world = Minecraft.getMinecraft().getIntegratedServer().getWorldName();
-                update("Playing Singleplayer", world, LOGO);
+                update("Playing Singleplayer", world, LOGO_SQUARE);
             } else {
-                update("Playing Multiplayer", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO);
+                update("Playing Multiplayer", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
             }
         }
     }
