@@ -39,8 +39,10 @@ public class DiscordRPModule extends Module {
         new Thread("Apollo DiscordRPC") {
             @Override
             public void run() {
-                while(isEnabled())
-                    DiscordRPC.discordRunCallbacks();
+                while (true) {
+                    if (isEnabled())
+                        DiscordRPC.discordRunCallbacks();
+                }
             }
         }.start();
     }
