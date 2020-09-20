@@ -50,13 +50,13 @@ public class AutoGGModule extends Module {
     private final Pattern spectatorPattern = Pattern.compile("\\.get(SPECTATOR) (?<rank>\\.get(.+) )?(?<player>\\S{1,16}): (?<message>.*)");
 
     // Patterns to match if the game is over.
-    private final List<Pattern> wins = new ArrayList<>();
+    private List<Pattern> wins;
 
     // Patterns to match if an event has happened.
-    private final List<Pattern> events = new ArrayList<>();
+    private List<Pattern> events;
 
     // Patterns to match if its a normal message (Doesn't say GG)
-    private final List<Pattern> normal = new ArrayList<>();
+    private List<Pattern> normal;
 
     private int tick = -1;
 
@@ -67,8 +67,11 @@ public class AutoGGModule extends Module {
 
     // TODO: wins show null
     @Override public void setup () throws Exception {
+        wins = new ArrayList<>();
+        events = new ArrayList<>();
+        normal = new ArrayList<>();
+
         JsonObject response = new Gson().fromJson(this.getDataFromUrlOrLocal("autogg-triggers.json"), JsonObject.class);
-        Apollo.log(response.toString());
         JsonObject version = response.getAsJsonObject("version");
         Apollo.log("[AutoGG] Using triggers v" + version.get("version").getAsString() + " (" + version.get("date").getAsString() + ")");
 
