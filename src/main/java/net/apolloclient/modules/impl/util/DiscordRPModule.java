@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiSelectWorld;
+import net.minecraft.client.multiplayer.ServerData;
 
 public class DiscordRPModule extends Module {
 
@@ -31,10 +32,25 @@ public class DiscordRPModule extends Module {
     @Override
     public void setup() {
         currentTime = System.currentTimeMillis();
-        eventHandlers = new DiscordEventHandlers.Builder().setReadyEventHandler(discordUser -> {
-            Apollo.log("[Discord Rich Presence] Found " + discordUser.username + "#" + discordUser.discriminator + "!");
-            update("In the Main Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
-        }).build();
+        eventHandlers = new DiscordEventHandlers.Builder()
+                .setReadyEventHandler(discordUser -> {
+                    Apollo.log("[Discord Rich Presence] Found " + discordUser.username + "#" + discordUser.discriminator + "!");
+                    update("In the Main Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
+                })
+                .setJoinGameEventHandler(joinSecret -> {
+                    // TODO: Join secret (maybe encrypt/decrypt)
+                    Apollo.log("Joining game: " + joinSecret);
+                    String serverIp = joinSecret.replaceAll("=", "");
+                    int times = 100;
+                    while (times != 0) {
+                        Apollo.log(serverIp);
+                        times--;
+                    }
+                })
+                .setJoinRequestEventHandler(request -> {
+                    // TODO: User#1234 would like to join you?
+                    Apollo.log(request.username + "#" + request.discriminator + " would like to join you.");
+                }).build();
         onEnabled();
         new Thread("Apollo DiscordRPC") {
             @Override
@@ -59,11 +75,26 @@ public class DiscordRPModule extends Module {
 
     @Override
     public void onEnabled() {
-        // 757271929399803914 <-- old
         if (eventHandlers != null)
             DiscordRPC.discordInitialize("728315613893886011", eventHandlers, true);
         if (discordRichPresence != null)
             DiscordRPC.discordUpdatePresence(discordRichPresence);
+    }
+
+    public static void setJoinData(String servername, int players, int max) {
+        int serverLength = servername.length();
+        StringBuilder id = new StringBuilder();
+        id.append(servername);
+        int times = 28 - serverLength;
+        while (times != 0) {
+            id.append("=");
+            times--;
+        }
+        discordRichPresence.writeField("partyId", id.toString());
+        discordRichPresence.writeField("joinSecret", servername);
+        discordRichPresence.writeField("partySize", players);
+        discordRichPresence.writeField("partyMax", max);
+        DiscordRPC.discordUpdatePresence(discordRichPresence);
     }
 
     public static void update(DiscordRichPresence drp) {
@@ -115,6 +146,8 @@ public class DiscordRPModule extends Module {
                 update("Playing Singleplayer", world, LOGO_SQUARE);
             } else {
                 update("Playing Multiplayer", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
+                ServerData currentServer = Minecraft.getMinecraft().getCurrentServerData();
+                setJoinData(currentServer.serverIP, 1, 20);
             }
         }
     }
