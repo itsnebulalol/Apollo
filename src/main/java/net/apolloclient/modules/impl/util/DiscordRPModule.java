@@ -50,10 +50,7 @@ public class DiscordRPModule extends Module {
                         Minecraft.getMinecraft().displayGuiScreen(new GuiConnecting(new GuiMainMenu(), Minecraft.getMinecraft(), new ServerData(serverIp, serverIp, false)));
                     });
                 })
-                .setJoinRequestEventHandler(request -> {
-                    // TODO: User#1234 would like to join you?
-                    Apollo.log(request.username + "#" + request.discriminator + " would like to join you.");
-                }).build();
+                .setJoinRequestEventHandler(request -> DiscordRPC.discordRespond(request.userId, DiscordRPC.DiscordReply.NO)).build();
         onEnabled();
         new Thread("Apollo DiscordRPC") {
             @Override
