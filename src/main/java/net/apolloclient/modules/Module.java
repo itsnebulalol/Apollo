@@ -59,9 +59,8 @@ public class Module {
         this.name = name;
         this.description = description;
         this.category = category;
-        this.enabled = enabled;
+        setEnabled(enabled);
         this.moduleSetup();
-        if (this.isEnabled()) Apollo.EVENT_BUS.register(this);
     }
 
     /** Get module stats from file and log creation to console **/
@@ -73,9 +72,10 @@ public class Module {
     /** Set enabled state opposite of what it is currently.
      * @return Boolean it was set too **/
     @NotNull public final Boolean toggle() {
-        this.enabled = !enabled;
-        if (enabled) { this.onModuleEnable(); return true; }
-        else { this.onModuleDisable(); return false; }
+        if ((enabled && canBeEnabled()) || (!enabled && canBeDisabled())) {
+            setEnabled(!isEnabled());
+        }
+        return isEnabled();
     }
 
     /** Called when module is enabled and registers the event manager **/
@@ -96,10 +96,20 @@ public class Module {
 
     /** Set toggle state of module
      * @param enabled toggle state */
-    public void setEnabled (boolean enabled) {
-        this.enabled = enabled;
-        if (!this.isEnabled()) Apollo.EVENT_BUS.unregister(this);
-        else Apollo.EVENT_BUS.register(this);
+    public boolean setEnabled (boolean enabled) {
+        if ((enabled && canBeEnabled()) || (!enabled && canBeDisabled())) {
+            this.enabled = enabled;
+            if (this.isEnabled()) {
+                Apollo.EVENT_BUS.register(this);
+                onModuleEnable();
+            }
+            else {
+                Apollo.EVENT_BUS.unregister(this);
+                onModuleDisable();
+            }
+            return true;
+        }
+        return false;
     }
 
     /** Called when module is enabled.
@@ -113,6 +123,10 @@ public class Module {
     public void setup () throws Exception {}
     /** Called on Shutdown **/
     public void shutdown() {}
+    /** Queried when enabled **/
+    public boolean canBeEnabled() { return true; }
+    /** Queried when disabled **/
+    public boolean canBeDisabled() { return true; }
 
     /** Called when module encounters an exception
      * @param exception encountered **/
