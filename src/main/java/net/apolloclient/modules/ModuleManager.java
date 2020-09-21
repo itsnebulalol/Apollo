@@ -43,7 +43,7 @@ public class ModuleManager {
         this.modules.add(autoGG);
         this.modules.add(quickplay);
         this.modules.add(discordRP);
-        return modules.size();
+        return (int) modules.stream().filter(Module::isEnabled).count();
     }
 
     /** Called when game is closed.
