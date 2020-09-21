@@ -72,7 +72,7 @@ public class Module {
     /** Set enabled state opposite of what it is currently.
      * @return Boolean it was set too **/
     @NotNull public final Boolean toggle() {
-        if ((enabled && canBeEnabled()) || (!enabled && canBeDisabled())) {
+        if ((enabled && canBeEnabled()) || !enabled) {
             setEnabled(!isEnabled());
         }
         return isEnabled();
@@ -97,7 +97,7 @@ public class Module {
     /** Set toggle state of module
      * @param enabled toggle state */
     public boolean setEnabled (boolean enabled) {
-        if ((enabled && canBeEnabled()) || (!enabled && canBeDisabled())) {
+        if ((enabled && canBeEnabled()) || !enabled) {
             this.enabled = enabled;
             if (this.isEnabled()) {
                 Apollo.EVENT_BUS.register(this);
@@ -125,8 +125,6 @@ public class Module {
     public void shutdown() {}
     /** Queried when enabled **/
     public boolean canBeEnabled() { return true; }
-    /** Queried when disabled **/
-    public boolean canBeDisabled() { return true; }
 
     /** Called when module encounters an exception
      * @param exception encountered **/
