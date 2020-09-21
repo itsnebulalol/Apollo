@@ -82,6 +82,18 @@ public class DiscordRPModule extends Module {
     }
 
     public static void setJoinData(String servername, int players, int max) {
+        getServerIp(servername);
+        discordRichPresence.writeField("partySize", players);
+        discordRichPresence.writeField("partyMax", max);
+        DiscordRPC.discordUpdatePresence(discordRichPresence);
+    }
+
+    public static void setJoinData(String servername) {
+        getServerIp(servername);
+        DiscordRPC.discordUpdatePresence(discordRichPresence);
+    }
+
+    private static void getServerIp(String servername) {
         int serverLength = servername.length();
         StringBuilder id = new StringBuilder();
         id.append(servername);
@@ -92,9 +104,6 @@ public class DiscordRPModule extends Module {
         }
         discordRichPresence.writeField("partyId", id.toString());
         discordRichPresence.writeField("joinSecret", servername);
-        discordRichPresence.writeField("partySize", players);
-        discordRichPresence.writeField("partyMax", max);
-        DiscordRPC.discordUpdatePresence(discordRichPresence);
     }
 
     public static void update(DiscordRichPresence drp) {
@@ -147,7 +156,7 @@ public class DiscordRPModule extends Module {
             } else {
                 update("Playing Multiplayer", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
                 ServerData currentServer = Minecraft.getMinecraft().getCurrentServerData();
-                setJoinData(currentServer.serverIP, 1, 20);
+                setJoinData(currentServer.serverIP);
             }
         }
     }
