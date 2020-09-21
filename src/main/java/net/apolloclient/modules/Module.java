@@ -39,12 +39,18 @@ public class Module {
     private final String name;
     private final String description;
     private final Category category;
+    // Priority module events will be triggered lowest to highest - default is 5.
     private int priority = 5;
     private boolean enabled;
-    private final ArrayList<Setting> settings = new ArrayList<>();
-    private final HashMap<String, Exception> errors = new HashMap<>();
 
+    // TODO: settings system on per module basis
+    private final ArrayList<Setting> settings = new ArrayList<>();
+
+    // Errors thrown by module - logs events, startup, enable and disable.
+    private final HashMap<String, Exception> errors = new HashMap<>();
+    // Error type for HashMap above.
     public static enum ExceptionType{ STARTUP, ENABLE, DISABLE, EVENT, IO }
+    // TODO: redo event manager to incorporate error handling
 
     /** @param name name of module
      * @param description description of module
@@ -70,11 +76,9 @@ public class Module {
     }
 
     /** Set enabled state opposite of what it is currently.
-     * @return Boolean it was set too **/
+     * @return boolean it was set too **/
     @NotNull public final Boolean toggle() {
-        if ((enabled && canBeEnabled()) || !enabled) {
-            setEnabled(!isEnabled());
-        }
+        setEnabled(!isEnabled());
         return isEnabled();
     }
 
@@ -95,21 +99,18 @@ public class Module {
     public final void setPriority (int priority) { this.priority = priority; }
 
     /** Set toggle state of module
-     * @param enabled toggle state */
+     * @param enabled toggle state
+     * @return boolean it was set to */
     public boolean setEnabled (boolean enabled) {
-        if ((enabled && canBeEnabled()) || !enabled) {
-            this.enabled = enabled;
-            if (this.isEnabled()) {
-                Apollo.EVENT_BUS.register(this);
-                onModuleEnable();
-            }
-            else {
-                Apollo.EVENT_BUS.unregister(this);
-                onModuleDisable();
-            }
-            return true;
+        if (canBeEnabled() || !enabled) this.enabled = !enabled;
+        if (this.isEnabled()) {
+            Apollo.EVENT_BUS.register(this);
+            this.onModuleEnable();
+        } else {
+            Apollo.EVENT_BUS.unregister(this);
+            this.onModuleDisable();
         }
-        return false;
+        return this.enabled;
     }
 
     /** Called when module is enabled.
@@ -128,7 +129,7 @@ public class Module {
 
     /** Called when module encounters an exception
      * @param exception encountered **/
-    public void handleException(ExceptionType exceptionType, Exception exception) {
+    public void handleException(@NotNull ExceptionType exceptionType, Exception exception) {
         this.errors.put(exceptionType.toString().toUpperCase() + "Exception - " + this.name, exception);
         Apollo.error("[" + this.name + "]" + " " + exceptionType.toString().toUpperCase() + " Exception - " + exception.toString());
     }
