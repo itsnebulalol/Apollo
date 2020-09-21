@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiSelectWorld;
+import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;
 
 public class DiscordRPModule extends Module {
@@ -38,14 +39,16 @@ public class DiscordRPModule extends Module {
                     update("In the Main Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
                 })
                 .setJoinGameEventHandler(joinSecret -> {
-                    // TODO: Join secret (maybe encrypt/decrypt)
                     Apollo.log("Joining game: " + joinSecret);
                     String serverIp = joinSecret.replaceAll("=", "");
-                    int times = 100;
-                    while (times != 0) {
-                        Apollo.log(serverIp);
-                        times--;
-                    }
+
+                    Minecraft.getMinecraft().addScheduledTask(() -> {
+                        try {
+                            Minecraft.getMinecraft().theWorld.sendQuittingDisconnectingPacket();
+                            Minecraft.getMinecraft().loadWorld(null);
+                        } catch (Exception ignored) {} // Returns null when they're not in a world.
+                        Minecraft.getMinecraft().displayGuiScreen(new GuiConnecting(new GuiMainMenu(), Minecraft.getMinecraft(), new ServerData(serverIp, serverIp, false)));
+                    });
                 })
                 .setJoinRequestEventHandler(request -> {
                     // TODO: User#1234 would like to join you?
