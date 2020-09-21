@@ -12,6 +12,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiSelectWorld;
+import net.minecraft.client.multiplayer.GuiConnecting;
+import net.minecraft.client.multiplayer.ServerData;
 
 public class DiscordRPModule extends Module {
 
@@ -31,10 +33,24 @@ public class DiscordRPModule extends Module {
     @Override
     public void setup() {
         currentTime = System.currentTimeMillis();
-        eventHandlers = new DiscordEventHandlers.Builder().setReadyEventHandler(discordUser -> {
-            Apollo.log("[Discord Rich Presence] Found " + discordUser.username + "#" + discordUser.discriminator + "!");
-            update("In the Main Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
-        }).build();
+        eventHandlers = new DiscordEventHandlers.Builder()
+                .setReadyEventHandler(discordUser -> {
+                    Apollo.log("[Discord Rich Presence] Found " + discordUser.username + "#" + discordUser.discriminator + "!");
+                    update("In the Main Menu", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
+                })
+                .setJoinGameEventHandler(joinSecret -> {
+                    Apollo.log("Joining game: " + joinSecret);
+                    String serverIp = joinSecret.replaceAll("=", "");
+
+                    Minecraft.getMinecraft().addScheduledTask(() -> {
+                        try {
+                            Minecraft.getMinecraft().theWorld.sendQuittingDisconnectingPacket();
+                            Minecraft.getMinecraft().loadWorld(null);
+                        } catch (Exception ignored) {} // Returns null when they're not in a world.
+                        Minecraft.getMinecraft().displayGuiScreen(new GuiConnecting(new GuiMainMenu(), Minecraft.getMinecraft(), new ServerData(serverIp, serverIp, false)));
+                    });
+                })
+                .setJoinRequestEventHandler(request -> DiscordRPC.discordRespond(request.userId, DiscordRPC.DiscordReply.NO)).build();
         onEnabled();
         new Thread("Apollo DiscordRPC") {
             @Override
@@ -59,11 +75,35 @@ public class DiscordRPModule extends Module {
 
     @Override
     public void onEnabled() {
-        // 757271929399803914 <-- old
         if (eventHandlers != null)
             DiscordRPC.discordInitialize("728315613893886011", eventHandlers, true);
         if (discordRichPresence != null)
             DiscordRPC.discordUpdatePresence(discordRichPresence);
+    }
+
+    public static void setJoinData(String servername, int players, int max) {
+        getServerIp(servername);
+        discordRichPresence.writeField("partySize", players);
+        discordRichPresence.writeField("partyMax", max);
+        DiscordRPC.discordUpdatePresence(discordRichPresence);
+    }
+
+    public static void setJoinData(String servername) {
+        getServerIp(servername);
+        DiscordRPC.discordUpdatePresence(discordRichPresence);
+    }
+
+    private static void getServerIp(String servername) {
+        int serverLength = servername.length();
+        StringBuilder id = new StringBuilder();
+        id.append(servername);
+        int times = 28 - serverLength;
+        while (times != 0) {
+            id.append("=");
+            times--;
+        }
+        discordRichPresence.writeField("partyId", id.toString());
+        discordRichPresence.writeField("joinSecret", servername);
     }
 
     public static void update(DiscordRichPresence drp) {
@@ -115,6 +155,8 @@ public class DiscordRPModule extends Module {
                 update("Playing Singleplayer", world, LOGO_SQUARE);
             } else {
                 update("Playing Multiplayer", "IGN: " + Minecraft.getMinecraft().getSession().getUsername(), LOGO_SQUARE);
+                ServerData currentServer = Minecraft.getMinecraft().getCurrentServerData();
+                setJoinData(currentServer.serverIP);
             }
         }
     }
