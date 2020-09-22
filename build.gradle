@@ -9,8 +9,12 @@ buildscript {
             name "spongepowered"
             url "https://repo.spongepowered.org/maven"
         }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
+        classpath "gradle.plugin.com.github.sherter.google-java-format:google-java-format-gradle-plugin:0.9"
         classpath "net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT"
         classpath "org.spongepowered:mixingradle:0.6-SNAPSHOT"
     }
@@ -18,21 +22,22 @@ buildscript {
 
 apply plugin: "net.minecraftforge.gradle.tweaker-client"
 apply plugin: "org.spongepowered.mixin"
+apply plugin: "com.github.sherter.google-java-format"
 
 version "1.0"
 group "net.apolloclient"
-archivesBaseName "Apollo"
+archivesBaseName = "Apollo"
 
 sourceCompatibility = targetCompatibility = 1.8
 compileJava.options.encoding = 'UTF-8'
 
 minecraft {
     version "1.8.9"
-    tweakClass "net.apolloclient.mixins.ApolloTweaker"
-    runDir "run"
-    mappings "stable_20"
-    clientJvmArgs []
-    makeObfSourceJar false
+    tweakClass = "net.apolloclient.mixins.ApolloTweaker"
+    runDir = "run"
+    mappings = "stable_20"
+    clientJvmArgs = []
+    makeObfSourceJar = false
 }
 
 repositories {
@@ -45,7 +50,7 @@ repositories {
         name "spongepowered"
         url "https://repo.spongepowered.org/maven/"
     }
-
+    jcenter()
     mavenCentral()
 }
 
@@ -75,7 +80,7 @@ dependencies {
 }
 
 mixin {
-    defaultObfuscationEnv notch
+    defaultObfuscationEnv = "notch"
     add sourceSets.main, "mixins.apollo.refmap.json"
 }
 
