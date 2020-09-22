@@ -17,10 +17,13 @@ package net.apolloclient;
 
 import net.apolloclient.events.bus.EventBus;
 import net.apolloclient.events.bus.EventSubscriber;
+import net.apolloclient.events.impl.client.GuiSwitchEvent;
 import net.apolloclient.events.impl.client.input.KeyPressedEvent;
 import net.apolloclient.hud.ModulesGui;
 import net.apolloclient.modules.ModuleManager;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.gui.GuiOptions;
 import org.lwjgl.input.Keyboard;
 
 import java.io.File;

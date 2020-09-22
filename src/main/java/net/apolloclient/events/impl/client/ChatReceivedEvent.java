@@ -19,15 +19,15 @@
 
 package net.apolloclient.events.impl.client;
 
+import net.apolloclient.events.CancelableEvent;
 import lombok.Getter;
-import net.apolloclient.events.Event;
 import net.minecraft.util.IChatComponent;
 
 /** Fired when the client receives a chat packet and it is not an action bar packet.
  * <p>If you want the action bar, see the {@link ActionBarEvent} class.</p>
  * @author Nora Cos | Nora#0001
  * @since 1.0.0 **/
-public class ChatReceivedEvent extends Event {
+public class ChatReceivedEvent extends CancelableEvent {
 
     @Getter private final IChatComponent chatComponent;
 

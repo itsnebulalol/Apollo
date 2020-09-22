@@ -4,9 +4,12 @@ import lombok.Getter;
 import net.apolloclient.events.Event;
 import net.minecraft.client.gui.GuiScreen;
 
+/** Mixin event for switching GUIs
+* @author MatthewTGM | MatthewTGM#4058
+*/
 public class GuiSwitchEvent extends Event {
 
-    @Getter private GuiScreen guiScreen;
+    @Getter public GuiScreen guiScreen;
 
     /**
      * @param guiScreen the GuiScreen.
