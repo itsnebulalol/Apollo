@@ -172,5 +172,4 @@ public class MixinMinecraft {
     private void loadWorld(GuiScreen guiScreenIn, CallbackInfo callbackInfo) {
         new GuiSwitchEvent(guiScreenIn).post();
     }
-
 }
