@@ -8,17 +8,6 @@ Apollo is a Hypixel oriented pvp client for 1.8.9 that uses the [Mixins](https:/
 - [Contribution Guidelines](#contribution-guidlines)
 - [License / Copyright](#copyright)
 
-### Dev Checklist
-
-- [x] Module Backend
-- [x] Event Backend
-- [x] Hypixel Api Wrapper(Slothpixel)
-- [x] Add Discord Webhook to this Repository
-- [ ] Add a lot of Events
-- [ ] Addon System
-- [ ] Main Module GUI
-- [ ] Color Codes / Text Wrap in FontRenderer
-
 ### Modules
 
 All Modules must be documented as well. When adding any new modules create a new line to the table with the module name and a description of what it does.
