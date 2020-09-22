@@ -21,9 +21,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-/** Removed Realms from main menu
+/** Custom gui main menu - temporary.
  * @author MatthewTGM | MatthewTGM#4058
- */
+ * @since 1.0.0 **/
 @Mixin(GuiMainMenu.class)
 public class MixinGuiMainMenu extends GuiScreen {
 

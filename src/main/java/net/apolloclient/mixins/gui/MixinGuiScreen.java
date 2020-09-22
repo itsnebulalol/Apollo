@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Mixin events for GuiScreen.class
  * @author MatthewTGM | MatthewTGM#4058
- */
+ * @since 1.0.0 **/
 @Mixin(GuiScreen.class)
 public class MixinGuiScreen {
 

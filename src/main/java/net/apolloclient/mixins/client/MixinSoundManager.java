@@ -27,6 +27,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/** MixinBootstrap Events for SoundManager.class.
+ * @author Icovid | Icovid#3888
+ * @since 1.0.0 **/
 @Mixin(SoundManager.class)
 public class MixinSoundManager {
 
