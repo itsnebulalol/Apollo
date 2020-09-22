@@ -66,7 +66,7 @@ Lastly to run the client you will need to bypass errors involving the Lombok Int
 
 # Contribution Guidelines
 
-All contributed code must follow the Google Java Format that can be found [here](https://google.github.io/styleguide/javaguide.html#s7.1-javadoc-formatting). You can autmatically format your code using `./gradlew goJF` task as hown below or by installing the [Google Java format](https://plugins.jetbrains.com/plugin/8527-google-java-format) intelij plugin.
+All contributed code must follow the Google Java Format that can be found [here](https://google.github.io/styleguide/javaguide.html#s7.1-javadoc-formatting). You can autmatically format your code using `./gradlew goJF` task as hown below or by installing the [Google Java format](https://plugins.jetbrains.com/plugin/8527-google-java-format) IntelliJ plugin.
 
 ![google](https://cdn.discordapp.com/attachments/755075257274073230/758040620416761866/Screen_Shot_2020-09-22_at_2.02.42_PM.png)
 
