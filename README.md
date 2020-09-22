@@ -66,7 +66,7 @@ Lastly to run the client you will need to bypass errors involving the Lombok Int
 
 # Contribution Guidelines
 
-Contributions must follow Google Java Style guide. This can be found at https://google.github.io/styleguide/javaguide.html#s7.1-javadoc-formatting. To impliment this into your code you can autmaticall update youre project using `./gradlew goJF` as shown below or by installing https://raw.githubusercontent.com/google/styleguide/gh-pages/intellij-java-google-style.xml as youre intlij java code style.
+Contributions must follow Google Java Style guide. This can be found [here](https://google.github.io/styleguide/javaguide.html#s7.1-javadoc-formatting). To impliment this into your code you can autmaticall update youre project using `./gradlew goJF` as shown below or by installing [this](https://raw.githubusercontent.com/google/styleguide/gh-pages/intellij-java-google-style.xml) as youre intlij java code style.
 
 ![google](https://media.discordapp.net/attachments/741000859001028818/758005936341123083/Screen_Shot_2020-09-22_at_11.44.50_AM.png)
 
