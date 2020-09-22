@@ -48,6 +48,7 @@ public class Apollo {
   public static final ModuleManager MODULE_MANAGER = new ModuleManager();
 
   // Main constructor used to instantiate all aspects of Apollo.
+  @SuppressWarnings("ResultOfMethodCallIgnored")
   public Apollo() {
     log("Starting " + NAME + " " + VERSION + "...");
     if (!apolloDirectory.exists()) {

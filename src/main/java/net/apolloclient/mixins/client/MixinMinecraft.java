@@ -54,7 +54,9 @@ public class MixinMinecraft {
    * @param callbackInfo is unused
    */
   @Inject(method = "createDisplay", at = @At("RETURN"))
-  public void createDisplay(CallbackInfo callbackInfo) { Display.setTitle(Apollo.NAME + " " + Apollo.VERSION);}
+  public void createDisplay(CallbackInfo callbackInfo) {
+    Display.setTitle(Apollo.NAME + " " + Apollo.VERSION);
+  }
 
   /**
    * Post {@link Apollo} start.
