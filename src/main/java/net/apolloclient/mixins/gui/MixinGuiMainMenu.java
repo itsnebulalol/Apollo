@@ -35,6 +35,6 @@ public class MixinGuiMainMenu extends GuiScreen {
 
   @Inject(method = "drawScreen", at = @At("RETURN"))
   public void drawScren(int mouseX, int mouseY, float partialTicks, CallbackInfo callbackInfo) {
-    this.drawString(fontRendererObj, "Apollo Client " + Apollo.VERSION, 2, this.height - 20, -1);
+    this.drawString(fontRendererObj, Apollo.NAME + " " + Apollo.VERSION, 2, this.height - 20, -1);
   }
 }
