@@ -25,9 +25,10 @@ jobs:
       run: chmod +x gradlew
     - name: Run Google code formating check
       run: ./gradlew goJF
-    - name: Push changes
+    - name: config name
       run: git config --global user.name 'Google Code Formatter'
-          git config --global user.email 'ic0vid@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git commit -am "Fixed Formatting Errors"
+    - name: set remote
+      run:  git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+    - name: commit changes
+      run:  git commit -am "Fixed Formatting Errors"
        
