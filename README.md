@@ -45,7 +45,6 @@ All Events that are added to apollo must be documented below to help developers 
 | ChatReceivedEvent | Fired when the client receives a chat packet. |
 | PlayerChatEvent | Fired when the client sends a message to the server. |
 | AttackEntityEvent | Fired when the client attacks an entity. |
-| ClientChatReceivedEvent | Fired when the client receives a chat message. |
 | GuiSwitchEvent | Fired when a GUI is opened. |
 
 ### Forum Post
