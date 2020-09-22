@@ -63,6 +63,7 @@ public class Rectangle extends GuiElement {
 
   /**
    * change location of rectangle
+   *
    * @param x1 first x position
    * @param y1 first y position
    */
