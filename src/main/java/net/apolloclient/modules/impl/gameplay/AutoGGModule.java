@@ -91,10 +91,8 @@ public class AutoGGModule extends Module {
     try {
       if (!isEnabled() || isNormalMessage(message)) return;
       // TODO: Make delay configurable.
-      if (isEndOfGame(message))
-        this.tick =
-            0; // getSettings().stream().filter(setting ->
-               // setting.name.equals("Delay")).findFirst().get()
+      if (isEndOfGame(message)) this.tick = 0; // getSettings().stream().filter(setting ->
+      // setting.name.equals("Delay")).findFirst().get()
     } catch (Exception ignored) {
     }
   }
@@ -106,9 +104,8 @@ public class AutoGGModule extends Module {
         // TODO: Make command/message configurable.
         Minecraft.getMinecraft()
             .thePlayer
-            .sendChatMessage(
-                "/ac GG"); // getSettings().stream().filter(setting ->
-                           // setting.name.equals("Message").findFirst().get())
+            .sendChatMessage("/ac GG"); // getSettings().stream().filter(setting ->
+        // setting.name.equals("Message").findFirst().get())
       }
       this.tick = -1;
     } else {
