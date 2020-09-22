@@ -163,13 +163,13 @@ public class MixinMinecraft {
   }
 
   /**
-   * Post {@link LoadWorldEvent} when new world is loaded for player.
+   * Post {@link GuiSwitchEvent} when a GUI is opened.
    *
-   * @param guiScreenIn world client used.
+   * @param guiScreenIn gui opened.
    * @param callbackInfo unused
    */
   @Inject(method = "displayGuiScreen", at = @At("HEAD"))
-  private void loadWorld(GuiScreen guiScreenIn, CallbackInfo callbackInfo) {
+  private void displayGuiScreen(GuiScreen guiScreenIn, CallbackInfo callbackInfo) {
     new GuiSwitchEvent(guiScreenIn).post();
   }
 }
