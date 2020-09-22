@@ -102,7 +102,7 @@ public class Module {
      * @param enabled toggle state
      * @return boolean it was set to */
     public boolean setEnabled (boolean enabled) {
-        if (canBeEnabled() || !enabled) this.enabled = !enabled;
+        if (canBeEnabled() || !enabled) this.enabled = enabled;
         if (this.isEnabled()) {
             Apollo.EVENT_BUS.register(this);
             this.onModuleEnable();
