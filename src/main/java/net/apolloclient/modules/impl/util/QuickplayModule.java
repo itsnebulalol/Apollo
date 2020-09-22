@@ -50,7 +50,7 @@ public class QuickplayModule extends Module {
       text.setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED));
       Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(text);
       /*if (Minecraft.getMinecraft().currentScreen == null) {
-          Minecraft.getMinecraft().displayGuiScreen(new ModulesGui()); // TODO: Create GUI.
+          Minecraft.getMinecraft().displayGuiScreen(new ModulesGuiOLD()); // TODO: Create GUI.
       }*/
     }
   }

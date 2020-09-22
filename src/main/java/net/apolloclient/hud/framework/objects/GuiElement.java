@@ -26,6 +26,7 @@ import net.apolloclient.hud.framework.Panel;
  * Gui element class all objects extend
  *
  * @author Icovid | Icovid#3888
+ * @deprecated scratching framework / to ambitious
  * @since 1.0.0
  */
 public abstract class GuiElement {

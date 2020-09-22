@@ -27,6 +27,7 @@ import lombok.Getter;
  * <p>Location and scale can also be adjusted via this panel.
  *
  * @author Icovid | Icovid#3888
+ * @deprecated scratching framework / to ambitious
  * @since 1.0.0
  */
 public class Panel {

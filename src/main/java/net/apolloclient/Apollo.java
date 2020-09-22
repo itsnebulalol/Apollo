@@ -21,7 +21,7 @@ import java.util.Date;
 import net.apolloclient.events.bus.EventBus;
 import net.apolloclient.events.bus.EventSubscriber;
 import net.apolloclient.events.impl.client.input.KeyPressedEvent;
-import net.apolloclient.hud.ModulesGui;
+import net.apolloclient.hud.ModulesGuiOLD;
 import net.apolloclient.modules.ModuleManager;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
@@ -110,6 +110,6 @@ public class Apollo {
   @EventSubscriber
   public void onKeyDown(KeyPressedEvent event) {
     if (event.getKeyCode() == Keyboard.KEY_RSHIFT)
-      Minecraft.getMinecraft().displayGuiScreen(new ModulesGui());
+      Minecraft.getMinecraft().displayGuiScreen(new ModulesGuiOLD());
   }
 }

@@ -32,6 +32,7 @@ import net.minecraft.client.renderer.WorldRenderer;
  * Draws a rectangle on screen.
  *
  * @author Icovid | Icovid#3888
+ * @deprecated scratching framework / to ambitious
  * @since 1.0.0
  */
 public class Rectangle extends GuiElement {
@@ -62,7 +63,6 @@ public class Rectangle extends GuiElement {
 
   /**
    * change location of rectangle
-   *
    * @param x1 first x position
    * @param y1 first y position
    */
@@ -121,7 +121,7 @@ public class Rectangle extends GuiElement {
   }
 
   /**
-   * round corners of rectangle per corner.
+   * Round corners of rectangle per corner.
    *
    * @param topLeft top left corner
    * @param topRight top right corner
@@ -137,6 +137,12 @@ public class Rectangle extends GuiElement {
     return this;
   }
 
+  /**
+   * Outline rectangle.
+   *
+   * @param amount size of outline
+   * @return this rectangle
+   */
   public Rectangle outline(int amount) {
     this.outlineLeft = amount;
     this.outlineRight = amount;
@@ -145,6 +151,15 @@ public class Rectangle extends GuiElement {
     return this;
   }
 
+  /**
+   * Outline rectangle on a per side basis.
+   *
+   * @param outlineLeft left border size
+   * @param outlineTop top border size
+   * @param outlineRight right border size
+   * @param outlineBottom bottom border size
+   * @return this rectangle
+   */
   public Rectangle outlines(int outlineLeft, int outlineTop, int outlineRight, int outlineBottom) {
     this.outlineLeft = outlineLeft;
     this.outlineRight = outlineRight;
@@ -153,11 +168,23 @@ public class Rectangle extends GuiElement {
     return this;
   }
 
+  /**
+   * Color of rectangle.
+   *
+   * @param color color to set rectangle
+   * @return this rectangle
+   */
   public Rectangle color(Color color) {
     this.color = color;
     return this;
   }
 
+  /**
+   * Color of rectangle outline.
+   *
+   * @param color color to set outline
+   * @return this rectangle
+   */
   public Rectangle outlineColor(Color color) {
     this.outlineColor = color;
     return this;
@@ -231,8 +258,10 @@ public class Rectangle extends GuiElement {
 
   @Override
   public void draw(Panel panel) {
+
     WorldRenderer worldrenderer = Tessellator.getInstance().getWorldRenderer();
     int x1, y1, x2, y2;
+
     x1 = panel.getXPosition() + panel.scale(this.x1);
     y1 = panel.getYPosition() + panel.scale(this.y1);
     x2 = panel.getXPosition() + panel.scale(this.x2);

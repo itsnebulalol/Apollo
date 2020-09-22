@@ -318,6 +318,7 @@ public class GLRenderer {
    * @param borderWidth width of rectangle border
    * @param color color of rectangle
    * @param borderColor color of rectangle border
+   * @deprecated border overlaps - doesn't work with transparency
    */
   public static void drawBorderedRectangle(
       int xPosition,

@@ -6,6 +6,7 @@
   "verbose": true,
   "mixins": [
     "client.MixinMinecraft",
+    "client.MixinSoundManager",
     "entity.MixinEntityPlayer",
     "entity.MixinEntityPlayerSP",
     "gui.MixinGuiMainMenu",
