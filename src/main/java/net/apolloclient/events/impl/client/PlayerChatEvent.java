@@ -19,9 +19,9 @@
 
 package net.apolloclient.events.impl.client;
 
+import net.apolloclient.events.CancelableEvent;
 import lombok.Getter;
 import lombok.Setter;
-import net.apolloclient.events.CancelableEvent;
 
 /** Fired when the client sends a message to the server.
  * @author Nora Cos | Nora#0001
