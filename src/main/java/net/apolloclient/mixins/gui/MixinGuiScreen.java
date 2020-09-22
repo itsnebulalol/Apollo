@@ -17,15 +17,11 @@ public class MixinGuiScreen {
 
     @Shadow protected Minecraft mc;
 
-    /**
+    /** Post {@link GuiSwitchEvent} when gui screen changes.
     * @param mouseX the x position of the mouse
     * @param mouseY the y position of the mouse
     * @param partialTicks TODO
-    * @param callbackInfo unused
-    */
+    * @param callbackInfo unused **/
     @Inject(method = "drawScreen", at = @At("RETURN"))
-    public void drawScreen(int mouseX, int mouseY, float partialTicks, CallbackInfo callbackInfo) {
-        GuiSwitchEvent event = new GuiSwitchEvent(this.mc.currentScreen);
-        event.post();
-    }
+    public void drawScreen(int mouseX, int mouseY, float partialTicks, CallbackInfo callbackInfo) { new GuiSwitchEvent(this.mc.currentScreen).post(); }
 }

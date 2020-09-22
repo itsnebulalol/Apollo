@@ -45,7 +45,6 @@ public class Apollo {
     public static final Apollo INSTANCE = new Apollo();
     public static final EventBus EVENT_BUS = new EventBus();
     public static final ModuleManager MODULE_MANAGER = new ModuleManager();
-    public static final DiscordRichPresence discordRichPresence = new DiscordRichPresence();
 
     // Main constructor used to instantiate all aspects of Apollo.
     public Apollo() {

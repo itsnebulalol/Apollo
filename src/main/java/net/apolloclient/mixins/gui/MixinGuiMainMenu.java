@@ -27,18 +27,11 @@ import java.util.List;
 @Mixin(GuiMainMenu.class)
 public class MixinGuiMainMenu extends GuiScreen {
 
-        @Overwrite public void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_) {
-            this.buttonList.add(new GuiButton(1, this.width / 2 - 100, p_73969_1_, I18n.format("menu.singleplayer", new Object[0])));
-            this.buttonList.add(new GuiButton(2, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 1, I18n.format("menu.multiplayer", new Object[0])));
-        }
-
-    public void renderBackgroundImage(ResourceLocation image) {
-
+    @Overwrite public void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_) {
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, p_73969_1_, I18n.format("menu.singleplayer", new Object[0])));
+        this.buttonList.add(new GuiButton(2, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 1, I18n.format("menu.multiplayer", new Object[0])));
     }
 
-    /**
-     * @author MatthewTGM | MatthewTGM#4058
-     */
     @Inject(method = "drawScreen", at = @At("RETURN"))
     public void drawScren(int mouseX, int mouseY, float partialTicks, CallbackInfo callbackInfo) {
         this.drawString(fontRendererObj, "Apollo Client " + Apollo.VERSION, 2, this.height - 20, -1);
