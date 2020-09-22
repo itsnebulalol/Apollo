@@ -25,9 +25,11 @@ import net.apolloclient.events.impl.client.input.KeyPressedEvent;
 import net.apolloclient.events.impl.client.input.KeyReleasedEvent;
 import net.apolloclient.events.impl.client.input.LeftClickEvent;
 import net.apolloclient.events.impl.client.input.RightClickEvent;
+import net.apolloclient.events.impl.hud.GuiSwitchEvent;
 import net.apolloclient.events.impl.world.LoadWorldEvent;
 import net.apolloclient.events.impl.world.SinglePlayerJoinEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.world.WorldSettings;
 import org.lwjgl.input.Keyboard;
@@ -98,5 +100,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
         new LoadWorldEvent(worldClient).post();
     }
 
+    /** Post {@link GuiSwitchEvent} when gui screen changes.
+     * @param guiScreenIn passed into event
+     * @param callbackInfo unused **/
+    @Inject(method = "displayGuiScreen", at = @At("HEAD"))
+    private void displayGuiScreen(GuiScreen guiScreenIn, CallbackInfo callbackInfo) {
+        new GuiSwitchEvent(guiScreenIn).post();
+    }
 
 }
