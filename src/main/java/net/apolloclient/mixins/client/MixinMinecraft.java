@@ -31,6 +31,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.world.WorldSettings;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -44,6 +45,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
+
+  /**
+   * Edits the Title bar
+   *
+   * @param callbackInfo is unused
+   */
+  @Inject(method = "createDisplay", at = @At("RETURN"))
+  public void createDisplay(CallbackInfo callbackInfo) { Display.setTitle(Apollo.NAME + " " + Apollo.VERSION);}
 
   /**
    * Post {@link Apollo} start.
