@@ -68,7 +68,7 @@ Lastly to run the client you will need to bypass errors involving the Lombok Int
 
 Contributions must follow Google Java Style guide. This can be found at https://google.github.io/styleguide/javaguide.html#s7.1-javadoc-formatting or you can autmaticall update youre project to latet guidlines using `./gradlew goJF` as shown below
 
-![google](https://media.discordapp.net/attachments/741000859001028818/758008531877363772/Screen_Shot_2020-09-22_at_11.55.11_AM.png)
+![google](https://media.discordapp.net/attachments/741000859001028818/758005936341123083/Screen_Shot_2020-09-22_at_11.44.50_AM.png)
 
 ### Pull Request
 
