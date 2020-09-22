@@ -15,8 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinEntityPlayer {
 
     /** posts a {@link AttackEntityEvent} when entity hits another entity.
-     * @param targetEntity entity hit **/
-    @Inject(method = "attackTargetEntityWithCurrentItem", at = @At("RETURN")) public void attackTargetEntityWithCurrentItem(Entity targetEntity, CallbackInfo ci) {
+     * @param targetEntity entity hit
+     * @param callbackInfo unused **/
+    @Inject(method = "attackTargetEntityWithCurrentItem", at = @At("RETURN")) public void attackTargetEntityWithCurrentItem(Entity targetEntity, CallbackInfo callbackInfo) {
         if(targetEntity != null) { new AttackEntityEvent(targetEntity).post(); }
     }
 }
