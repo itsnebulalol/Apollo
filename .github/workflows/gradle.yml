@@ -27,6 +27,8 @@ jobs:
       run: ./gradlew goJF
     - name: config name
       run: git config --global user.name 'Google Code Formatter'
+    - name: config email
+      run: git config --global user.email 'formatter@google.com'
     - name: set remote
       run:  git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
     - name: commit changes
