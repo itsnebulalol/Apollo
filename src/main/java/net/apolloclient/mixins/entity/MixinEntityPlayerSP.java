@@ -19,7 +19,7 @@
 
 package net.apolloclient.mixins.entity;
 
-import net.apolloclient.events.impl.client.PlayerChatEvent;
+import net.apolloclient.events.impl.player.PlayerChatEvent;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.network.play.client.C01PacketChatMessage;

@@ -2,7 +2,7 @@ package net.apolloclient.modules.impl.util;
 
 import net.apolloclient.Apollo;
 import net.apolloclient.events.bus.EventSubscriber;
-import net.apolloclient.events.impl.client.GuiSwitchEvent;
+import net.apolloclient.events.impl.hud.GuiSwitchEvent;
 import net.apolloclient.modules.Category;
 import net.apolloclient.modules.Module;
 import net.arikia.dev.drpc.DiscordEventHandlers;

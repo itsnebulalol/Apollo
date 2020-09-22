@@ -17,7 +17,7 @@
  Contact: Icovid#3888 @ https://discord.com
  ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤*/
 
-package net.apolloclient.events.impl.client;
+package net.apolloclient.events.impl.player;
 
 import net.apolloclient.events.CancelableEvent;
 import lombok.Getter;

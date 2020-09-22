@@ -1,6 +1,6 @@
 package net.apolloclient.mixins.gui;
 
-import net.apolloclient.events.impl.client.GuiSwitchEvent;
+import net.apolloclient.events.impl.hud.GuiSwitchEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import org.spongepowered.asm.mixin.Mixin;

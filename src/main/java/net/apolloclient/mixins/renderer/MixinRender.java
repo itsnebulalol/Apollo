@@ -12,7 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Renderer mixin for Render.class
  * TODO: IMPLEMENT THIS IN MODULE / COSMETIC GUI
- * @author MatthewTGM | MatthewTGM#4058 **/
+ * @author MatthewTGM | MatthewTGM#4058
+ * @since 1.0.0 **/
 @Mixin(Render.class)
 public abstract class MixinRender<T extends Entity> {
 
