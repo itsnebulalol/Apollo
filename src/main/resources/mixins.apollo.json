@@ -9,7 +9,6 @@
     "entity.MixinEntityPlayer",
     "entity.MixinEntityPlayerSP",
     "gui.MixinGuiMainMenu",
-    "gui.MixinGuiScreen",
     "network.MixinNetHandlerPlayClient",
     "renderer.MixinRender"
   ]

@@ -25,9 +25,11 @@ import net.apolloclient.events.impl.client.input.KeyPressedEvent;
 import net.apolloclient.events.impl.client.input.KeyReleasedEvent;
 import net.apolloclient.events.impl.client.input.LeftClickEvent;
 import net.apolloclient.events.impl.client.input.RightClickEvent;
+import net.apolloclient.events.impl.hud.GuiSwitchEvent;
 import net.apolloclient.events.impl.world.LoadWorldEvent;
 import net.apolloclient.events.impl.world.SinglePlayerJoinEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.world.WorldSettings;
 import org.lwjgl.input.Keyboard;
@@ -158,5 +160,16 @@ public class MixinMinecraft {
   @Inject(method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;)V", at = @At("HEAD"))
   private void loadWorld(WorldClient worldClient, CallbackInfo callbackInfo) {
     new LoadWorldEvent(worldClient).post();
+  }
+
+  /**
+   * Post {@link LoadWorldEvent} when new world is loaded for player.
+   *
+   * @param guiScreenIn world client used.
+   * @param callbackInfo unused
+   */
+  @Inject(method = "displayGuiScreen", at = @At("HEAD"))
+  private void loadWorld(GuiScreen guiScreenIn, CallbackInfo callbackInfo) {
+    new GuiSwitchEvent(guiScreenIn).post();
   }
 }
