@@ -51,13 +51,6 @@ public class Module {
   // Errors thrown by module - logs events, startup, enable and disable.
   private final HashMap<String, Exception> errors = new HashMap<>();
   // Error type for HashMap above.
-  public static enum ExceptionType {
-    STARTUP,
-    ENABLE,
-    DISABLE,
-    EVENT,
-    IO
-  }
   // TODO: redo event manager to incorporate error handling
 
   /**
@@ -89,7 +82,7 @@ public class Module {
     try {
       this.setup();
     } catch (Exception exception) {
-      handleException(ExceptionType.STARTUP, exception);
+      handleException("Startup Error", exception);
     }
   }
 
@@ -109,7 +102,7 @@ public class Module {
     try {
       this.onEnabled();
     } catch (Exception exception) {
-      handleException(ExceptionType.ENABLE, exception);
+      handleException("Enabling Error", exception);
     }
   }
   /** Called when module is disabled and unregisters the event manager */
@@ -117,35 +110,35 @@ public class Module {
     try {
       this.onDisable();
     } catch (Exception exception) {
-      handleException(ExceptionType.DISABLE, exception);
+      handleException("Disabling Error", exception);
     }
   }
 
-  /** Getters and Setters used because i don't know how to make lombok final. */
+  /** Get name of the module. */
   public final String getName() {
     return name;
   }
-
+  /** Get description of the module. */
   public final String getDescription() {
     return description;
   }
-
+  /** Get Category of the module. */
   public final Category getCategory() {
     return category;
   }
-
+  /** Get priority of module. */
   public final int getPriority() {
     return priority;
   }
-
+  /** If module is enabled / events are being called. */
   public final boolean isEnabled() {
     return enabled;
   }
-
+  /** Get settings for the gui. */
   public final ArrayList<Setting> getSettings() {
     return settings;
   }
-
+  /** Get errors thrown by module. */
   public final HashMap<String, Exception> getErrors() {
     return errors;
   }
@@ -172,23 +165,11 @@ public class Module {
     return this.enabled;
   }
 
-  /**
-   * Called when module is enabled.
-   *
-   * @see #toggle()
-   */
+  /** Called when module is enabled. */
   public void onEnabled() throws Exception {}
-  /**
-   * Called when module is disabled.
-   *
-   * @see #toggle()
-   */
+  /** Called when module is disabled. */
   public void onDisable() throws Exception {}
-  /**
-   * Called on startup
-   *
-   * @see #moduleSetup()
-   */
+  /** Called on startup */
   public void setup() throws Exception {}
   /** Called on Shutdown */
   public void shutdown() {}
@@ -200,18 +181,12 @@ public class Module {
   /**
    * Called when module encounters an exception
    *
+   * @param exceptionMessage message of exception
    * @param exception encountered
    */
-  public void handleException(@NotNull ExceptionType exceptionType, Exception exception) {
-    this.errors.put(exceptionType.toString().toUpperCase() + "Exception - " + this.name, exception);
-    Apollo.error(
-        "["
-            + this.name
-            + "]"
-            + " "
-            + exceptionType.toString().toUpperCase()
-            + " Exception - "
-            + exception.toString());
+  public void handleException(String exceptionMessage, Exception exception) {
+    this.errors.put(exceptionMessage, exception);
+    Apollo.error("[" + this.name + "]" + " " + exceptionMessage + " : " + exception.getCause());
   }
 
   /**
@@ -234,7 +209,7 @@ public class Module {
       serverResponse.close();
       return response;
     } catch (Exception exception) {
-      this.handleException(ExceptionType.IO, exception);
+      this.handleException("File Error", exception);
       BufferedReader bufferedReader =
           new BufferedReader(
               new InputStreamReader(Module.class.getResourceAsStream("/other/" + filename)));
