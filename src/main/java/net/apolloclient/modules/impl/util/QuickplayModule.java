@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.SneakyThrows;
 import net.apolloclient.Apollo;
 import net.apolloclient.events.bus.EventSubscriber;
 import net.apolloclient.events.impl.client.input.KeyPressedEvent;
@@ -25,7 +26,8 @@ public class QuickplayModule extends Module {
   }
 
   @Override
-  public void setup() throws Exception {
+  @SneakyThrows
+  public void setup()  {
     games = new ArrayList<>();
     Gson gson = new Gson();
     data = gson.fromJson(this.getDataFromUrlOrLocal("quickplay-games.json"), JsonObject.class);
