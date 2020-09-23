@@ -24,6 +24,7 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import lombok.SneakyThrows;
 import net.apolloclient.Apollo;
 import net.apolloclient.events.bus.EventSubscriber;
 import net.apolloclient.events.bus.Priority;
@@ -55,7 +56,8 @@ public class AutoGGModule extends Module {
 
   /** Sets up triggers. */
   @Override
-  public void setup() throws Exception {
+  @SneakyThrows
+  public void setup() {
     wins = new ArrayList<>();
     events = new ArrayList<>();
     normal = new ArrayList<>();

@@ -44,14 +44,8 @@ public class Module {
   // Priority module events will be triggered lowest to highest - default is 5.
   private int priority = 5;
   private boolean enabled;
-
   // TODO: settings system on per module basis
   private final ArrayList<Setting> settings = new ArrayList<>();
-
-  // Errors thrown by module - logs events, startup, enable and disable.
-  private final HashMap<String, Exception> errors = new HashMap<>();
-  // Error type for HashMap above.
-  // TODO: redo event manager to incorporate error handling
 
   /**
    * @param name name of module
@@ -79,11 +73,7 @@ public class Module {
   /** Get module stats from file and log creation to console */
   public final void moduleSetup() {
     Apollo.log("Initiating " + this.name.toUpperCase() + "!");
-    try {
-      this.setup();
-    } catch (Exception exception) {
-      handleException("Startup Error", exception);
-    }
+    this.setup();
   }
 
   /**
@@ -99,19 +89,11 @@ public class Module {
 
   /** Called when module is enabled and registers the event manager */
   public final void onModuleEnable() {
-    try {
-      this.onEnabled();
-    } catch (Exception exception) {
-      handleException("Enabling Error", exception);
-    }
+    this.onEnabled();
   }
   /** Called when module is disabled and unregisters the event manager */
   public final void onModuleDisable() {
-    try {
-      this.onDisable();
-    } catch (Exception exception) {
-      handleException("Disabling Error", exception);
-    }
+    this.onDisable();
   }
 
   /** Get name of the module. */
@@ -138,10 +120,6 @@ public class Module {
   public final ArrayList<Setting> getSettings() {
     return settings;
   }
-  /** Get errors thrown by module. */
-  public final HashMap<String, Exception> getErrors() {
-    return errors;
-  }
   /** Set priority of module in event system */
   public final void setPriority(int priority) {
     this.priority = priority;
@@ -166,27 +144,16 @@ public class Module {
   }
 
   /** Called when module is enabled. */
-  public void onEnabled() throws Exception {}
+  public void onEnabled() {}
   /** Called when module is disabled. */
-  public void onDisable() throws Exception {}
+  public void onDisable() {}
   /** Called on startup */
-  public void setup() throws Exception {}
+  public void setup() {}
   /** Called on Shutdown */
   public void shutdown() {}
   /** Queried when enabled */
   public boolean canBeEnabled() {
     return true;
-  }
-
-  /**
-   * Called when module encounters an exception
-   *
-   * @param exceptionMessage message of exception
-   * @param exception encountered
-   */
-  public void handleException(String exceptionMessage, Exception exception) {
-    this.errors.put(exceptionMessage, exception);
-    Apollo.error("[" + this.name + "]" + " " + exceptionMessage + " : " + exception.getCause());
   }
 
   /**
@@ -209,7 +176,6 @@ public class Module {
       serverResponse.close();
       return response;
     } catch (Exception exception) {
-      this.handleException("File Error", exception);
       BufferedReader bufferedReader =
           new BufferedReader(
               new InputStreamReader(Module.class.getResourceAsStream("/other/" + filename)));
