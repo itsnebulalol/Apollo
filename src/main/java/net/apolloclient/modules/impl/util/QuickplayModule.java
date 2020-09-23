@@ -18,8 +18,7 @@ import org.lwjgl.input.Keyboard;
 
 public class QuickplayModule extends Module {
 
-  private JsonObject data;
-  private List<Game> games;
+  private static List<Game> games;
 
   public QuickplayModule() {
     super("Quickplay", "Choose a game to play in a good-looking menu.", Category.UTIL, true);
@@ -27,10 +26,11 @@ public class QuickplayModule extends Module {
 
   @Override
   @SneakyThrows
-  public void setup()  {
+  public void setup() {
     games = new ArrayList<>();
     Gson gson = new Gson();
-    data = gson.fromJson(this.getDataFromUrlOrLocal("quickplay-games.json"), JsonObject.class);
+    JsonObject data =
+        gson.fromJson(this.getDataFromUrlOrLocal("quickplay-games.json"), JsonObject.class);
 
     JsonObject version = data.getAsJsonObject("version");
     Apollo.log(
@@ -40,9 +40,7 @@ public class QuickplayModule extends Module {
             + version.get("date").getAsString()
             + ")");
 
-    data.getAsJsonArray("games").forEach(game -> games.add(gson.fromJson(game, Game.class)));
-
-    data.getAsJsonArray("games").forEach(game -> games.add(gson.fromJson(game, Game.class)));
+    data.getAsJsonArray("games").forEach(game -> games.add(new Game(game.getAsJsonObject())));
   }
 
   @EventSubscriber
@@ -57,10 +55,20 @@ public class QuickplayModule extends Module {
     }
   }
 
+  public static List<Game> getGames() {
+    return games;
+  }
+
   private static class Game {
-    private String name;
-    private String icon;
-    @Deprecated private List<Mode> modes;
+    private final String name;
+    private final String icon;
+    private final List<Mode> modes = new ArrayList<>();
+
+    public Game(JsonObject data) {
+      name = data.get("name").getAsString();
+      icon = data.get("icon").getAsString();
+      data.getAsJsonArray("modes").forEach(mode -> modes.add(new Mode(mode.getAsJsonObject())));
+    }
 
     public String getName() {
       return name;
@@ -70,27 +78,32 @@ public class QuickplayModule extends Module {
       return icon;
     }
 
-    @Deprecated
     public List<Mode> getModes() {
       return modes;
     }
-  }
 
-  private static class Mode {
-    private String name;
-    private String command;
-    private boolean enabled;
+    private static class Mode {
+      private final String name;
+      private final String command;
+      private final boolean enabled;
 
-    public String getName() {
-      return name;
-    }
+      public Mode(JsonObject data) {
+        name = data.get("name").getAsString();
+        command = data.get("command").getAsString();
+        enabled = data.get("enabled").getAsBoolean();
+      }
 
-    public String getCommand() {
-      return command;
-    }
+      public String getName() {
+        return name;
+      }
 
-    public boolean isEnabled() {
-      return enabled;
+      public String getCommand() {
+        return command;
+      }
+
+      public boolean isEnabled() {
+        return enabled;
+      }
     }
   }
 }
