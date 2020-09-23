@@ -24,7 +24,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.stream.Collectors;
 import net.apolloclient.Apollo;
 import net.apolloclient.settings.Setting;
@@ -46,6 +45,8 @@ public class Module {
   private boolean enabled;
   // TODO: settings system on per module basis
   private final ArrayList<Setting> settings = new ArrayList<>();
+  // Errors to show on Gui
+  private final ArrayList<Exception> errors = new ArrayList<>();
 
   /**
    * @param name name of module
@@ -120,6 +121,11 @@ public class Module {
   public final ArrayList<Setting> getSettings() {
     return settings;
   }
+  /** Get errors thrown my module */
+  public ArrayList<Exception> getErrors() {
+    return errors;
+  }
+
   /** Set priority of module in event system */
   public final void setPriority(int priority) {
     this.priority = priority;
