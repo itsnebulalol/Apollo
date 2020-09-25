@@ -42,8 +42,8 @@
         { "name": "Ranked", "command": "/play ranked_normal", "enabled": true },
         { "name": "Solo Normal", "command": "/play solo_normal", "enabled": true },
         { "name": "Solo Insane", "command": "/play solo_insane", "enabled": true },
-        { "name": "Doubles Normal", "command": "/play doubles_normal", "enabled": true },
-        { "name": "Doubles Insane", "command": "/play doubles_insane", "enabled": true },
+        { "name": "Doubles Normal", "command": "/play teams_normal", "enabled": true },
+        { "name": "Doubles Insane", "command": "/play teams_insane", "enabled": true },
         { "name": "Mega Normal", "command": "/play mega_normal", "enabled": true },
         { "name": "Mega Doubles", "command": "/play mega_doubles", "enabled": false },
         { "name": "Solo TNT Madness", "command": "/play solo_insane_tnt_madness", "enabled": true },
@@ -81,6 +81,10 @@
         { "name": "Rush 4v4v4v4", "command": "/play bedwars_four_four_rush", "enabled": true },
         { "name": "Ultimate Doubles", "command": "/play bedwars_eight_two_ultimate", "enabled": true },
         { "name": "Ultimate 4v4v4v4", "command": "/play bedwars_four_four_ultimate", "enabled": true },
+        { "name": "Voidless Doubles", "command": "/play bedwars_eight_two_voidless", "enabled": true},
+        { "name": "Voidless 4v4v4v4", "command": "/play bedwars_four_four_voidless", "enabled": true},
+        { "name": "Armed Doubles", "command": "/play bedwars_eight_two_armed", "enabled": true},
+        { "name": "Armed 4v4v4v4", "command": "/play bedwars_four_four_armed", "enabled": true},
         { "name": "Castle 40v40", "command": "/play bedwars_castle", "enabled": false },
         { "name": "4v4", "command": "/play bedwars_two_four", "enabled": true }
       ]
@@ -89,6 +93,7 @@
       "name": "Arcade",
       "icon": "https://hypixel.net/styles/hypixel-uix/hypixel/game-icons/Arcade-64.png",
       "modes": [
+        { "name": "Capture The Wool", "command": "/play prototype_pvp_ctw", "enabled": true },
         { "name": "Hole in the Wall", "command": "/play arcade_hole_in_the_wall", "enabled": true },
         { "name": "Football", "command": "/play arcade_soccer", "enabled": true },
         { "name": "Bounty Hunters", "command": "/play arcade_bounty_hunters", "enabled": true },
@@ -97,7 +102,7 @@
         { "name": "Ender Spleef", "command": "/play arcade_ender_spleef", "enabled": true },
         { "name": "Galaxy Wars", "command": "/play arcade_starwars", "enabled": true },
         { "name": "Throw Out", "command": "/play arcade_throw_out", "enabled": true },
-        { "name": "Creeper Attack", "command": "/play arcade_creeper_attack", "enabled": true },
+        { "name": "Creeper Attack", "command": "/play arcade_creeper_defense", "enabled": true },
         { "name": "Party Games", "command": "/play arcade_party_games_1", "enabled": true },
         { "name": "Farm Hunt", "command": "/play arcade_farm_hunt", "enabled": true },
         { "name": "Zombies Dead End", "command": "/play arcade_zombies_dead_end", "enabled": true },
@@ -173,7 +178,7 @@
         { "name": "Doubles OP", "command": "/play duels_op_doubles", "enabled": true },
         { "name": "Solo Mega Walls", "command": "/play duels_mw_duel", "enabled": true },
         { "name": "Doubles Mega Walls", "command": "/play duels_mw_doubles", "enabled": true },
-        { "name": "Solo Sumo", "command": "/play duels_solo_sumo", "enabled": true },
+        { "name": "Solo Sumo", "command": "/play duels_sumo_duel", "enabled": true },
         { "name": "Solo Blitz", "command": "/play duels_blitz_duel", "enabled": true },
         { "name": "Solo Bow Spleef", "command": "/play duels_bowspleef_duel", "enabled": false },
         { "name": "Bridge 1v1", "command": "/play duels_bridge_duel", "enabled": true },
@@ -197,7 +202,7 @@
       "modes": [
         { "name": "Solo 1v1v1v1", "command": "/play super_smash_solo_normal", "enabled": true },
         { "name": "Teams 2v2", "command": "/play super_smash_2v2_normal", "enabled": true },
-        { "name": "Teams 2v2v2", "command": "/play super_smash_2v2v2_normal", "enabled": true },
+        { "name": "Teams 2v2v2", "command": "/play super_smash_teams_normal", "enabled": true },
         { "name": "1v1 Mode", "command": "/play super_smash_1v1_normal", "enabled": true },
         { "name": "Friends 1v1v1v1", "command": "/play super_smash_friends_normal", "enabled": true }
       ]
@@ -221,7 +226,6 @@
       "name": "Prototype",
       "icon": "https://hypixel.net/styles/hypixel-uix/hypixel/game-icons/Prototype-64.png",
       "modes": [
-        { "name": "Capture The Wool", "command": "/play prototype_pvp_ctw", "enabled": false },
         { "name": "King of the Hill 6v6", "command": "/play prototype_koth_two_team", "enabled": false },
         { "name": "King of the Hill 3v3v3v3", "command": "/play prototype_koth_four_team", "enabled": false },
         { "name": "TowerWars Solo", "command": "/play prototype_towerwars_solo", "enabled": true },
