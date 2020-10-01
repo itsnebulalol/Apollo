@@ -22,12 +22,12 @@ import com.google.gson.JsonObject;
 import net.apolloclient.Apollo;
 import net.apolloclient.event.Priority;
 import net.apolloclient.module.bus.Module;
+import net.apolloclient.module.bus.Module.EventHandler;
 import net.apolloclient.module.bus.Module.Instance;
 import net.apolloclient.module.bus.event.InitializationEvent;
 import net.apolloclient.utils.DataUtil;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 /**
  * Choose a game to play in a good-looking menu.
@@ -47,7 +47,7 @@ public class QuickPlay {
 
     public final ArrayList<Game> games = new ArrayList<>();
 
-    @Module.EventHandler(priority = Priority.HIGH)
+    @EventHandler(priority = Priority.HIGH)
     public void setup (InitializationEvent event) throws Exception {
 
         JsonObject response = new Gson().fromJson(DataUtil.getDataFromUrlOrLocal("quickplay-games.json"), JsonObject.class);

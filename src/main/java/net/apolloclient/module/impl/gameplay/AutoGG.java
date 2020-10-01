@@ -25,6 +25,7 @@ import net.apolloclient.event.bus.SubscribeEvent;
 import net.apolloclient.event.impl.client.ChatReceivedEvent;
 import net.apolloclient.module.Category;
 import net.apolloclient.module.bus.Module;
+import net.apolloclient.module.bus.Module.EventHandler;
 import net.apolloclient.module.bus.Module.Instance;
 import net.apolloclient.module.bus.event.InitializationEvent;
 import net.apolloclient.utils.DataUtil;
@@ -58,7 +59,7 @@ public class AutoGG {
     // Patterns to match if its a normal message (Doesn't say GG)
     private final ArrayList<Pattern> normal = new ArrayList<>();
 
-    @Module.EventHandler(priority = Priority.HIGH)
+    @EventHandler(priority = Priority.HIGH)
     public void setup (InitializationEvent event) throws Exception {
 
         JsonObject response = new Gson().fromJson(DataUtil.getDataFromUrlOrLocal("autogg-triggers.json"), JsonObject.class);;

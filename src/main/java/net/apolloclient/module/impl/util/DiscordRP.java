@@ -23,18 +23,17 @@ import net.apolloclient.event.bus.SubscribeEvent;
 import net.apolloclient.event.impl.client.GameLoopEvent;
 import net.apolloclient.event.impl.hud.GuiSwitchEvent;
 import net.apolloclient.module.bus.Module;
+import net.apolloclient.module.bus.Module.EventHandler;
+import net.apolloclient.module.bus.Module.Instance;
 import net.apolloclient.module.bus.event.DisableEvent;
 import net.apolloclient.module.bus.event.EnableEvent;
 import net.apolloclient.module.bus.event.InitializationEvent;
-import net.apolloclient.module.bus.Module.Instance;
 import net.apolloclient.module.bus.event.ShutDownEvent;
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
-import net.minecraft.client.gui.GuiMultiplayer;
-import net.minecraft.client.gui.GuiSelectWorld;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;
 
@@ -62,7 +61,7 @@ public class DiscordRP {
 
     private static long currentTime;
 
-    @Module.EventHandler(priority = Priority.HIGH)
+    @EventHandler(priority = Priority.HIGH)
     public void setup (InitializationEvent event) {
 
         eventHandlers = new DiscordEventHandlers.Builder()
@@ -93,17 +92,17 @@ public class DiscordRP {
         DiscordRPC.discordUpdatePresence(discordRichPresence);
     }
 
-    @Module.EventHandler
+    @EventHandler
     public void onDisable(DisableEvent event) {
         DiscordRPC.discordShutdown();
     }
 
-    @Module.EventHandler
+    @EventHandler
     public void shutdown(ShutDownEvent event) {
         DiscordRPC.discordShutdown();
     }
 
-    @Module.EventHandler(priority = Priority.HIGH)
+    @EventHandler(priority = Priority.HIGH)
     public void onEnabled(EnableEvent event) {
         DiscordRPC.discordInitialize("728315613893886011", eventHandlers, true);
         DiscordRPC.discordUpdatePresence(discordRichPresence);
