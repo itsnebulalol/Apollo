@@ -2,39 +2,11 @@
 
 # Apollo
 
-Apollo is a Hypixel oriented pvp client for 1.8.9 that uses the [Mixins](https://github.com/SpongePowered/Mixin) library to hook into game events and inject into Minecraft. Apollo will have countless modules enjoyed by the forge community as well as an SDK to develop and profit off your own modules and cosmetics!
+Apollo is a Hypixel oriented pvp client for 1.8.9 that uses the [SpongeAPI](https://www.spongepowered.org) to hook into game events and inject into Minecraft. Apollo will have countless modules enjoyed by the forge community as well as an SDK to develop and profit off your own modules and cosmetics!
 
 - [Development Setup](#development-setup)
 - [Contribution Guidelines](#contribution-guidlines)
 - [License / Copyright](#copyright)
-
-### Modules
-
-All Modules must be documented as well. When adding any new modules create a new line to the table with the module name and a description of what it does.
-
-| Name | Description |
-| --- | --- |
-| DiscordRP | Updates the Discord Rich Presence, based on what your doing|
-| Windowed Fullscreen | Lets you use other monitors while in Fullscreen|
-| AutoGG | Automatically says GG at the end of the game|
-| Quickplay (W.I.P) | Quickly get into a game using a fancy menu|
-
-### Events
-
-All Events that are added to apollo must be documented below to help developers in future SDK. You must fill out the name of the event class and a description of when it is called.
-
-| Name | Description |
-| --- | --- |
-| GameLoopEvent | Fired every tick. |
-| LeftClickEvent | Fired when left mouse button is pressed. |
-| RightClickEvent | Fired when right mouse button is pressed. |
-| KeyPressedEvent | Fired when key is pressed. |
-| KeyReleasedEvent | Fired when key is released. |
-| ActionBarEvent | Fired when the Action Bar is updated. |
-| ChatReceivedEvent | Fired when the client receives a chat packet. |
-| PlayerChatEvent | Fired when the client sends a message to the server. |
-| AttackEntityEvent | Fired when the client attacks an entity. |
-| GuiSwitchEvent | Fired when a GUI is opened. |
 
 ### Forum Post
 
@@ -43,7 +15,6 @@ If you create any forum post for the client put the link below so we can keep tr
 - https://hypixel.net/threads/apollo-client-discord-new-hypixel-client.3219735/#post-22502168
 - https://hypixel.net/threads/apollo-client-sdk-update-for-apollo-client-development.3292568/#post-23178676
 - https://hypixel.net/threads/apollo-client-what-is-apollo-client-unique-1-8-9-pvp-client-for-hypixel-more.3304557/
-- https://hypixel.net/threads/apollo-★-awesome-new-hypixel-pvp-client-★.3328295/
 
 # Development Setup
 
@@ -51,7 +22,7 @@ First you will need to set up a development workspace with the Apollo source cod
 
 ```bash
 ./gradlew setupDecompWorkspace
-./gradlew genIntellijRuns
+./gradlew genIntiljRuns
 ```
 
 ![Image of project](https://media.discordapp.net/attachments/747901986770518047/750929662795972740/Screen_Shot_2020-09-02_at_11.06.15_PM.png)
@@ -59,30 +30,3 @@ First you will need to set up a development workspace with the Apollo source cod
 This will download the dependencies and setup the run configuration for the project allowing you to run the client from your IDE. If the game will still not run after you have completed these steps make sure `Minecraft Client` run configuration is set to the module `Apollo.main`.
 
 ![Apollo.main](https://media.discordapp.net/attachments/747901986770518047/750931022694318120/Screen_Shot_2020-09-02_at_11.11.31_PM.png)
-
-Lastly to run the client you will need to bypass errors involving the Lombok IntelliJ plugin we use to make writing Java more tolerable. You can do this by installing the Lombok IntelliJ plugin from [this link](https://plugins.jetbrains.com/plugin/6317-lombok) or the JetBrains plugin repository.
-
-![plugin](https://media.discordapp.net/attachments/747901986770518047/751266941204693002/Screen_Shot_2020-09-03_at_9.26.33_PM.png)
-
-# Contribution Guidelines
-
-All contributed code must follow the Google Java Format that can be found [here](https://google.github.io/styleguide/javaguide.html#s7.1-javadoc-formatting). You can autmatically format your code using `./gradlew goJF` task as shown below or by installing the [Google Java format](https://plugins.jetbrains.com/plugin/8527-google-java-format) IntelliJ plugin.
-
-![google](https://cdn.discordapp.com/attachments/755075257274073230/758040620416761866/Screen_Shot_2020-09-22_at_2.02.42_PM.png)
-
-## Copyright 
-
-```
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
-```

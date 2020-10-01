@@ -20,8 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinRender<T extends Entity> {
 
   @Shadow
-  protected abstract void renderLivingLabel(
-      T entityIn, String str, double x, double y, double z, int maxDistance);
+  protected abstract void renderLivingLabel(T entityIn, String str, double x, double y, double z, int maxDistance);
 
   /**
    * @param entity the entity which is being called
@@ -33,14 +32,7 @@ public abstract class MixinRender<T extends Entity> {
    * @param callbackInfo unused
    */
   @Inject(method = "doRender", at = @At("HEAD"))
-  public void doRender(
-      T entity,
-      double x,
-      double y,
-      double z,
-      float entityYaw,
-      float partialTicks,
-      CallbackInfo callbackInfo) {
+  public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo callbackInfo) {
     if (entity instanceof EntityPlayerSP) {
       this.renderLivingLabel(
           entity,

@@ -19,7 +19,7 @@ Contact: Icovid#3888 @ https://discord.com
 
 package net.apolloclient.mixins.client;
 
-import net.apolloclient.events.impl.client.PlaySoundEvent;
+import net.apolloclient.event.impl.client.PlaySoundEvent;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.SoundManager;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Event target ejections for SoundManager.class.
  *
  * @author Icovid | Icovid#3888
- * @since 1.0.0
+ * @since b0.2
  */
 @Mixin(SoundManager.class)
 public class MixinSoundManager {
@@ -42,14 +42,7 @@ public class MixinSoundManager {
    * @param callbackInfo used to cancel event
    * @param sound sound played
    */
-  @Inject(
-      method = "playSound",
-      at =
-          @At(
-              value = "INVOKE",
-              target =
-                  "Lnet/minecraft/client/audio/SoundHandler;getSound(Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/audio/SoundEventAccessorComposite;"),
-      cancellable = true)
+  @Inject(method = "playSound", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/audio/SoundHandler;getSound(Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/audio/SoundEventAccessorComposite;"), cancellable = true)
   private void playSound(ISound sound, CallbackInfo callbackInfo) {
     PlaySoundEvent playSoundEvent = new PlaySoundEvent(sound);
     playSoundEvent.post();

@@ -20,8 +20,8 @@ Contact: Icovid#3888 @ https://discord.com
 package net.apolloclient.mixins.network;
 
 import net.apolloclient.Apollo;
-import net.apolloclient.events.impl.client.ActionBarEvent;
-import net.apolloclient.events.impl.client.ChatReceivedEvent;
+import net.apolloclient.event.impl.client.ActionBarEvent;
+import net.apolloclient.event.impl.client.ChatReceivedEvent;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.network.play.server.S02PacketChat;
 import org.spongepowered.asm.mixin.Mixin;

@@ -9,7 +9,6 @@
     "client.MixinSoundManager",
     "entity.MixinEntityPlayer",
     "entity.MixinEntityPlayerSP",
-    "gui.MixinGuiMainMenu",
     "network.MixinNetHandlerPlayClient",
     "renderer.MixinRender"
   ]

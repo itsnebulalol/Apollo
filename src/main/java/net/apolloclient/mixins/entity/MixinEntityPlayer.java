@@ -1,6 +1,6 @@
 package net.apolloclient.mixins.entity;
 
-import net.apolloclient.events.impl.player.AttackEntityEvent;
+import net.apolloclient.event.impl.player.AttackEntityEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Event target ejections for EntityPlayer.class.
  *
  * @author MatthewTGM | MatthewTGM#4058
- * @since 1.0.0 *
+ * @since b0.2
  */
 @Mixin(EntityPlayer.class)
 public class MixinEntityPlayer {

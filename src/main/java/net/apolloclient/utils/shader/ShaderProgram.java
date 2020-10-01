@@ -19,18 +19,19 @@ Contact: Icovid#3888 @ https://discord.com
 
 package net.apolloclient.utils.shader;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL20;
 
 /**
  * Loads shaders.
  *
  * @author Basilicous | Basilicous#7866
- * @since 1.0.0 *
+ * @since b0.2
  */
 public abstract class ShaderProgram {
   private int programID;

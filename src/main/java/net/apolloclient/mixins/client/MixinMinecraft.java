@@ -20,14 +20,14 @@ Contact: Icovid#3888 @ https://discord.com
 package net.apolloclient.mixins.client;
 
 import net.apolloclient.Apollo;
-import net.apolloclient.events.impl.client.GameLoopEvent;
-import net.apolloclient.events.impl.client.input.KeyPressedEvent;
-import net.apolloclient.events.impl.client.input.KeyReleasedEvent;
-import net.apolloclient.events.impl.client.input.LeftClickEvent;
-import net.apolloclient.events.impl.client.input.RightClickEvent;
-import net.apolloclient.events.impl.hud.GuiSwitchEvent;
-import net.apolloclient.events.impl.world.LoadWorldEvent;
-import net.apolloclient.events.impl.world.SinglePlayerJoinEvent;
+import net.apolloclient.event.impl.client.GameLoopEvent;
+import net.apolloclient.event.impl.client.input.KeyPressedEvent;
+import net.apolloclient.event.impl.client.input.KeyReleasedEvent;
+import net.apolloclient.event.impl.client.input.LeftClickEvent;
+import net.apolloclient.event.impl.client.input.RightClickEvent;
+import net.apolloclient.event.impl.hud.GuiSwitchEvent;
+import net.apolloclient.event.impl.world.LoadWorldEvent;
+import net.apolloclient.event.impl.world.SinglePlayerJoinEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -43,7 +43,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Event target ejections for Minecraft.class.
  *
  * @author Icovid | Icovid#3888
- * @since 1.0.0 *
+ * @since b0.2
  */
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
@@ -65,7 +65,7 @@ public class MixinMinecraft {
    */
   @Inject(method = "startGame", at = @At("RETURN"))
   private void onGameStart(CallbackInfo callbackInfo) {
-    Apollo.INSTANCE.postInitialisation();
+    Apollo.INSTANCE.postInitialization();
   }
 
   /**
@@ -75,7 +75,7 @@ public class MixinMinecraft {
    */
   @Inject(method = "shutdown", at = @At("HEAD"))
   private void shutdown(CallbackInfo callbackInfo) {
-    Apollo.INSTANCE.shutdown();
+    Apollo.INSTANCE.stopClient();
   }
 
   /**
@@ -84,13 +84,7 @@ public class MixinMinecraft {
    * @param callbackInfo unused
    * @author Nora Cos | #Nora#0001
    */
-  @Inject(
-      method = "runGameLoop",
-      at =
-          @At(
-              value = "FIELD",
-              target = "Lnet/minecraft/client/Minecraft;skipRenderWorld:Z",
-              shift = At.Shift.AFTER))
+  @Inject(method = "runGameLoop", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;skipRenderWorld:Z", shift = At.Shift.AFTER))
   private void runGameLoop(CallbackInfo callbackInfo) {
     new GameLoopEvent().post();
   }
@@ -100,13 +94,7 @@ public class MixinMinecraft {
    *
    * @param callbackInfo unused
    */
-  @Inject(
-      method = "dispatchKeypresses",
-      at =
-          @At(
-              value = "INVOKE_ASSIGN",
-              target = "Lorg/lwjgl/input/Keyboard;getEventKeyState()Z",
-              remap = false))
+  @Inject(method = "dispatchKeypresses", at = @At(value = "INVOKE_ASSIGN", target = "Lorg/lwjgl/input/Keyboard;getEventKeyState()Z", remap = false))
   private void runTickKeyboard(CallbackInfo callbackInfo) {
     Apollo.EVENT_BUS.post(
         Keyboard.getEventKeyState()
@@ -143,11 +131,7 @@ public class MixinMinecraft {
    * @param callbackInfo unused
    */
   @Inject(method = "launchIntegratedServer", at = @At("HEAD"))
-  private void joinSinglePlayer(
-      String folderName,
-      String worldName,
-      WorldSettings worldSettingsIn,
-      CallbackInfo callbackInfo) {
+  private void joinSinglePlayer(String folderName, String worldName, WorldSettings worldSettingsIn, CallbackInfo callbackInfo) {
     new SinglePlayerJoinEvent(folderName, worldName, worldSettingsIn).post();
   }
 

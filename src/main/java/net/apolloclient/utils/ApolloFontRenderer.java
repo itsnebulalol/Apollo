@@ -19,14 +19,6 @@ Contact: Icovid#3888 @ https://discord.com
 
 package net.apolloclient.utils;
 
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Pattern;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -37,12 +29,21 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
+
 /**
  * Font rendered used for all Apollo guis.
  *
  * @author Icovid | Icovid#3888
- * @see org.newdawn.slick.UnicodeFont
- * @since 1.0.0
+ * @see UnicodeFont
+ * @since b0.2
  */
 public class ApolloFontRenderer extends UnicodeFont {
 
@@ -80,8 +81,7 @@ public class ApolloFontRenderer extends UnicodeFont {
    * @param fontStream {@link InputStream} of .ttf font file
    * @param fontSize size font will be renderer
    */
-  public ApolloFontRenderer(InputStream fontStream, float fontSize)
-      throws IOException, FontFormatException, SlickException {
+  public ApolloFontRenderer(InputStream fontStream, float fontSize) throws IOException, FontFormatException, SlickException {
     super(
         Font.createFont(Font.TRUETYPE_FONT, fontStream)
             .deriveFont(
@@ -97,8 +97,7 @@ public class ApolloFontRenderer extends UnicodeFont {
    * @param fontFile font .ttf {@link File}
    * @param fontSize size font will be renderer
    */
-  public ApolloFontRenderer(File fontFile, float fontSize)
-      throws IOException, FontFormatException, SlickException {
+  public ApolloFontRenderer(File fontFile, float fontSize) throws IOException, FontFormatException, SlickException {
     super(
         Font.createFont(Font.TRUETYPE_FONT, fontFile)
             .deriveFont(
@@ -146,8 +145,7 @@ public class ApolloFontRenderer extends UnicodeFont {
    * @implNote use /n for new line and § for color codes
    */
   @Override
-  public void drawString(
-      float xPosition, float yPosition, String text, org.newdawn.slick.Color color) {
+  public void drawString(float xPosition, float yPosition, String text, org.newdawn.slick.Color color) {
     ScaledResolution resolution = new ScaledResolution(Minecraft.getMinecraft());
     GlStateManager.bindTexture(0);
     xPosition *= resolution.getScaleFactor();
@@ -166,8 +164,7 @@ public class ApolloFontRenderer extends UnicodeFont {
 
     GlStateManager.disableLighting();
     GlStateManager.enableBlend();
-    GlStateManager.tryBlendFuncSeparate(
-        GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
+    GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
     GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
     // TODO : COLOR AND /n/r
@@ -228,8 +225,7 @@ public class ApolloFontRenderer extends UnicodeFont {
    * @param yPosition y location of text
    * @param color color of text
    */
-  public void drawCenteredStringWithShadow(
-      String text, float xPosition, float yPosition, Color color) {
+  public void drawCenteredStringWithShadow(String text, float xPosition, float yPosition, Color color) {
     this.drawCenteredString(
         StringUtils.stripControlCodes(text),
         xPosition + 0.5F,
@@ -247,8 +243,7 @@ public class ApolloFontRenderer extends UnicodeFont {
    * @param color color of text
    * @param shadowColor color of text shadow
    */
-  public void drawStringWithShadow(
-      String text, float xPosition, float yPosition, Color color, Color shadowColor) {
+  public void drawStringWithShadow(String text, float xPosition, float yPosition, Color color, Color shadowColor) {
     this.drawString(
         StringUtils.stripControlCodes(text), xPosition + 0.5F, yPosition + 0.5F, shadowColor);
     this.drawString(text, xPosition, yPosition, color);
@@ -263,8 +258,7 @@ public class ApolloFontRenderer extends UnicodeFont {
    * @param color color of text
    * @param shadowColor color of text shadow
    */
-  public void drawCenteredStringWithShadow(
-      String text, float xPosition, float yPosition, Color color, Color shadowColor) {
+  public void drawCenteredStringWithShadow(String text, float xPosition, float yPosition, Color color, Color shadowColor) {
     this.drawCenteredString(
         StringUtils.stripControlCodes(text), xPosition + 0.5F, yPosition + 0.5F, shadowColor);
     this.drawCenteredString(text, xPosition, yPosition, color);
@@ -290,8 +284,7 @@ public class ApolloFontRenderer extends UnicodeFont {
    * @param yPosition start y location of text
    * @param color color of text
    */
-  public void drawWrapStringWithShadow(
-      ArrayList<String> lines, int xPosition, int yPosition, Color color) {
+  public void drawWrapStringWithShadow(ArrayList<String> lines, int xPosition, int yPosition, Color color) {
     this.drawStringWithShadow(String.join("\n", lines), xPosition, yPosition, color);
   }
 
@@ -304,8 +297,7 @@ public class ApolloFontRenderer extends UnicodeFont {
    * @param color color of text
    * @param shadowColor color of text shadow
    */
-  public void drawWrapStringWithShadow(
-      ArrayList<String> lines, int xPosition, int yPosition, Color color, Color shadowColor) {
+  public void drawWrapStringWithShadow(ArrayList<String> lines, int xPosition, int yPosition, Color color, Color shadowColor) {
     this.drawStringWithShadow(String.join("\n", lines), xPosition, yPosition, color, shadowColor);
   }
 

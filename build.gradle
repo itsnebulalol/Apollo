@@ -1,42 +1,39 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
         maven {
-            name "forge"
-            url "https://files.minecraftforge.net/maven"
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
         }
         maven {
-            name "spongepowered"
-            url "https://repo.spongepowered.org/maven"
-        }
-        maven {
-            url "https://plugins.gradle.org/m2/"
+            name = 'sponge'
+            url = 'https://repo.spongepowered.org/maven'
         }
     }
     dependencies {
-        classpath "gradle.plugin.com.github.sherter.google-java-format:google-java-format-gradle-plugin:0.9"
-        classpath "net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT"
-        classpath "org.spongepowered:mixingradle:0.6-SNAPSHOT"
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
     }
 }
 
-apply plugin: "net.minecraftforge.gradle.tweaker-client"
-apply plugin: "org.spongepowered.mixin"
-apply plugin: "com.github.sherter.google-java-format"
+apply plugin: 'net.minecraftforge.gradle.tweaker-client'
+apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'java'
 
-version "1.0"
-group "net.apolloclient"
+version = "1.8.9-BETA"
+group= "net.apolloclient" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Apollo"
 
 sourceCompatibility = targetCompatibility = 1.8
 compileJava.options.encoding = 'UTF-8'
 
 minecraft {
-    version "1.8.9"
+    version = "1.8.9"
     tweakClass = "net.apolloclient.mixins.ApolloTweaker"
     runDir = "run"
     mappings = "stable_20"
-    clientJvmArgs = []
+    clientJvmArgs = ["-XX:-DisableExplicitGC"]
     makeObfSourceJar = false
 }
 
@@ -67,16 +64,10 @@ dependencies {
         exclude module: 'commons-io'
     }
     embed 'org.slick2d:slick2d-core:1.0.2'
-    embed 'com.googlecode.json-simple:json-simple:1.1.1'
     embed 'com.google.code.gson:gson:2.8.5'
-    embed 'com.github.mew:Slothpixel-JVM:master-SNAPSHOT'
     embed 'com.github.Vatuu:discord-rpc:1.6.2'
 
-    compileOnly 'org.projectlombok:lombok:1.18.12'
-    annotationProcessor 'org.projectlombok:lombok:1.18.12'
-
-    testCompileOnly 'org.projectlombok:lombok:1.18.12'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
 }
 
 mixin {

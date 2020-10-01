@@ -23,7 +23,7 @@ package net.apolloclient.utils.shader;
  * loads blur shader.
  *
  * @author Basilicous | Basilicous#7866
- * @since 1.0.0 *
+ * @since b0.2
  */
 public class BlurShader extends ShaderProgram {
 

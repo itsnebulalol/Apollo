@@ -19,7 +19,7 @@ Contact: Icovid#3888 @ https://discord.com
 
 package net.apolloclient.mixins.entity;
 
-import net.apolloclient.events.impl.player.PlayerChatEvent;
+import net.apolloclient.event.impl.player.PlayerChatEvent;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.network.play.client.C01PacketChatMessage;
@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.Shadow;
  * Event target ejections for EntityPlayerSP.class.
  *
  * @author Nora Cos | Nora#0001
- * @since 1.0.0 *
+ * @since b02
  */
 @Mixin(EntityPlayerSP.class)
 public class MixinEntityPlayerSP {
@@ -44,13 +44,14 @@ public class MixinEntityPlayerSP {
    * message.
    *
    * @param message message player sent
+   * @author Nora Cos | Nora#0001
    */
   @Overwrite
   public void sendChatMessage(String message) {
     if (message != null) {
       PlayerChatEvent event = new PlayerChatEvent(message);
       if (!event.isCanceled()) {
-        this.sendQueue.addToSendQueue(new C01PacketChatMessage(event.getMessage()));
+        this.sendQueue.addToSendQueue(new C01PacketChatMessage(event.message));
       }
     }
   }
