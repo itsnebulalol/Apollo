@@ -25,6 +25,4 @@ jobs:
       run: chmod +x gradlew
     - name: Build
       run: ./gradlew build
-    - name: Check Formating
-      run: ./gradlew goJF
        
