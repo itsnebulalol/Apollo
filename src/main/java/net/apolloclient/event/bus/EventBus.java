@@ -85,7 +85,7 @@ public class EventBus {
      * Registers an object to the {@link EventBus}. All methods annotated with the {@link
      * SubscribeEvent} annotation will be called when that Event is posted.
      *
-     * @param any instance of the object you want to register *
+     * @param any instance of the object you want to register
      */
     @SuppressWarnings("unchecked")
     public void register(Object any) {

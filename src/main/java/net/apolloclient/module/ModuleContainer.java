@@ -29,6 +29,7 @@ import net.apolloclient.module.bus.Module.Instance;
 import net.apolloclient.module.bus.ModuleFactory;
 import net.apolloclient.module.bus.event.DisableEvent;
 import net.apolloclient.module.bus.event.EnableEvent;
+import net.apolloclient.module.bus.event.InitializationEvent;
 import net.apolloclient.module.bus.event.ModuleEvent;
 
 import java.util.HashMap;
@@ -49,9 +50,9 @@ public class ModuleContainer implements ModContainer {
     private final Object instance;
 
     // Information displayed in gui.
-    private final String name;
-    private final String description;
-    private final String author;
+    private final String   name;
+    private final String   description;
+    private final String   author;
     private final Category category;
 
     // Information to help in finding / toggling module
@@ -69,8 +70,8 @@ public class ModuleContainer implements ModContainer {
 
     public ModuleContainer(Module moduleAnnotation, Object instance) {
         this(moduleAnnotation.name(), moduleAnnotation.description(), moduleAnnotation.author(),
-                moduleAnnotation.category(), moduleAnnotation.aliases(), moduleAnnotation.recommendedServersIP(),
-                moduleAnnotation.disallowedServersIP(), moduleAnnotation.priority(), moduleAnnotation.enabled(), instance);
+             moduleAnnotation.category(), moduleAnnotation.aliases(), moduleAnnotation.recommendedServersIP(),
+             moduleAnnotation.disallowedServersIP(), moduleAnnotation.priority(), moduleAnnotation.enabled(), instance);
     }
 
     /**
@@ -86,16 +87,16 @@ public class ModuleContainer implements ModContainer {
      * @param instance instance of the module class for events to be called on
      */
     public ModuleContainer(String name, String description, String author, Category category, String[] aliases, String[] recommendedServersIP, String[] disallowedServersIP, int priority, boolean enabled, Object instance) {
-        this.name = name;
-        this.description = description;
-        this.author = author;
-        this.category = category;
-        this.aliases = aliases;
+        this.name                 = name;
+        this.description          = description;
+        this.author               = author;
+        this.category             = category;
+        this.aliases              = aliases;
         this.recommendedServersIP = recommendedServersIP;
-        this.disallowedServersIP = disallowedServersIP;
-        this.priority = priority;
-        this.enabled = enabled;
-        this.instance = instance;
+        this.disallowedServersIP  = disallowedServersIP;
+        this.priority             = priority;
+        this.enabled              = enabled;
+        this.instance             = instance;
 
         if (this.enabled) Apollo.EVENT_BUS.register(this);
     }
@@ -124,29 +125,56 @@ public class ModuleContainer implements ModContainer {
         Apollo.MODULE_FACTORY.sortModules();
     }
 
+    /**
+     * Post an event to module and any module requesting its events
+     *
+     * @param moduleEvent event to be posted.
+     */
+    @Override
+    public void post(ModuleEvent moduleEvent) {
+        for (EventContainer eventContainer : handlers.getOrDefault(moduleEvent.getClass(), new CopyOnWriteArrayList<>())) {
+            eventContainer.invoke(moduleEvent);
+        }
+    }
+
     /** Toggle module enabled state */
     @Override public void toggle() {
         this.setEnabled(!enabled);
     }
 
-    /** If module is currently enabled. */
+    /** @return If module is currently enabled. */
     @Override public boolean isEnabled() { return enabled; }
-    /** Get the actual module class object */
+
+    /** @return Get the actual module class object */
     @Override public Object getInstance() { return instance; }
-    /** Used to define settings in file / must be unique to module. */
+
+    /** @return Used to define settings in file / must be unique to module. */
     @Override public String getName() { return this.name; }
-    /** Description of module displayed in gui list. */
+
+    /** @return Description of module displayed in gui list. */
     @Override public String getDescription() { return this.description; }
-    /** Category used to section modules. */
+
+    /** @return Category used to section modules. */
     @Override public Category getCategory() { return this.category; }
-    /** Aliases are search terms people can type instead of module name to find the module. */
+
+    /** @return Aliases are search terms people can type instead of module name to find the module. */
     @Override public String[] getAliases() { return this.aliases; }
-    /** Priority of modules events compared to other modules. */
+
+    /** @return Priority of modules events compared to other modules. */
     @Override public int getPriority() { return this.priority; }
-    /** Author of module to be displayed in credits. */
+
+    /** @return Author of module to be displayed in credits. */
     @Override public String getAuthor() { return this.author; }
-    /** List of servers module is best compatible with. */
+
+    /** @return List of servers module is best compatible with. */
     @Override public String[] getRecommendedServersIPs() { return this.recommendedServersIP; }
-    /** List of servers module is not allowed on.*/
+
+    /** @return List of servers module is not allowed on.*/
     @Override public String[] getDisallowedServersIPs() { return this.disallowedServersIP; }
+
+    /** @return HashMap of {@link ModuleEvent} with a list of {@link EventContainer} */
+    @Override public HashMap<Class<? extends ModuleEvent>, CopyOnWriteArrayList<EventContainer>> getHandlers() { return handlers; }
+
+    /** @return HashMap of {@link Event} with a list of {@link EventContainer} */
+    @Override public HashMap<Class<? extends Event>, CopyOnWriteArrayList<SubscribeEventContainer>> getEvents() { return events; }
 }

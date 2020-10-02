@@ -46,15 +46,15 @@ import net.minecraft.client.multiplayer.ServerData;
 @Module(name = DiscordRP.NAME, description = DiscordRP.DESCRIPTION, author = DiscordRP.AUTHOR)
 public class DiscordRP {
 
-    public static final String NAME = "Discord Rich Presence";
+    public static final String NAME        = "Discord Rich Presence";
     public static final String DESCRIPTION = "Show what you are doing to everyone on Discord.";
-    public static final String AUTHOR = "SLLCoding";
+    public static final String AUTHOR      = "SLLCoding";
 
     @Instance public static final DiscordRP instance = new DiscordRP();
 
-    private static final String LOGO_WHITE = "apollowhite";
+    private static final String LOGO_WHITE  = "apollowhite";
     private static final String LOGO_SQUARE = "apollologo2";
-    private static final String LOGO_ROUND = "apollologo";
+    private static final String LOGO_ROUND  = "apollologo";
 
     private DiscordEventHandlers eventHandlers;
     private DiscordRichPresence discordRichPresence;

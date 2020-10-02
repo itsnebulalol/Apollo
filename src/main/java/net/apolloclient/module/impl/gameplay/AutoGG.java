@@ -43,9 +43,9 @@ import java.util.regex.Pattern;
 @Module(name = AutoGG.NAME, description = AutoGG.DESCRIPTION, author = AutoGG.AUTHOR, category = Category.GAMEPLAY, recommendedServersIP = AutoGG.RECOMMENDED_SERVERS, enabled = true)
 public class AutoGG {
 
-    public static final String NAME = "AutoGG";
-    public static final String DESCRIPTION = "Automatically say a phrase at the end of the game.";
-    public static final String AUTHOR = "SLLCoding";
+    public static final String NAME                = "AutoGG";
+    public static final String DESCRIPTION         = "Automatically say a phrase at the end of the game.";
+    public static final String AUTHOR              = "SLLCoding";
     public static final String RECOMMENDED_SERVERS = "hypixel.net";
 
     @Instance public static final AutoGG instance = new AutoGG();

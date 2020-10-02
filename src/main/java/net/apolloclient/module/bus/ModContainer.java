@@ -41,10 +41,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public interface ModContainer {
 
-    // HashMap of all events so they can be triggered in order of module priority
-    final HashMap<Class<? extends ModuleEvent>, CopyOnWriteArrayList<EventContainer>> handlers = new HashMap<>();
-    final HashMap<Class<? extends Event>, CopyOnWriteArrayList<SubscribeEventContainer>> events = new HashMap<>();
-
     /**
      * Name of module to displayed in gui list.
      * <p>Used to define settings in file / must be unique to module</p>
@@ -122,23 +118,19 @@ public interface ModContainer {
      *
      * @return HashMap of {@link ModuleEvent} with a list of {@link EventContainer}
      */
-    default HashMap<Class<? extends ModuleEvent>, CopyOnWriteArrayList<EventContainer>> getHandlers() { return handlers; }
+    HashMap<Class<? extends ModuleEvent>, CopyOnWriteArrayList<EventContainer>> getHandlers();
 
     /**
      * Tracks all methods annotated with {@link SubscribeEvent}
      *
      * @return HashMap of {@link Event} with a list of {@link EventContainer}
      */
-    default HashMap<Class<? extends Event>, CopyOnWriteArrayList<SubscribeEventContainer>> getEvents() { return events; };
+    HashMap<Class<? extends Event>, CopyOnWriteArrayList<SubscribeEventContainer>> getEvents();
 
     /**
      * Post an event to module and any module requesting its events
      *
      * @param moduleEvent event to be posted.
      */
-    default void post(ModuleEvent moduleEvent) {
-        for (EventContainer eventContainer : handlers.getOrDefault(moduleEvent.getClass(), new CopyOnWriteArrayList<>())) {
-            eventContainer.invoke(moduleEvent);
-        }
-    };
+    void post(ModuleEvent moduleEvent);
 }

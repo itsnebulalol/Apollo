@@ -38,9 +38,9 @@ import java.util.ArrayList;
 @Module(name = QuickPlay.NAME, description = QuickPlay.DESCRIPTION, author = QuickPlay.AUTHOR, recommendedServersIP = QuickPlay.RECOMMENDED_SERVERS)
 public class QuickPlay {
 
-    public static final String NAME = "QuickPlay";
-    public static final String DESCRIPTION = "Choose a game to play in a good-looking menu.";
-    public static final String AUTHOR = "SLLCoding";
+    public static final String NAME                = "QuickPlay";
+    public static final String DESCRIPTION         = "Choose a game to play in a good-looking menu.";
+    public static final String AUTHOR              = "SLLCoding";
     public static final String RECOMMENDED_SERVERS = "hypixel.net";
 
     @Instance public static final QuickPlay instance = new QuickPlay();
@@ -81,8 +81,8 @@ public class QuickPlay {
             public final boolean enabled;
 
             public Mode(JsonObject data) {
-                name = data.get("name").getAsString();
-                command = data.get("command").getAsString();
+                name    = data.get("name").getAsString    ();
+                command = data.get("command").getAsString ();
                 enabled = data.get("enabled").getAsBoolean();
             }
         }
