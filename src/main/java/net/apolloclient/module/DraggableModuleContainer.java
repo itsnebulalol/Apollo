@@ -66,10 +66,6 @@ public class DraggableModuleContainer implements ModContainer {
     private int priority;
     private boolean enabled;
 
-    // HashMap of all events so they can be triggered in order of module priority
-    private final HashMap<Class<? extends ModuleEvent>, CopyOnWriteArrayList<EventContainer>> handlers = new HashMap<>();
-    private final HashMap<Class<? extends Event>, CopyOnWriteArrayList<SubscribeEventContainer>> events = new HashMap<>();
-
     public DraggableModuleContainer(DraggableModule moduleAnnotation, Object instance) {
         this(moduleAnnotation.name(), moduleAnnotation.description(), moduleAnnotation.author(),
                 moduleAnnotation.category(), moduleAnnotation.aliases(), moduleAnnotation.recommendedServersIP(),
@@ -106,14 +102,6 @@ public class DraggableModuleContainer implements ModContainer {
     }
 
     /**
-     * Used to gather settings and build module object.
-     */
-    @Override
-    public void setup() {
-
-    }
-
-    /**
      * Set module enabled state to certain value.
      */
     @Override
@@ -137,102 +125,33 @@ public class DraggableModuleContainer implements ModContainer {
         Apollo.MODULE_FACTORY.sortModules();
     }
 
-    /**
-     * Toggle module enabled state
-     */
+    /** Toggle module enabled state */
     @Override
-    public void toggle() { this.setEnabled(!enabled); }
+    public void toggle() {
+        this.setEnabled(!enabled);
+    }
 
-    /**
-     * If module is currently enabled.
-     */
-    @Override
-    public boolean isEnabled() {
+    /** If module is currently enabled. */
+    @Override public boolean isEnabled() {
         return enabled;
     }
-
-    /**
-     * Get the actual module class object
-     */
-    @Override
-    public Object getInstance() { return instance; }
-
-    /**
-     * Tracks all methods annotated with {@link EventHandler}
-     */
-    @Override
-    public HashMap<Class<? extends ModuleEvent>, CopyOnWriteArrayList<EventContainer>> getHandlers() { return handlers; }
-
-    /**
-     * Tracks all methods annotated with {@link SubscribeEvent}
-     */
-    @Override
-    public HashMap<Class<? extends Event>, CopyOnWriteArrayList<SubscribeEventContainer>> getEvents() { return events; }
-
-    /**
-     * Used to define settings in file / must be unique to module.
-     *
-     * @return Name of module to displayed in gui list.
-     */
-    @Override
-    public String getName() { return this.name; }
-
-    /**
-     * @return Description of module displayed in gui list.
-     */
-    @Override
-    public String getDescription() { return this.description; }
-
-    /**
-     * @return Category used to section modules.
-     */
-    @Override
-    public Category getCategory() { return this.category; }
-
-    /**
-     * Aliases are search terms people can type instead of module
-     * name to find the module, split aliases with {@code :}.
-     */
-    @Override
-    public String[] getAliases() { return this.aliases; }
-
-    /**
-     * @return Priority of modules events compared to other modules.
-     */
-    @Override
-    public int getPriority() { return this.priority; }
-
-    /**
-     * @return Author of module to be displayed in credits.
-     */
-    @Override
-    public String getAuthor() { return this.author; }
-
-    /**
-     * List of servers module is compatible with split by {@code :}.
-     * <p>Use this if module is dependant on certain aspects of a server such as chat formatting
-     * or scoreboard information.</p>
-     */
-    @Override
-    public String[] getRecommendedServersIPs() { return this.recommendedServersIP; }
-
-    /**
-     * List of servers module is not allowed on split by {@code :}.
-     * <p>Use this if module should always be disabled to follow server guidelines.</p>
-     */
-    @Override
-    public String[] getDisallowedServersIPs() { return this.disallowedServersIP; }
-
-    /**
-     * Post an event to module and any module requesting its events
-     *
-     * @param moduleEvent event to be posted.
-     */
-    @Override
-    public void post(ModuleEvent moduleEvent) {
-        for (EventContainer eventContainer : handlers.getOrDefault(moduleEvent.getClass(), new CopyOnWriteArrayList<>())) {
-            eventContainer.invoke(moduleEvent);
-        }
-    }
+    /** Get the actual module class object */
+    @Override public Object getInstance() { return instance; }
+    /** Used to define settings in file / must be unique to module. */
+    @Override public String getName() { return this.name; }
+    /** Description of module displayed in gui list. */
+    @Override public String getDescription() { return this.description; }
+    /** Category used to section modules. */
+    @Override public Category getCategory() { return this.category; }
+    /** Aliases are search terms people can type instead of module name to find the module. */
+    @Override public String[] getAliases() { return this.aliases; }
+    /** Priority of modules events compared to other modules. */
+    @Override public int getPriority() { return this.priority; }
+    /** Author of module to be displayed in credits. */
+    @Override public String getAuthor() { return this.author; }
+    /** List of servers module is best compatible with. */
+    @Override public String[] getRecommendedServersIPs() { return this.recommendedServersIP; }
+    /** List of servers module is not allowed on.*/
+    @Override public String[] getDisallowedServersIPs() { return this.disallowedServersIP; }
 }
 
