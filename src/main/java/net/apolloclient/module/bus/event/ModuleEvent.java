@@ -18,7 +18,7 @@
 package net.apolloclient.module.bus.event;
 
 import net.apolloclient.module.bus.ModContainer;
-import net.apolloclient.module.bus.Module.EventHandler;
+import net.apolloclient.module.bus.EventHandler;
 
 /**
  * Container class for all module specific event.

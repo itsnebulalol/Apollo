@@ -18,8 +18,6 @@
 package net.apolloclient.module.bus;
 
 import net.apolloclient.module.Category;
-import net.apolloclient.module.bus.Module.EventHandler;
-import net.apolloclient.module.bus.Module.Instance;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

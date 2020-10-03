@@ -25,8 +25,8 @@ import net.apolloclient.event.bus.SubscribeEvent;
 import net.apolloclient.event.impl.client.ChatReceivedEvent;
 import net.apolloclient.module.Category;
 import net.apolloclient.module.bus.Module;
-import net.apolloclient.module.bus.Module.EventHandler;
-import net.apolloclient.module.bus.Module.Instance;
+import net.apolloclient.module.bus.EventHandler;
+import net.apolloclient.module.bus.Instance;
 import net.apolloclient.module.bus.event.InitializationEvent;
 import net.apolloclient.utils.DataUtil;
 import net.minecraft.client.Minecraft;
@@ -96,4 +96,7 @@ public class AutoGG {
         return this.wins.stream().anyMatch(s -> s.matcher(message).find())
                 || this.events.stream().anyMatch(s -> s.matcher(message).find());
     }
+
+    public void test(String message) {}
+
 }

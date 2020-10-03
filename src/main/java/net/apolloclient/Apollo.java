@@ -21,7 +21,9 @@ package net.apolloclient;
 
 
 import net.apolloclient.event.bus.EventBus;
+import net.apolloclient.module.bus.ModContainer;
 import net.apolloclient.module.bus.ModuleFactory;
+import net.apolloclient.module.bus.event.PostInitializationEvent;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -56,7 +58,8 @@ public class Apollo {
      * Called on Minecraft startup.
      */
     public void postInitialization() {
-
+        for (ModContainer container : MODULE_FACTORY.modules)
+            container.post(new PostInitializationEvent(container));
     }
 
     /**

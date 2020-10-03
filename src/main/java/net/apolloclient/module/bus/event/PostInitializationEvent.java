@@ -17,7 +17,7 @@
 
 package net.apolloclient.module.bus.event;
 
-import net.apolloclient.module.ModuleContainer;
+import net.apolloclient.module.bus.ModContainer;
 
 /**
  * Called after all modules have been constructed.
@@ -32,7 +32,7 @@ public class PostInitializationEvent extends ModuleEvent {
      * @param module module event is being called by, really only useful
      *               when different target is set
      */
-    public PostInitializationEvent(ModuleContainer module) {
+    public PostInitializationEvent(ModContainer module) {
         super(module);
     }
 }

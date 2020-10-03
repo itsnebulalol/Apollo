@@ -20,16 +20,13 @@ package net.apolloclient.module;
 import net.apolloclient.Apollo;
 import net.apolloclient.event.Event;
 import net.apolloclient.event.bus.EventContainer;
-import net.apolloclient.event.bus.SubscribeEvent;
 import net.apolloclient.event.bus.SubscribeEventContainer;
 import net.apolloclient.module.bus.ModContainer;
 import net.apolloclient.module.bus.Module;
-import net.apolloclient.module.bus.Module.EventHandler;
-import net.apolloclient.module.bus.Module.Instance;
+import net.apolloclient.module.bus.Instance;
 import net.apolloclient.module.bus.ModuleFactory;
 import net.apolloclient.module.bus.event.DisableEvent;
 import net.apolloclient.module.bus.event.EnableEvent;
-import net.apolloclient.module.bus.event.InitializationEvent;
 import net.apolloclient.module.bus.event.ModuleEvent;
 
 import java.util.HashMap;
@@ -137,44 +134,83 @@ public class ModuleContainer implements ModContainer {
         }
     }
 
-    /** Toggle module enabled state */
-    @Override public void toggle() {
+    /**
+     * Toggle module enabled state
+     */
+    @Override
+    public void toggle() {
         this.setEnabled(!enabled);
     }
 
     /** @return If module is currently enabled. */
-    @Override public boolean isEnabled() { return enabled; }
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
 
     /** @return Get the actual module class object */
-    @Override public Object getInstance() { return instance; }
+    @Override
+    public Object getInstance() {
+        return instance;
+    }
 
     /** @return Used to define settings in file / must be unique to module. */
-    @Override public String getName() { return this.name; }
+    @Override
+    public String getName() {
+        return this.name;
+    }
 
     /** @return Description of module displayed in gui list. */
-    @Override public String getDescription() { return this.description; }
+    @Override
+    public String getDescription() {
+        return this.description;
+    }
 
     /** @return Category used to section modules. */
-    @Override public Category getCategory() { return this.category; }
+    @Override
+    public Category getCategory() {
+        return this.category;
+    }
 
     /** @return Aliases are search terms people can type instead of module name to find the module. */
-    @Override public String[] getAliases() { return this.aliases; }
+    @Override
+    public String[] getAliases() {
+        return this.aliases;
+    }
 
     /** @return Priority of modules events compared to other modules. */
-    @Override public int getPriority() { return this.priority; }
+    @Override
+    public int getPriority() {
+        return this.priority;
+    }
 
     /** @return Author of module to be displayed in credits. */
-    @Override public String getAuthor() { return this.author; }
+    @Override
+    public String getAuthor() {
+        return this.author;
+    }
 
     /** @return List of servers module is best compatible with. */
-    @Override public String[] getRecommendedServersIPs() { return this.recommendedServersIP; }
+    @Override
+    public String[] getRecommendedServersIPs() {
+        return this.recommendedServersIP;
+    }
 
     /** @return List of servers module is not allowed on.*/
-    @Override public String[] getDisallowedServersIPs() { return this.disallowedServersIP; }
+    @Override
+    public String[] getDisallowedServersIPs() {
+        return this.disallowedServersIP;
+    }
 
     /** @return HashMap of {@link ModuleEvent} with a list of {@link EventContainer} */
-    @Override public HashMap<Class<? extends ModuleEvent>, CopyOnWriteArrayList<EventContainer>> getHandlers() { return handlers; }
+    @Override
+    public HashMap<Class<? extends ModuleEvent>, CopyOnWriteArrayList<EventContainer>> getHandlers() {
+        return handlers;
+    }
 
     /** @return HashMap of {@link Event} with a list of {@link EventContainer} */
-    @Override public HashMap<Class<? extends Event>, CopyOnWriteArrayList<SubscribeEventContainer>> getEvents() { return events; }
+    @Override
+    public HashMap<Class<? extends Event>, CopyOnWriteArrayList<SubscribeEventContainer>> getEvents() {
+        return events;
+    }
 }

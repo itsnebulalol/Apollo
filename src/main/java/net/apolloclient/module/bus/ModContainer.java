@@ -23,7 +23,6 @@ import net.apolloclient.event.bus.SubscribeEvent;
 import net.apolloclient.event.bus.SubscribeEventContainer;
 import net.apolloclient.module.Category;
 import net.apolloclient.module.ModuleContainer;
-import net.apolloclient.module.bus.Module.EventHandler;
 import net.apolloclient.module.bus.event.ModuleEvent;
 
 import java.util.HashMap;

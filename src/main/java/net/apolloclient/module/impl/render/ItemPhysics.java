@@ -1,7 +1,7 @@
 package net.apolloclient.module.impl.render;
 
 import net.apolloclient.module.bus.Module;
-import net.apolloclient.module.bus.Module.*;
+import net.apolloclient.module.bus.Instance;
 
 /**
  * Cool item animations.

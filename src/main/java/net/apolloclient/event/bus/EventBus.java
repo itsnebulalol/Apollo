@@ -20,8 +20,8 @@ package net.apolloclient.event.bus;
 import net.apolloclient.Apollo;
 import net.apolloclient.event.Event;
 import net.apolloclient.event.EventCancelable;
+import net.apolloclient.module.bus.EventHandler;
 import net.apolloclient.module.bus.ModContainer;
-import net.apolloclient.module.bus.Module;
 import net.apolloclient.module.bus.event.ModuleEvent;
 
 import java.lang.annotation.Annotation;
@@ -33,7 +33,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Class for holding event subscribers. The main implementation can be found in {@link Apollo}
  *
- * <p>You can register an object with the {@code post} method.
+ * <p>You can register an object with the {@code register} method.
  *
  * @author Icovid | Icovid#3888
  * @since b0.2
@@ -44,7 +44,7 @@ public class EventBus {
 
     /**
      * Register mod container instance to receive {@link ModuleEvent}s using
-     * the {@link Module.EventHandler} annotation.
+     * the {@link EventHandler} annotation.
      *
      * @param modContainer container class of module
      */

@@ -21,8 +21,6 @@ import net.apolloclient.Apollo;
 import net.apolloclient.event.bus.EventContainer;
 import net.apolloclient.module.DraggableModuleContainer;
 import net.apolloclient.module.ModuleContainer;
-import net.apolloclient.module.bus.Module.EventHandler;
-import net.apolloclient.module.bus.Module.Instance;
 import net.apolloclient.module.bus.event.InitializationEvent;
 import net.apolloclient.module.bus.event.ModuleEvent;
 import org.reflections.Reflections;
@@ -132,20 +130,20 @@ public class ModuleFactory {
     public ArrayList<Method> register(ModContainer modContainer) {
         ArrayList<Method> methods = new ArrayList<>();
         for (Method method : modContainer.getInstance().getClass().getDeclaredMethods()) {
-            for (Annotation annotation : method.getAnnotationsByType(Module.EventHandler.class)) {
+            for (Annotation annotation : method.getAnnotationsByType(EventHandler.class)) {
 
                 if (method.getParameterTypes().length == 1 && ModuleEvent.class.isAssignableFrom(method.getParameterTypes()[0])) {
 
                     method.setAccessible(true);
                     Class<? extends ModuleEvent> moduleEvent = (Class<? extends ModuleEvent>) method.getParameterTypes()[0];
 
-                    if (!method.getAnnotation(Module.EventHandler.class).target().equals(""))
+                    if (!method.getAnnotation(EventHandler.class).target().equals(""))
                         methods.add(method);
 
                     if (!modContainer.getHandlers().containsKey(moduleEvent))
                         modContainer.getHandlers().put(moduleEvent, new CopyOnWriteArrayList<>());
 
-                    modContainer.getHandlers().get(moduleEvent).add(new EventContainer(modContainer.getInstance(), method, method.getAnnotation(Module.EventHandler.class).priority()));
+                    modContainer.getHandlers().get(moduleEvent).add(new EventContainer(modContainer.getInstance(), method, method.getAnnotation(EventHandler.class).priority()));
 
                     Apollo.log("[" + modContainer.getName() + "] [HANDLE] Registered method " + method.getName().toUpperCase() + " with " + method.getParameterTypes()[0].getCanonicalName() + " event.");
 
@@ -171,14 +169,14 @@ public class ModuleFactory {
                 method.setAccessible(true);
                 Class<? extends ModuleEvent> moduleEvent = (Class<? extends ModuleEvent>) method.getParameterTypes()[0];
 
-                for (String name : method.getAnnotation(Module.EventHandler.class).target()) {
+                for (String name : method.getAnnotation(EventHandler.class).target()) {
                     if (getModContainerByName(name) != null) {
                         ModContainer module = getModContainerByName(name);
 
                         if (!modContainer.getHandlers().containsKey(moduleEvent))
                             modContainer.getHandlers().put(moduleEvent, new CopyOnWriteArrayList<>());
 
-                        modContainer.getHandlers().get(moduleEvent).add(new EventContainer(module.getInstance(), method,  method.getAnnotation(Module.EventHandler.class).priority()));
+                        modContainer.getHandlers().get(moduleEvent).add(new EventContainer(module.getInstance(), method,  method.getAnnotation(EventHandler.class).priority()));
 
                         Apollo.log("[" + modContainer.getName() + "] [EVENT-" + module.getName().toUpperCase() + "] Registered method " + method.getName().toUpperCase() + " with " + method.getParameterTypes()[0].getCanonicalName() + " event.");
 
@@ -203,11 +201,11 @@ public class ModuleFactory {
 
             for (Field field : modContainer.getInstance().getClass().getDeclaredFields()) {
                 for (Annotation annotation : field.getDeclaredAnnotations()) {
-                    if (annotation.annotationType().equals(Module.Instance.class)) {
+                    if (annotation.annotationType().equals(Instance.class)) {
                         modifiersField.setAccessible(true);
                         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
                         field.set(null, modContainer.getInstance());
-                        Apollo.log("[" + modContainer.getName() + "] [FIELD] Set field " + field.getName().toUpperCase() + " to " + modContainer.getName() + " instance.");
+                        Apollo.log("[" + modContainer.getName() + "] [FIELD] Set field " + field.getName().toUpperCase() + " to " + modContainer.getName() + " instance at " + modContainer.getClass().getCanonicalName());
                     }
                 }
             }
