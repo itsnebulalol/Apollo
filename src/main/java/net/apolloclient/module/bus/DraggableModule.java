@@ -44,61 +44,61 @@ import java.lang.annotation.Target;
 public @interface DraggableModule {
 
     /**
-     * Name of module to displayed in gui list.
+     * @return Name of module to displayed in gui list.
      * <p>Used to define settings in file / must be unique to module</p>
      */
     String name();
 
     /**
-     * Description of module displayed in gui list.
+     * @return Description of module displayed in gui list.
      */
     String description();
 
     /**
-     * Default X position.
+     * @return Default X position.
      */
     double x();
 
     /**
-     * Default Y position
+     * @return Default Y position
      */
     double y();
 
     /**
-     * Category used to section modules.
+     * @return Category used to section modules.
      */
     Category category() default Category.UTIL;
 
     /**
-     * Aliases are search terms people can type instead of module
+     * @return Aliases are search terms people can type instead of module
      * name to find the module, split aliases with {@code :}.
      */
     String[] aliases() default "";
 
     /**
-     * Priority of modules events compared to other modules
+     * @return Priority of modules events compared to other modules
      */
     int priority() default 5;
 
     /**
-     * Author of module to be displayed in credits.
+     * @return Author of module to be displayed in credits.
      */
     String author() default "Apollo Development Team";
 
     /**
-     * If module should be enabled by default will first opening client.
+     * @return If module should be enabled by default will first opening client.
      */
     boolean enabled() default false;
 
     /**
-     * List of servers module is compatible with split by {@code :}.
+     * @return List of servers module is compatible with split by {@code :}.
      * <p>Use this if module is dependant on certain aspects of a server such as chat formatting
      * or scoreboard information.</p>
      */
     String[] recommendedServersIP() default "";
 
     /**
-     * List of servers module is not allowed on split by {@code :}.
+     * @return List of servers module is not allowed on split by {@code :}.
      * <p>Use this if module should always be disabled to follow server guidelines.</p>
      */
     String[] disallowedServersIP() default "";

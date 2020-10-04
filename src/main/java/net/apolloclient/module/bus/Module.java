@@ -44,51 +44,51 @@ import java.lang.annotation.Target;
 public @interface Module {
 
     /**
-     * Name of module to displayed in gui list.
+     * @return Name of module to displayed in gui list.
      * <p>Used to define settings in file / must be unique to module</p>
      */
     String name();
 
     /**
-     * Description of module displayed in gui list.
+     * @return Description of module displayed in gui list.
      */
     String description();
 
     /**
-     * Category used to section modules.
+     * @return Category used to section modules.
      */
     Category category() default Category.UTIL;
 
     /**
-     * Aliases are search terms people can type instead of module
+     * @return Aliases are search terms people can type instead of module
      * name to find the module.
      */
     String[] aliases() default "";
 
     /**
-     * Priority of modules events compared to other modules
+     * @return Priority of modules events compared to other modules
      */
     int priority() default 5;
 
     /**
-     * Author of module to be displayed in credits.
+     * @return Author of module to be displayed in credits.
      */
     String author() default "Apollo Development Team";
 
     /**
-     * If module should be enabled by default will first opening client.
+     * @return If module should be enabled by default will first opening client.
      */
     boolean enabled() default false;
 
     /**
-     * List of servers module is compatible with.
+     * @return List of servers module is compatible with.
      * <p>Use this if module is dependant on certain aspects of a server such as chat formatting
      * or scoreboard information.</p>
      */
     String[] recommendedServersIP() default "";
 
     /**
-     * List of servers module is not allowed on.
+     * @return List of servers module is not allowed on.
      * <p>Use this if module should always be disabled to follow server guidelines.</p>
      */
     String[] disallowedServersIP() default "";

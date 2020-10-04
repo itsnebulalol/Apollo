@@ -20,6 +20,7 @@ package net.apolloclient.module.impl.gameplay;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.apolloclient.Apollo;
+import net.apolloclient.command.Command;
 import net.apolloclient.event.Priority;
 import net.apolloclient.event.bus.SubscribeEvent;
 import net.apolloclient.event.impl.client.ChatReceivedEvent;
@@ -78,6 +79,8 @@ public class AutoGG {
         response
                 .getAsJsonArray("normal")
                 .forEach(trigger -> normal.add(Pattern.compile(trigger.getAsString())));
+
+        Apollo.COMMAND_BUS.register(this);
     }
 
     @SubscribeEvent(priority = Priority.HIGH)
@@ -97,6 +100,9 @@ public class AutoGG {
                 || this.events.stream().anyMatch(s -> s.matcher(message).find());
     }
 
-    public void test(String message) {}
+    @Command(args = {"test", "LOL"}, description = "change gg message")
+    public void test(String message) {
+        Apollo.log(message);
+    }
 
 }
