@@ -10,8 +10,14 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.function.Predicate;
 
+/**
+ * Creates commands of type {@link CommandContainer} by
+ * registering objects with {@link #register(Object)}
+ *
+ * @author Icovid | Icovid#3888
+ * @since b0.2
+ */
 public class CommandBus {
 
     private final CopyOnWriteArrayList<CommandContainer> commands = new CopyOnWriteArrayList<>();

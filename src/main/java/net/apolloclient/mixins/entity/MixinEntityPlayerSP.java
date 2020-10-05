@@ -19,7 +19,6 @@ Contact: Icovid#3888 @ https://discord.com
 
 package net.apolloclient.mixins.entity;
 
-import net.apolloclient.Apollo;
 import net.apolloclient.event.impl.player.PlayerChatEvent;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetHandlerPlayClient;

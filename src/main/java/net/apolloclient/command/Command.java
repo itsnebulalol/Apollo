@@ -7,6 +7,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Any method found with this annotation will be registered in
+ * {@link CommandBus} and will be called on chat message.
+ *
+ * @author Icovid | Icovid#3888
+ * @since b0.2
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Command {

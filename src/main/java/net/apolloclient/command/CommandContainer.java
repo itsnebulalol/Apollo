@@ -4,6 +4,12 @@ import net.apolloclient.event.Priority;
 
 import java.lang.reflect.Method;
 
+/**
+ * Holds command information used by {@link CommandBus}
+ *
+ * @author Icovid | Icovid#3888
+ * @since b0.2
+ */
 public class CommandContainer {
 
     public final Object instance;

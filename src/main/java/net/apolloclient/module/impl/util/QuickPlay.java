@@ -21,9 +21,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.apolloclient.Apollo;
 import net.apolloclient.event.Priority;
-import net.apolloclient.module.bus.Module;
 import net.apolloclient.module.bus.EventHandler;
 import net.apolloclient.module.bus.Instance;
+import net.apolloclient.module.bus.Module;
 import net.apolloclient.module.bus.event.InitializationEvent;
 import net.apolloclient.utils.DataUtil;
 

@@ -20,14 +20,13 @@ package net.apolloclient.module.impl.gameplay;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.apolloclient.Apollo;
-import net.apolloclient.command.Command;
 import net.apolloclient.event.Priority;
 import net.apolloclient.event.bus.SubscribeEvent;
 import net.apolloclient.event.impl.client.ChatReceivedEvent;
 import net.apolloclient.module.Category;
-import net.apolloclient.module.bus.Module;
 import net.apolloclient.module.bus.EventHandler;
 import net.apolloclient.module.bus.Instance;
+import net.apolloclient.module.bus.Module;
 import net.apolloclient.module.bus.event.InitializationEvent;
 import net.apolloclient.utils.DataUtil;
 import net.minecraft.client.Minecraft;
@@ -79,8 +78,6 @@ public class AutoGG {
         response
                 .getAsJsonArray("normal")
                 .forEach(trigger -> normal.add(Pattern.compile(trigger.getAsString())));
-
-        Apollo.COMMAND_BUS.register(this);
     }
 
     @SubscribeEvent(priority = Priority.HIGH)
@@ -99,10 +96,4 @@ public class AutoGG {
         return this.wins.stream().anyMatch(s -> s.matcher(message).find())
                 || this.events.stream().anyMatch(s -> s.matcher(message).find());
     }
-
-    @Command(args = {"test", "LOL"}, description = "change gg message")
-    public void test(String message) {
-        Apollo.log(message);
-    }
-
 }
