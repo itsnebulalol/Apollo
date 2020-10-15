@@ -29,10 +29,10 @@ public class ChatTextField extends Gui {
      */
     public ChatTextField(ApolloFontRenderer fontRenderer, int xPosition, int yPosition, int width, int height) {
         this.fontRenderer = fontRenderer;
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
-        this.width = width;
-        this.height = height;
+        this.xPosition    = xPosition;
+        this.yPosition    = yPosition;
+        this.width        = width;
+        this.height       = height;
     }
 
     /**

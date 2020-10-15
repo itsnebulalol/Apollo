@@ -75,8 +75,6 @@ public class Apollo {
 
         try { ApolloFontRenderer.loadEmojis();
         } catch (IOException e) { e.printStackTrace(); }
-
-        for (ApolloFont apolloFont : ApolloFont.values()) ApolloFontRenderer.create(apolloFont, 12);
     }
 
     /**

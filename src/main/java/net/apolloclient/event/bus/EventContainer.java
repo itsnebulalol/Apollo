@@ -40,7 +40,7 @@ public class EventContainer {
      */
     public EventContainer(Object instance, Method method, Priority priority) {
         this.instance = instance;
-        this.method = method;
+        this.method   = method;
         this.priority = priority;
     }
 

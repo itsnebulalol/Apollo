@@ -32,7 +32,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * Container class to hold basic module information
  * to be displayed in gui and functions for module enabling / disabling
  *
- * <p>Done this way so {@link ModuleContainer} and {@link DraggableModule} can
+ * <p>Done this way so {@link ModuleContainer} and {@link net.apolloclient.module.DraggableModuleContainer} can
  * be handled differently within constructor.</p>
  *
  * @author Icovid | Icovid#3888

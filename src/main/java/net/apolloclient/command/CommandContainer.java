@@ -30,13 +30,13 @@ public class CommandContainer {
      * @param priority priority of method
      */
     public CommandContainer(Object instance, Method method, String[] args, String description, boolean deleteMessage, boolean ignoreCase, Priority priority) {
-        this.instance = instance;
-        this.method = method;
-        this.args = args;
-        this.description = description;
+        this.instance      = instance;
+        this.method        = method;
+        this.args          = args;
+        this.description   = description;
         this.deleteMessage = deleteMessage;
-        this.ignoreCase = ignoreCase;
-        this.priority = priority;
+        this.ignoreCase    = ignoreCase;
+        this.priority      = priority;
     }
 
     /**

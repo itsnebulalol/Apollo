@@ -94,11 +94,11 @@ public class ApolloFontRenderer {
      * @param unicode_bold_italic unicode font on bold text italicized
      */
     public ApolloFontRenderer(UnicodeFont unicode_regular, UnicodeFont unicode_regular_italic, UnicodeFont unicode_bold, UnicodeFont unicode_bold_italic, UnicodeFont unicode_obfuscated) {
-        this.unicode_regular = unicode_regular;
+        this.unicode_regular        = unicode_regular;
         this.unicode_regular_italic = unicode_regular_italic;
-        this.unicode_bold = unicode_bold;
-        this.unicode_bold_italic = unicode_bold_italic;
-        this.unicode_obfuscated = unicode_obfuscated;
+        this.unicode_bold           = unicode_bold;
+        this.unicode_bold_italic    = unicode_bold_italic;
+        this.unicode_obfuscated     = unicode_obfuscated;
     }
 
     /**
@@ -203,11 +203,11 @@ public class ApolloFontRenderer {
         HashMap<int[], Emoji> emojis_to_render = new HashMap<>();
 
         boolean scramble_letters = false;
-        boolean strikethrough = false;
-        boolean underline = false;
-        boolean is_italic = false;
-        boolean is_bold = false;
-        boolean is_chroma = false;
+        boolean strikethrough    = false;
+        boolean underline        = false;
+        boolean is_italic        = false;
+        boolean is_bold          = false;
+        boolean is_chroma        = false;
 
         int active_color = color.hashCode();
         int default_color = active_color;
