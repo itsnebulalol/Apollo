@@ -21,10 +21,7 @@ import net.apolloclient.Apollo;
 import net.apolloclient.event.Event;
 import net.apolloclient.event.bus.EventContainer;
 import net.apolloclient.event.bus.SubscribeEventContainer;
-import net.apolloclient.module.bus.DraggableModule;
-import net.apolloclient.module.bus.Instance;
-import net.apolloclient.module.bus.ModContainer;
-import net.apolloclient.module.bus.ModuleFactory;
+import net.apolloclient.module.bus.*;
 import net.apolloclient.module.bus.draggable.ScreenPosition;
 import net.apolloclient.module.bus.event.DisableEvent;
 import net.apolloclient.module.bus.event.EnableEvent;
@@ -68,10 +65,10 @@ public class DraggableModuleContainer implements ModContainer {
     private final HashMap<Class<? extends ModuleEvent>, CopyOnWriteArrayList<EventContainer>> handlers = new HashMap<>();
     private final HashMap<Class<? extends Event>, CopyOnWriteArrayList<SubscribeEventContainer>> events = new HashMap<>();
 
-    public DraggableModuleContainer(DraggableModule moduleAnnotation, Object instance) {
+    public DraggableModuleContainer(Module moduleAnnotation, ScreenPosition screenPosition, Object instance) {
         this(moduleAnnotation.name(), moduleAnnotation.description(), moduleAnnotation.author(),
              moduleAnnotation.category(), moduleAnnotation.aliases(), moduleAnnotation.recommendedServersIP(),
-             moduleAnnotation.disallowedServersIP(), moduleAnnotation.priority(), moduleAnnotation.enabled(), new ScreenPosition(moduleAnnotation.x(), moduleAnnotation.y()), instance);
+             moduleAnnotation.disallowedServersIP(), moduleAnnotation.priority(), moduleAnnotation.enabled(), screenPosition, instance);
     }
 
     /**

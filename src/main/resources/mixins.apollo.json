@@ -10,6 +10,7 @@
     "entity.MixinEntityPlayer",
     "entity.MixinEntityPlayerSP",
     "network.MixinNetHandlerPlayClient",
-    "renderer.MixinRender"
+    "renderer.MixinRender",
+    "renderer.MixinRenderEntityItem"
   ]
 }

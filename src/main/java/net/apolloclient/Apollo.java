@@ -22,10 +22,18 @@ package net.apolloclient;
 
 import net.apolloclient.command.CommandBus;
 import net.apolloclient.event.bus.EventBus;
+import net.apolloclient.event.bus.SubscribeEvent;
+import net.apolloclient.event.impl.client.input.KeyPressedEvent;
+import net.apolloclient.gui.guitest;
 import net.apolloclient.module.bus.ModContainer;
 import net.apolloclient.module.bus.ModuleFactory;
 import net.apolloclient.module.bus.event.PostInitializationEvent;
+import net.apolloclient.utils.font.ApolloFont;
+import net.apolloclient.utils.font.ApolloFontRenderer;
+import net.minecraft.client.Minecraft;
+import org.lwjgl.input.Keyboard;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -53,7 +61,6 @@ public class Apollo {
     public static final ModuleFactory MODULE_FACTORY = new ModuleFactory("net.apolloclient.module.impl", null);
 
     public Apollo() {
-
     }
 
     /**
@@ -62,14 +69,20 @@ public class Apollo {
     public void postInitialization() {
         for (ModContainer container : MODULE_FACTORY.modules)
             container.post(new PostInitializationEvent(container));
+
         EVENT_BUS.register(COMMAND_BUS);
+        EVENT_BUS.register(this);
+
+        try { ApolloFontRenderer.loadEmojis();
+        } catch (IOException e) { e.printStackTrace(); }
+
+        for (ApolloFont apolloFont : ApolloFont.values()) ApolloFontRenderer.create(apolloFont, 12);
     }
 
     /**
      * Called on Minecraft shutdown.
      */
     public void stopClient() {
-
     }
 
     /**
@@ -90,6 +103,12 @@ public class Apollo {
     public static void error(String... message) {
         for (String out : message)
             System.err.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] [Apollo-Error] " + out);
+    }
+
+    @SubscribeEvent
+    public void test(KeyPressedEvent event) {
+        if (event.keyCode == Keyboard.KEY_RSHIFT)
+            Minecraft.getMinecraft().displayGuiScreen(new guitest());
     }
 
 }

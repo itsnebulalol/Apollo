@@ -17,7 +17,6 @@
 
 package net.apolloclient.module.bus.draggable;
 
-import net.apolloclient.module.bus.DraggableModule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 

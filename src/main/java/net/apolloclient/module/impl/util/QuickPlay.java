@@ -25,7 +25,7 @@ import net.apolloclient.module.bus.EventHandler;
 import net.apolloclient.module.bus.Instance;
 import net.apolloclient.module.bus.Module;
 import net.apolloclient.module.bus.event.InitializationEvent;
-import net.apolloclient.utils.DataUtil;
+import net.apolloclient.utils.DataDownloader;
 
 import java.util.ArrayList;
 
@@ -50,16 +50,24 @@ public class QuickPlay {
     @EventHandler(priority = Priority.HIGH)
     public void setup (InitializationEvent event) throws Exception {
 
-        JsonObject response = new Gson().fromJson(DataUtil.getDataFromUrlOrLocal("quickplay-games.json"), JsonObject.class);
-        JsonObject version = response.getAsJsonObject("version");
+        DataDownloader.DataCallback dataCallback = new DataDownloader.DataCallback() {
 
-        Apollo.log("[Quickplay] Using games list v"
-                + version.get("version").getAsString() + " ("
-                + version.get("date").getAsString() + ")");
+            @Override public void stringCallback(String data) {
+                JsonObject response = new Gson().fromJson(data, JsonObject.class);
 
-        response
-                .getAsJsonArray("games")
-                .forEach(game -> games.add(new Game(game.getAsJsonObject())));
+                JsonObject version = response.getAsJsonObject("version");
+
+                Apollo.log("[Quickplay] Using games list v"
+                        + version.get("version").getAsString() + " ("
+                        + version.get("date").getAsString() + ")");
+
+                response
+                        .getAsJsonArray("games")
+                        .forEach(game -> games.add(new Game(game.getAsJsonObject())));
+            }
+        };
+
+        DataDownloader.downloadStringAsync("https://static.apolloclient.net/quickplay-games.json", dataCallback);
     }
 
     public static class Game {

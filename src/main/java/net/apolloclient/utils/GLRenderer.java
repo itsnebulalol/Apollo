@@ -137,8 +137,7 @@ public class GLRenderer {
    * @param color color of circle
    * @param thickness width of circle outline
    */
-  public static void drawHollowCircle(
-      int xPosition, int yPosition, int radius, int thickness, Color color) {
+  public static void drawHollowCircle(int xPosition, int yPosition, int radius, int thickness, Color color) {
     GlStateManager.pushMatrix();
     GlStateManager.color(
         color.getRed() / 255.0F,
@@ -177,8 +176,7 @@ public class GLRenderer {
    * @param color color of angle
    * @implNote Strait Angles - 90|180|270|360
    */
-  public static void drawPartialCircle(
-      int xPosition, int yPosition, int radius, int startAngle, int endAngle, Color color) {
+  public static void drawPartialCircle(int xPosition, int yPosition, int radius, int startAngle, int endAngle, Color color) {
     GL11.glPushMatrix();
     GL11.glEnable(3042);
     GL11.glDisable(3553);
@@ -220,14 +218,7 @@ public class GLRenderer {
    * @param thickness width of circle outline
    * @implNote Strait Angles - 90|180|270|360
    */
-  public static void drawHollowPartialCircle(
-      int xPosition,
-      int yPosition,
-      int radius,
-      int startAngle,
-      int endAngle,
-      int thickness,
-      Color color) {
+  public static void drawHollowPartialCircle(int xPosition, int yPosition, int radius, int startAngle, int endAngle, int thickness, Color color) {
     GL11.glPushMatrix();
     GL11.glDisable(3553);
     GL11.glBlendFunc(770, 771);
@@ -263,8 +254,7 @@ public class GLRenderer {
    * @param height height of rectangle
    * @param color color of rectangle
    */
-  public static void drawRectangle(
-      int xPosition, int yPosition, int width, int height, Color color) {
+  public static void drawRectangle(int xPosition, int yPosition, int width, int height, Color color) {
     GlStateManager.enableBlend();
     GlStateManager.disableTexture2D();
     GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
@@ -297,8 +287,7 @@ public class GLRenderer {
    * @param angle angle of rectangle corners
    * @param color color of rectangle
    */
-  public static void drawRoundedRectangle(
-      int xPosition, int yPosition, int width, int height, int angle, Color color) {
+  public static void drawRoundedRectangle(int xPosition, int yPosition, int width, int height, int angle, Color color) {
     drawPartialCircle(xPosition + angle, yPosition + angle, angle, 0, 90, color);
     drawPartialCircle(xPosition + width - angle, yPosition + angle, angle, 270, 360, color);
     drawPartialCircle(
@@ -321,14 +310,7 @@ public class GLRenderer {
    * @param borderColor color of rectangle border
    * @deprecated border overlaps - doesn't work with transparency
    */
-  public static void drawBorderedRectangle(
-      int xPosition,
-      int yPosition,
-      int width,
-      int height,
-      int borderWidth,
-      Color color,
-      Color borderColor) {
+  public static void drawBorderedRectangle(int xPosition, int yPosition, int width, int height, int borderWidth, Color color, Color borderColor) {
     drawRectangle(xPosition, yPosition, width, height, color);
     GL11.glEnable(GL11.GL_BLEND);
     GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -366,8 +348,7 @@ public class GLRenderer {
    * @param width width of rectangle
    * @param height height of rectangle
    */
-  public static void drawTexturedRectangle(
-      ResourceLocation resourceLocation, int xPosition, int yPosition, int width, int height) {
+  public static void drawTexturedRectangle(ResourceLocation resourceLocation, int xPosition, int yPosition, int width, int height) {
     GL11.glEnable(GL11.GL_BLEND);
     Minecraft.getMinecraft().getTextureManager().bindTexture(resourceLocation);
     GL11.glBegin(GL11.GL_QUADS);
@@ -394,8 +375,7 @@ public class GLRenderer {
    * @param sides number of sides in polygon
    * @param color color of polygon
    */
-  public static void drawRegularPolygon(
-      int xPosition, int yPosition, int radius, int sides, Color color) {
+  public static void drawRegularPolygon(int xPosition, int yPosition, int radius, int sides, Color color) {
     GL11.glEnable(GL11.GL_BLEND);
     GL11.glDisable(GL11.GL_TEXTURE_2D);
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

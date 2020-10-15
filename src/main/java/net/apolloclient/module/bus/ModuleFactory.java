@@ -19,6 +19,7 @@ package net.apolloclient.module.bus;
 
 import net.apolloclient.Apollo;
 import net.apolloclient.event.bus.EventContainer;
+import net.apolloclient.module.bus.draggable.Draggable;
 import net.apolloclient.module.DraggableModuleContainer;
 import net.apolloclient.module.ModuleContainer;
 import net.apolloclient.module.bus.event.InitializationEvent;
@@ -63,25 +64,15 @@ public class ModuleFactory {
 
         for (Class<?> clazz : classes) {
             try {
-                ModContainer container = new ModuleContainer(clazz.getAnnotation(Module.class), clazz.newInstance());
-                this.handleInstance(container);
-                sharedMethods.put(container, new CopyOnWriteArrayList<>());
-                sharedMethods.get(container).addAll(this.register(container));
-                container.post(new InitializationEvent(container));
-                modules.add(container);
-            }
-            catch (Exception e) {
-                Apollo.error("Unable to create module instance of " + clazz.getCanonicalName());
-                e.printStackTrace();
-            }
-        }
+                Object class_instance = clazz.newInstance();
+                ModContainer container;
 
-        classes = new CopyOnWriteArrayList<>(reflections.getTypesAnnotatedWith(DraggableModule.class));
-        classes.sort(Comparator.comparingInt(module -> module.getAnnotation(DraggableModule.class).priority()));
+                if (class_instance instanceof Draggable) {
+                    container = new DraggableModuleContainer(clazz.getAnnotation(Module.class), ((Draggable) class_instance).getDefaultScreenPositionScreenPosition(), clazz.newInstance());
+                } else {
+                    container = new ModuleContainer(clazz.getAnnotation(Module.class), clazz.newInstance());
+                }
 
-        for (Class<?> clazz : classes) {
-            try {
-                ModContainer container = new DraggableModuleContainer(clazz.getAnnotation(DraggableModule.class), clazz.newInstance());
                 this.handleInstance(container);
                 sharedMethods.put(container, new CopyOnWriteArrayList<>());
                 sharedMethods.get(container).addAll(this.register(container));

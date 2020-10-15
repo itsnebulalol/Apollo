@@ -28,7 +28,7 @@ import net.apolloclient.module.bus.EventHandler;
 import net.apolloclient.module.bus.Instance;
 import net.apolloclient.module.bus.Module;
 import net.apolloclient.module.bus.event.InitializationEvent;
-import net.apolloclient.utils.DataUtil;
+import net.apolloclient.utils.DataDownloader;
 import net.minecraft.client.Minecraft;
 
 import java.util.ArrayList;
@@ -60,24 +60,31 @@ public class AutoGG {
     private final ArrayList<Pattern> normal = new ArrayList<>();
 
     @EventHandler(priority = Priority.HIGH)
-    public void setup (InitializationEvent event) throws Exception {
+    public void setup (InitializationEvent event){
 
-        JsonObject response = new Gson().fromJson(DataUtil.getDataFromUrlOrLocal("autogg-triggers.json"), JsonObject.class);;
-        JsonObject version = response.getAsJsonObject("version");
+        DataDownloader.DataCallback dataCallback = new DataDownloader.DataCallback() {
 
-        Apollo.log("[AutoGG] Using triggers v"
-                + version.get("version").getAsString() + " ("
-                + version.get("date").getAsString() + ")");
+            @Override public void stringCallback(String data) {
+                JsonObject response = new Gson().fromJson(data, JsonObject.class);
+                JsonObject version = response.getAsJsonObject("version");
 
-        response
-                .getAsJsonArray("wins")
-                .forEach(trigger -> wins.add(Pattern.compile(trigger.getAsString())));
-        response
-                .getAsJsonArray("events")
-                .forEach(trigger -> events.add(Pattern.compile(trigger.getAsString())));
-        response
-                .getAsJsonArray("normal")
-                .forEach(trigger -> normal.add(Pattern.compile(trigger.getAsString())));
+                Apollo.log("[AutoGG] Using triggers v"
+                        + version.get("version").getAsString() + " ("
+                        + version.get("date").getAsString() + ")");
+
+                response
+                        .getAsJsonArray("wins")
+                        .forEach(trigger -> wins.add(Pattern.compile(trigger.getAsString())));
+                response
+                        .getAsJsonArray("events")
+                        .forEach(trigger -> events.add(Pattern.compile(trigger.getAsString())));
+                response
+                        .getAsJsonArray("normal")
+                        .forEach(trigger -> normal.add(Pattern.compile(trigger.getAsString())));
+            }
+        };
+
+        DataDownloader.downloadStringAsync("https://static.apolloclient.net/autogg-triggers.json", dataCallback);
     }
 
     @SubscribeEvent(priority = Priority.HIGH)
