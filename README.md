@@ -4,10 +4,6 @@
 
 Apollo is a Hypixel oriented pvp client for 1.8.9 that uses the [Sponge Mixin API](https://github.com/SpongePowered/Mixin) to hook into game events and inject into Minecraft. Apollo will have countless modules enjoyed by the forge community as well as an SDK to develop and profit off your own modules and cosmetics!
 
-- [Development Setup](#development-setup)
-- [Contribution Guidelines](#contribution-guidlines)
-- [License / Copyright](#copyright)
-
 ### Forum Post
 
 If you create any forum post for the client put the link below so we can keep track of our social presence.
