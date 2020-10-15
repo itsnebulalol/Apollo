@@ -31,7 +31,8 @@ import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Holds module information from any class annotated with {@link DraggableModule}
+ * Holds module information from any class annotated with {@link Module}
+ * that implements {@link net.apolloclient.module.bus.draggable.Draggable}
  *
  * <p>Use to get class instance events are being called on if not using the
  * {@link Instance} annotation and to get display information for {@link } </p>

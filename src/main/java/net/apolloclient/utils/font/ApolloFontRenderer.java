@@ -24,6 +24,43 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * Custom unicode font renderer used through out the client with
+ * support for discord emoji format as well as the following formatting codes:
+ * <p></p>
+ * <p>COLOR CODES:</p>
+ * <ul>
+ * <li>{@code §0} : black text color.</li>
+ * <li>{@code §1} : dark blue text color.</li>
+ * <li>{@code §2} : dark green text color.</li>
+ * <li>{@code §3} : dark aqua text color.</li>
+ * <li>{@code §4} : dark red text color.</li>
+ * <li>{@code §5} : dark purple text color.</li>
+ * <li>{@code §6} : gold text color.</li>
+ * <li>{@code §7} : grey text color.</li>
+ * <li>{@code §8} : dark grey text color.</li>
+ * <li>{@code §9} : blue text color.</li>
+ * <li>{@code §a} : green text color.</li>
+ * <li>{@code §b} : aqua text color.</li>
+ * <li>{@code §c} : red text color.</li>
+ * <li>{@code §d} : magenta text color.</li>
+ * <li>{@code §e} : yellow text color.</li>
+ * <li>{@code §f} : white text color.</li>
+ * <li>{@code §!} : chroma text color.</li>
+ * <li>{@code §r} : reset style to default.</li>
+ * </ul>
+ * <p>FORMAT CODES:</p>
+ * <ul>
+ * <li>{@code §k} : obfuscated text style.</li>
+ * <li>{@code §l} : bold text style.</li>
+ * <li>{@code §m} : strike through text style.</li>
+ * <li>{@code §n} : underline text style.</li>
+ * <li>{@code §o} : italic text style.</li>
+ * </ul>
+ *
+ * @author Icovid | Icovid#3888
+ * @since b0.2
+ */
 public class ApolloFontRenderer {
 
     // Fonts used in current renderer instance
